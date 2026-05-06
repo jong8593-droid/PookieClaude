@@ -413,18 +413,8 @@ body[data-lang="en"] { font-family: 'Quicksand','Mali',sans-serif; }
         <p data-i18n="subtitle"></p>
     </div>
 
-    <!-- Picker (single page, no wizard) -->
+    <!-- Picker (single page) -->
     <div class="picker">
-        <div class="picker-label" data-i18n="lblGender"></div>
-        <div class="gender-row">
-            <button class="gbtn" id="g-m" onclick="pickG('male')">
-                <span class="em">👨</span><span data-i18n="male"></span>
-            </button>
-            <button class="gbtn" id="g-f" onclick="pickG('female')">
-                <span class="em">👩</span><span data-i18n="female"></span>
-            </button>
-        </div>
-
         <div class="picker-label" data-i18n="lblDay"></div>
         <div class="day-grid" id="dayGrid"></div>
         <div class="date-line" id="dateLine"></div>
@@ -680,7 +670,6 @@ const TIMES = ['06:00–08:00','08:00–10:00','10:00–12:00','12:00–14:00',
 /* ─── State ────────────────────────────────────────────────── */
 const TODAY_DOW = new Date().getDay();
 let lang = localStorage.getItem('lang') || 'th';
-let gender = localStorage.getItem('gender') || null;
 let pickedDay = TODAY_DOW;
 let activeCat = 'work';
 
@@ -705,16 +694,6 @@ function setLang(l) {
     localStorage.setItem('lang', lang);
     applyLang();
 }
-
-/* ─── Gender ───────────────────────────────────────────────── */
-function pickG(g) {
-    gender = g;
-    localStorage.setItem('gender', g);
-    document.getElementById('g-m').className = 'gbtn' + (g==='male'  ? ' sel-m' : '');
-    document.getElementById('g-f').className = 'gbtn' + (g==='female'? ' sel-f' : '');
-    render();
-}
-if (gender) pickG(gender);
 
 /* ─── Day picker ──────────────────────────────────────────── */
 function buildDayGrid() {
@@ -750,18 +729,17 @@ function updateDateLine() {
 }
 
 /* ─── Color picker ─────────────────────────────────────────── */
-function pickColors(qd, g, cat) {
-    const gOff = g === 'female' ? 1 : (g === 'male' ? 0 : 2);
+function pickColors(qd, cat) {
     const base = DAYS[qd].colors;
     const palA = DAYS[cat.pA].colors;
     const palB = DAYS[cat.pB].colors;
     return {
-        hero: base[(qd + gOff) % base.length],
+        hero: base[qd % base.length],
         subs: [
-            palA[(qd + gOff + 2) % palA.length],
-            palB[(qd + gOff + 1) % palB.length],
+            palA[(qd + 2) % palA.length],
+            palB[(qd + 1) % palB.length],
             base[(qd + 3) % base.length],
-            palA[(qd + gOff + 4) % palA.length]
+            palA[(qd + 4) % palA.length]
         ]
     };
 }
@@ -789,7 +767,7 @@ function render() {
     </div>`;
 
     Object.entries(CATS).forEach(([k,c]) => {
-        const pal = pickColors(pickedDay, gender, c);
+        const pal = pickColors(pickedDay, c);
         const blessing = BLESS[lang][pickedDay][k];
         html += `
         <div class="panel ${k===activeCat?'show':''}" id="panel-${k}">
