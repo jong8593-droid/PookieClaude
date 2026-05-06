@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🌈 สีมงคลประจำวัน</title>
-<link href="https://fonts.googleapis.com/css2?family=Mali:wght@400;500;600;700&family=Sarabun:wght@400;600;700;800&display=swap" rel="stylesheet">
+<title>🌈 สีมงคลประจำวัน · Lucky Colors</title>
+<link href="https://fonts.googleapis.com/css2?family=Mali:wght@400;500;600;700&family=Sarabun:wght@400;600;700;800&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
 
@@ -20,7 +20,7 @@
 }
 
 body {
-    font-family: 'Mali', 'Sarabun', sans-serif;
+    font-family: 'Mali', 'Quicksand', 'Sarabun', sans-serif;
     min-height: 100vh;
     color: var(--ink);
     background:
@@ -32,8 +32,10 @@ body {
     background-attachment: fixed;
     overflow-x: hidden;
 }
+body[data-lang="en"] {
+    font-family: 'Quicksand', 'Mali', sans-serif;
+}
 
-/* ── Floating decorations ─────────────────────────────────────── */
 .deco {
     position: fixed;
     pointer-events: none;
@@ -57,6 +59,40 @@ body {
     100% { transform: translate(0,0) rotate(0); }
 }
 
+/* ── Language switch (top-right floating) ─────────────────── */
+.lang-switch {
+    position: fixed;
+    top: 18px;
+    right: 18px;
+    z-index: 100;
+    display: flex;
+    background: rgba(255,255,255,.85);
+    backdrop-filter: blur(15px);
+    border-radius: 50px;
+    padding: 4px;
+    box-shadow: 0 8px 28px rgba(180,120,200,.25);
+    border: 2px solid rgba(255,255,255,.7);
+}
+.lang-btn {
+    border: none;
+    padding: 8px 16px;
+    border-radius: 50px;
+    background: transparent;
+    font-family: 'Mali', 'Quicksand', sans-serif;
+    font-size: .9rem;
+    font-weight: 700;
+    color: var(--soft-ink);
+    cursor: pointer;
+    transition: all .25s;
+    letter-spacing: .5px;
+}
+.lang-btn.active {
+    background: linear-gradient(135deg, #FF6FA5, #B66FFF);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(182,111,255,.3);
+}
+.lang-btn:not(.active):hover { color: var(--ink); }
+
 .app {
     max-width: 760px;
     margin: 0 auto;
@@ -65,7 +101,6 @@ body {
     z-index: 1;
 }
 
-/* ── Header ───────────────────────────────────────────────────── */
 .hero {
     text-align: center;
     padding: 30px 10px 24px;
@@ -90,6 +125,7 @@ body {
     line-height: 1.15;
     margin-bottom: 10px;
 }
+body[data-lang="en"] .hero h1 { font-family: 'Quicksand', sans-serif; }
 .hero h1 span {
     background: linear-gradient(135deg, #FF6FA5, #B66FFF);
     -webkit-background-clip: text;
@@ -102,7 +138,6 @@ body {
     font-weight: 400;
 }
 
-/* ── Wizard card ──────────────────────────────────────────────── */
 .wizard {
     background: rgba(255,255,255,.85);
     backdrop-filter: blur(20px);
@@ -114,7 +149,6 @@ body {
     position: relative;
 }
 
-/* ── Stepper ─────────────────────────────────────────────────── */
 .stepper {
     display: flex;
     justify-content: center;
@@ -131,7 +165,6 @@ body {
 .dot.active { background: linear-gradient(90deg, #FF6FA5, #B66FFF); width: 44px; }
 .dot.done   { background: #C8B6E5; }
 
-/* ── Steps ──────────────────────────────────────────────────── */
 .step { display: none; animation: fadeIn .4s ease; }
 .step.show { display: block; }
 
@@ -152,7 +185,6 @@ body {
 }
 .step-title {
     text-align: center;
-    font-family: 'Mali', sans-serif;
     font-size: 1.6rem;
     font-weight: 700;
     color: var(--ink);
@@ -165,13 +197,12 @@ body {
     margin-bottom: 26px;
 }
 
-/* ── Inputs ─────────────────────────────────────────────────── */
 .input-big {
     width: 100%;
     padding: 18px 22px;
     border: 3px solid #F0E5F8;
     border-radius: 18px;
-    font-family: 'Mali', sans-serif;
+    font-family: inherit;
     font-size: 1.15rem;
     color: var(--ink);
     background: #FCFAFF;
@@ -185,7 +216,6 @@ body {
     box-shadow: 0 0 0 6px rgba(255,111,165,.13);
 }
 
-/* ── Gender pick ────────────────────────────────────────────── */
 .gpick {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -199,7 +229,7 @@ body {
     cursor: pointer;
     text-align: center;
     transition: all .3s;
-    font-family: 'Mali', sans-serif;
+    font-family: inherit;
 }
 .gcard:hover { transform: translateY(-4px); border-color: #DCC6F5; }
 .gcard .em { font-size: 3.2rem; display: block; margin-bottom: 6px; }
@@ -208,7 +238,6 @@ body {
 .gcard.sel-f { border-color: #FF6FA5; background: linear-gradient(135deg,#FFD0E0,#FFE5EE); }
 .gcard.sel-m .nm, .gcard.sel-f .nm { color: var(--ink); font-weight: 700; }
 
-/* ── Step actions ───────────────────────────────────────────── */
 .actions {
     display: flex;
     gap: 12px;
@@ -219,7 +248,7 @@ body {
     padding: 16px;
     border: none;
     border-radius: 16px;
-    font-family: 'Mali', sans-serif;
+    font-family: inherit;
     font-size: 1.05rem;
     font-weight: 600;
     cursor: pointer;
@@ -232,11 +261,6 @@ body {
 .btn-next:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(182,111,255,.45); }
 .btn-final { background: linear-gradient(135deg, #FFB347, #FF6FA5); color: #fff; box-shadow: 0 8px 22px rgba(255,111,165,.4); }
 .btn-final:hover { transform: translateY(-2px); }
-.btn:disabled { opacity: .4; cursor: not-allowed; transform: none !important; box-shadow: none; }
-
-/* ────────────────────────────────────────────────────────────── */
-/*                          RESULTS                               */
-/* ────────────────────────────────────────────────────────────── */
 
 .results { display: none; }
 .results.show { display: block; animation: fadeIn .5s; }
@@ -258,12 +282,11 @@ body {
     pointer-events: none;
 }
 .res-hero .greet { font-size: 1rem; opacity: .9; font-weight: 500; }
-.res-hero h2 { font-size: 1.9rem; font-weight: 700; font-family: 'Mali', sans-serif; margin: 6px 0; }
+.res-hero h2 { font-size: 1.9rem; font-weight: 700; margin: 6px 0; }
 .res-hero .day-em { font-size: 4.5rem; margin: 8px 0; filter: drop-shadow(0 4px 8px rgba(0,0,0,.25)); }
-.res-hero .day-nm { font-size: 2.4rem; font-weight: 700; font-family: 'Mali', sans-serif; }
+.res-hero .day-nm { font-size: 2.4rem; font-weight: 700; }
 .res-hero .day-date { font-size: .95rem; opacity: .92; margin-top: 6px; }
 
-/* ── Category tabs ──────────────────────────────────────────── */
 .tabs {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -278,7 +301,7 @@ body {
     cursor: pointer;
     text-align: center;
     transition: all .3s;
-    font-family: 'Mali', sans-serif;
+    font-family: inherit;
     border: 2px solid transparent;
 }
 .tab:hover { transform: translateY(-3px); }
@@ -291,7 +314,6 @@ body {
 .tab.active.charm { border-color: #6FBFFF; }
 .tab.active .t-nm { color: var(--ink); }
 
-/* ── Category panel ─────────────────────────────────────────── */
 .panel {
     background: rgba(255,255,255,.92);
     border-radius: 28px;
@@ -305,10 +327,9 @@ body {
 
 .panel-head { text-align: center; margin-bottom: 22px; }
 .panel-head .em { font-size: 3rem; }
-.panel-head h3 { font-size: 1.6rem; font-weight: 700; font-family: 'Mali', sans-serif; margin-top: 4px; }
+.panel-head h3 { font-size: 1.6rem; font-weight: 700; margin-top: 4px; }
 .panel-head p  { font-size: .95rem; color: var(--soft-ink); margin-top: 4px; }
 
-/* ── Hero color ─────────────────────────────────────────────── */
 .hero-color {
     display: flex;
     align-items: center;
@@ -342,7 +363,6 @@ body {
 .hero-color-info h4 {
     font-size: 1.7rem;
     font-weight: 700;
-    font-family: 'Mali', sans-serif;
     color: var(--ink);
     margin: 4px 0;
 }
@@ -359,7 +379,6 @@ body {
 }
 .hero-color-info .hex:hover { background: var(--ink); color: #fff; }
 
-/* ── Sub colors ─────────────────────────────────────────────── */
 .sub-label {
     font-size: .9rem;
     color: var(--soft-ink);
@@ -394,7 +413,6 @@ body {
 .sub-item .sub-name { font-weight: 600; color: var(--ink); font-size: .95rem; }
 .sub-item .sub-hex  { font-size: .75rem; color: #B099C0; }
 
-/* ── Tip ────────────────────────────────────────────────────── */
 .tip {
     padding: 16px 18px;
     background: linear-gradient(135deg, #FFF8E5, #FFF1F5);
@@ -404,7 +422,6 @@ body {
     line-height: 1.6;
 }
 
-/* ── Lucky extras ───────────────────────────────────────────── */
 .extras {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -420,9 +437,8 @@ body {
 }
 .extra-card .ex-em { font-size: 2.4rem; }
 .extra-card .ex-lb { font-size: .82rem; color: var(--soft-ink); margin-top: 4px; font-weight: 500; }
-.extra-card .ex-vl { font-size: 1.4rem; font-weight: 700; font-family: 'Mali', sans-serif; color: var(--ink); margin-top: 6px; }
+.extra-card .ex-vl { font-size: 1.4rem; font-weight: 700; color: var(--ink); margin-top: 6px; }
 
-/* ── Restart ────────────────────────────────────────────────── */
 .restart {
     width: 100%;
     padding: 16px;
@@ -430,7 +446,7 @@ body {
     border-radius: 18px;
     background: rgba(255,255,255,.5);
     color: var(--soft-ink);
-    font-family: 'Mali', sans-serif;
+    font-family: inherit;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
@@ -438,7 +454,6 @@ body {
 }
 .restart:hover { background: rgba(255,255,255,.85); }
 
-/* ── Toast ──────────────────────────────────────────────────── */
 .toast {
     position: fixed;
     bottom: 24px; left: 50%;
@@ -457,7 +472,6 @@ body {
 }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
-/* ── Responsive ─────────────────────────────────────────────── */
 @media (max-width: 560px) {
     .hero h1 { font-size: 2.2rem; }
     .wizard  { padding: 26px 20px; }
@@ -466,10 +480,18 @@ body {
     .hero-color { flex-direction: column; text-align: center; }
     .hero-swatch { width: 90px; height: 90px; }
     .tab .t-nm { font-size: .75rem; }
+    .lang-switch { top: 12px; right: 12px; }
+    .lang-btn { padding: 6px 12px; font-size: .8rem; }
 }
 </style>
 </head>
-<body>
+<body data-lang="th">
+
+<!-- Language switch -->
+<div class="lang-switch">
+    <button class="lang-btn active" data-set-lang="th" onclick="setLang('th')">🇹🇭 ไทย</button>
+    <button class="lang-btn"        data-set-lang="en" onclick="setLang('en')">🇬🇧 EN</button>
+</div>
 
 <!-- decorations -->
 <span class="deco d1">🌸</span>
@@ -481,14 +503,12 @@ body {
 
 <div class="app">
 
-    <!-- Hero -->
     <div class="hero">
-        <div class="hero-badge">🔮 โหราศาสตร์ไทย</div>
-        <h1>สีมงคล <span>ประจำวัน</span></h1>
-        <p>ค้นพบสีเสื้อผ้าที่ใช่ ในวันที่ใช่ ✨</p>
+        <div class="hero-badge" data-i18n="badge"></div>
+        <h1><span data-i18n="title1"></span> <span data-i18n="title2"></span></h1>
+        <p data-i18n="subtitle"></p>
     </div>
 
-    <!-- Wizard -->
     <div class="wizard" id="wizard">
 
         <div class="stepper">
@@ -498,65 +518,64 @@ body {
             <div class="dot" data-step="4"></div>
         </div>
 
-        <!-- Step 1: nickname -->
+        <!-- Step 1 -->
         <div class="step show" data-step="1">
             <div class="step-icon">👋</div>
-            <div class="step-title">สวัสดีค่ะ! เรียกคุณว่าอะไรดี?</div>
-            <div class="step-sub">บอกชื่อเล่นของคุณให้เรารู้จักหน่อย</div>
-            <input type="text" class="input-big" id="nickname" placeholder="ชื่อเล่น..." maxlength="20">
+            <div class="step-title" data-i18n="s1_title"></div>
+            <div class="step-sub"   data-i18n="s1_sub"></div>
+            <input type="text" class="input-big" id="nickname" data-i18n-ph="s1_ph" maxlength="20">
             <div class="actions">
-                <button class="btn btn-next" onclick="next()">ถัดไป →</button>
+                <button class="btn btn-next" onclick="next()" data-i18n="next"></button>
             </div>
         </div>
 
-        <!-- Step 2: gender -->
+        <!-- Step 2 -->
         <div class="step" data-step="2">
             <div class="step-icon">🧚</div>
-            <div class="step-title">คุณเป็นเพศอะไร?</div>
-            <div class="step-sub">เพื่อแนะนำสีให้เหมาะที่สุด</div>
+            <div class="step-title" data-i18n="s2_title"></div>
+            <div class="step-sub"   data-i18n="s2_sub"></div>
             <div class="gpick">
                 <div class="gcard" id="g-m" onclick="pickG('male')">
                     <span class="em">👨</span>
-                    <span class="nm">ชาย</span>
+                    <span class="nm" data-i18n="male"></span>
                 </div>
                 <div class="gcard" id="g-f" onclick="pickG('female')">
                     <span class="em">👩</span>
-                    <span class="nm">หญิง</span>
+                    <span class="nm" data-i18n="female"></span>
                 </div>
             </div>
             <div class="actions">
-                <button class="btn btn-back" onclick="prev()">← ย้อนกลับ</button>
-                <button class="btn btn-next" onclick="next()">ถัดไป →</button>
+                <button class="btn btn-back" onclick="prev()" data-i18n="back"></button>
+                <button class="btn btn-next" onclick="next()" data-i18n="next"></button>
             </div>
         </div>
 
-        <!-- Step 3: birth date -->
+        <!-- Step 3 -->
         <div class="step" data-step="3">
             <div class="step-icon">🎂</div>
-            <div class="step-title">วันเกิดของคุณ</div>
-            <div class="step-sub">วันเกิดบ่งบอกดาวประจำตัวของคุณ</div>
+            <div class="step-title" data-i18n="s3_title"></div>
+            <div class="step-sub"   data-i18n="s3_sub"></div>
             <input type="date" class="input-big" id="birthdate">
             <div class="actions">
-                <button class="btn btn-back" onclick="prev()">← ย้อนกลับ</button>
-                <button class="btn btn-next" onclick="next()">ถัดไป →</button>
+                <button class="btn btn-back" onclick="prev()" data-i18n="back"></button>
+                <button class="btn btn-next" onclick="next()" data-i18n="next"></button>
             </div>
         </div>
 
-        <!-- Step 4: query date -->
+        <!-- Step 4 -->
         <div class="step" data-step="4">
             <div class="step-icon">📅</div>
-            <div class="step-title">อยากดูสีมงคลของวันไหน?</div>
-            <div class="step-sub">เลือกวันที่ต้องการเสริมโชค</div>
+            <div class="step-title" data-i18n="s4_title"></div>
+            <div class="step-sub"   data-i18n="s4_sub"></div>
             <input type="date" class="input-big" id="querydate">
             <div class="actions">
-                <button class="btn btn-back" onclick="prev()">← ย้อนกลับ</button>
-                <button class="btn btn-final" onclick="reveal()">✨ เปิดเผยสีมงคล</button>
+                <button class="btn btn-back" onclick="prev()" data-i18n="back"></button>
+                <button class="btn btn-final" onclick="reveal()" data-i18n="reveal"></button>
             </div>
         </div>
 
     </div>
 
-    <!-- Results -->
     <div class="results" id="results"></div>
 
 </div>
@@ -564,14 +583,248 @@ body {
 <div class="toast" id="toast"></div>
 
 <script>
-/* ─── Defaults ─────────────────────────────────────────────── */
+/* ─── Translations ─────────────────────────────────────────── */
+const I18N = {
+    th: {
+        badge: '🔮 โหราศาสตร์ไทย',
+        title1: 'สีมงคล',
+        title2: 'ประจำวัน',
+        subtitle: 'ค้นพบสีเสื้อผ้าที่ใช่ ในวันที่ใช่ ✨',
+
+        s1_title:'สวัสดีค่ะ! เรียกคุณว่าอะไรดี?',
+        s1_sub:'บอกชื่อเล่นของคุณให้เรารู้จักหน่อย',
+        s1_ph:'ชื่อเล่น...',
+        s2_title:'คุณเป็นเพศอะไร?',
+        s2_sub:'เพื่อแนะนำสีให้เหมาะที่สุด',
+        s3_title:'วันเกิดของคุณ',
+        s3_sub:'วันเกิดบ่งบอกดาวประจำตัวของคุณ',
+        s4_title:'อยากดูสีมงคลของวันไหน?',
+        s4_sub:'เลือกวันที่ต้องการเสริมโชค',
+
+        male:'ชาย', female:'หญิง',
+        next:'ถัดไป →', back:'← ย้อนกลับ',
+        reveal:'✨ เปิดเผยสีมงคล',
+
+        greetPrefix:'สวัสดี',
+        bornOn: d => `คุณเกิดวัน${d}`,
+        dayPrefix: d => `วัน${d}`,
+        heroLabel:'สีหลักของวันนี้',
+        subColors:'🎨 สีเสริมที่เข้าคู่ได้ดี',
+        luckyNum:'เลขมงคล',
+        luckyGem:'อัญมณีมงคล',
+        luckyTime:'เวลามงคล',
+        restart:'🔄 เริ่มใหม่อีกครั้ง',
+
+        toastNick:'💌 กรุณาใส่ชื่อเล่นด้วยนะ',
+        toastG:'💖 กรุณาเลือกเพศ',
+        toastBd:'🎂 กรุณาเลือกวันเกิด',
+        toastQd:'📅 กรุณาเลือกวันที่',
+        toastCopy:(n,h)=>`🎨 คัดลอกสี${n} (${h}) แล้ว!`,
+    },
+    en: {
+        badge: '🔮 Thai Astrology',
+        title1: 'Daily',
+        title2: 'Lucky Colors',
+        subtitle: 'Find the right color for the right day ✨',
+
+        s1_title:"Hi there! What should we call you?",
+        s1_sub:'Tell us your nickname',
+        s1_ph:'Your nickname...',
+        s2_title:"What's your gender?",
+        s2_sub:'To recommend the best colors for you',
+        s3_title:'Your birthday',
+        s3_sub:'Your birthday reveals your guardian planet',
+        s4_title:"Which day's lucky colors?",
+        s4_sub:'Pick a date to find your lucky colors',
+
+        male:'Male', female:'Female',
+        next:'Next →', back:'← Back',
+        reveal:'✨ Reveal My Colors',
+
+        greetPrefix:'Hello',
+        bornOn: d => `Born on ${d}`,
+        dayPrefix: d => d,
+        heroLabel:"TODAY'S MAIN COLOR",
+        subColors:'🎨 Matching accent colors',
+        luckyNum:'Lucky Number',
+        luckyGem:'Lucky Gem',
+        luckyTime:'Lucky Hour',
+        restart:'🔄 Start Over',
+
+        toastNick:'💌 Please enter your nickname',
+        toastG:'💖 Please choose gender',
+        toastBd:'🎂 Please pick your birthday',
+        toastQd:'📅 Please pick a date',
+        toastCopy:(n,h)=>`🎨 Copied ${n} (${h})!`,
+    }
+};
+
+/* ─── Day data (bilingual) ─────────────────────────────────── */
+const DAYS = {
+    0: { th:{n:'อาทิตย์',p:'พระอาทิตย์'}, en:{n:'Sunday',p:'Sun'}, em:'☀️',
+         grad:'linear-gradient(135deg,#FF6B6B,#FFB347)',
+         colors:[
+            {hex:'#FF3B3B',th:'แดงสด',en:'Bright Red'},
+            {hex:'#DC143C',th:'แดงเข้ม',en:'Crimson'},
+            {hex:'#FF7F50',th:'แดงปะการัง',en:'Coral'},
+            {hex:'#FFD700',th:'ทอง',en:'Gold'},
+            {hex:'#FF8C00',th:'ส้มเข้ม',en:'Dark Orange'},
+            {hex:'#FFB347',th:'ส้มอ่อน',en:'Light Orange'}
+         ]},
+    1: { th:{n:'จันทร์',p:'พระจันทร์'}, en:{n:'Monday',p:'Moon'}, em:'🌙',
+         grad:'linear-gradient(135deg,#FFD93D,#FCEE74)',
+         colors:[
+            {hex:'#FFD700',th:'เหลืองทอง',en:'Golden Yellow'},
+            {hex:'#FFEB3B',th:'เหลืองสด',en:'Bright Yellow'},
+            {hex:'#FFFACD',th:'เหลืองอ่อน',en:'Light Yellow'},
+            {hex:'#F5DEB3',th:'ครีม',en:'Cream'},
+            {hex:'#FFFFFF',th:'ขาว',en:'White'},
+            {hex:'#FFF8DC',th:'ครีมหวาน',en:'Soft Cream'}
+         ]},
+    2: { th:{n:'อังคาร',p:'พระอังคาร'}, en:{n:'Tuesday',p:'Mars'}, em:'🌸',
+         grad:'linear-gradient(135deg,#FF6FA5,#FFB7D5)',
+         colors:[
+            {hex:'#FF69B4',th:'ชมพู',en:'Pink'},
+            {hex:'#FF1493',th:'ชมพูเข้ม',en:'Hot Pink'},
+            {hex:'#FFB6C1',th:'ชมพูอ่อน',en:'Light Pink'},
+            {hex:'#FF007F',th:'กุหลาบ',en:'Rose'},
+            {hex:'#C71585',th:'แดงกุหลาบ',en:'Rose Red'},
+            {hex:'#FFC0CB',th:'ชมพูหวาน',en:'Soft Pink'}
+         ]},
+    3: { th:{n:'พุธ',p:'พระพุธ'}, en:{n:'Wednesday',p:'Mercury'}, em:'🍀',
+         grad:'linear-gradient(135deg,#43E97B,#38F9D7)',
+         colors:[
+            {hex:'#22C55E',th:'เขียวสด',en:'Bright Green'},
+            {hex:'#10B981',th:'มรกต',en:'Emerald'},
+            {hex:'#84CC16',th:'เขียวมะนาว',en:'Lime Green'},
+            {hex:'#86EFAC',th:'เขียวอ่อน',en:'Light Green'},
+            {hex:'#15803D',th:'เขียวเข้ม',en:'Dark Green'},
+            {hex:'#A7F3D0',th:'เขียวหวาน',en:'Mint'}
+         ]},
+    4: { th:{n:'พฤหัสบดี',p:'พระพฤหัสบดี'}, en:{n:'Thursday',p:'Jupiter'}, em:'🍊',
+         grad:'linear-gradient(135deg,#FFB347,#FFD700)',
+         colors:[
+            {hex:'#FFA500',th:'ส้มสด',en:'Orange'},
+            {hex:'#FF8C00',th:'ส้มเข้ม',en:'Dark Orange'},
+            {hex:'#FFD700',th:'ทอง',en:'Gold'},
+            {hex:'#FFBF00',th:'เหลืองส้ม',en:'Amber'},
+            {hex:'#A0522D',th:'น้ำตาลแดง',en:'Sienna'},
+            {hex:'#D2691E',th:'น้ำตาลส้ม',en:'Chocolate'}
+         ]},
+    5: { th:{n:'ศุกร์',p:'พระศุกร์'}, en:{n:'Friday',p:'Venus'}, em:'💎',
+         grad:'linear-gradient(135deg,#4ECDC4,#6FBFFF)',
+         colors:[
+            {hex:'#3B82F6',th:'น้ำเงิน',en:'Blue'},
+            {hex:'#87CEEB',th:'ฟ้าอ่อน',en:'Sky Blue'},
+            {hex:'#06B6D4',th:'เทอร์ควอยส์',en:'Turquoise'},
+            {hex:'#0EA5E9',th:'ฟ้าสด',en:'Bright Blue'},
+            {hex:'#1E40AF',th:'น้ำเงินเข้ม',en:'Navy'},
+            {hex:'#BFDBFE',th:'ฟ้าหวาน',en:'Soft Blue'}
+         ]},
+    6: { th:{n:'เสาร์',p:'พระเสาร์'}, en:{n:'Saturday',p:'Saturn'}, em:'🔮',
+         grad:'linear-gradient(135deg,#A18CD1,#9B59B6)',
+         colors:[
+            {hex:'#9333EA',th:'ม่วง',en:'Purple'},
+            {hex:'#7C3AED',th:'ไวโอเล็ต',en:'Violet'},
+            {hex:'#4C1D95',th:'ม่วงเข้ม',en:'Deep Purple'},
+            {hex:'#C4B5FD',th:'ม่วงอ่อน',en:'Light Purple'},
+            {hex:'#1F2937',th:'ดำ',en:'Black'},
+            {hex:'#5B21B6',th:'น้ำเงินม่วง',en:'Indigo'}
+         ]}
+};
+
+/* ─── Categories (bilingual) ───────────────────────────────── */
+const CATS = {
+    work: {
+        em:'💼',
+        th:{ title:'การงาน', sub:'สีเสริมพลังความสำเร็จในการทำงาน',
+             tip:'💡 เหมาะสำหรับวันประชุมสำคัญ การนำเสนองาน หรือวันที่ต้องการสร้างความน่าเชื่อถือ',
+             panel:'สีมงคลด้านการงาน' },
+        en:{ title:'Work', sub:'Colors that boost career success',
+             tip:'💡 Wear on important meetings, presentations, or days you need to look credible',
+             panel:'Lucky Colors for Work' },
+        pA:0, pB:4
+    },
+    money: {
+        em:'💰',
+        th:{ title:'การเงิน', sub:'สีดึงดูดโชคลาภและความมั่งคั่ง',
+             tip:'💡 สวมใส่วันทำธุรกรรม เจรจาต่อรอง หรือวันที่อยากเรียกเงินเข้ากระเป๋า',
+             panel:'สีมงคลด้านการเงิน' },
+        en:{ title:'Wealth', sub:'Colors to attract fortune & abundance',
+             tip:'💡 Wear when making transactions, negotiating, or attracting wealth',
+             panel:'Lucky Colors for Wealth' },
+        pA:4, pB:1
+    },
+    love: {
+        em:'💕',
+        th:{ title:'ความรัก', sub:'สีเสริมเสน่ห์และความโรแมนติก',
+             tip:'💡 เหมาะกับวันเดท วันพิเศษกับคนรัก หรือวันที่อยากดูดีที่สุด',
+             panel:'สีมงคลด้านความรัก' },
+        en:{ title:'Love', sub:'Colors that enhance charm & romance',
+             tip:'💡 Perfect for date nights, special moments, or when you want to look your best',
+             panel:'Lucky Colors for Love' },
+        pA:5, pB:2
+    },
+    charm: {
+        em:'✨',
+        th:{ title:'เมตตา', sub:'สีเสริมความน่ารักและเสน่ห์ต่อผู้คน',
+             tip:'💡 ใส่วันพบปะสังคม เจอผู้ใหญ่ หรือวันที่ต้องการให้คนรอบข้างเอ็นดู',
+             panel:'สีมงคลด้านเมตตา' },
+        en:{ title:'Charm', sub:'Colors that draw kindness from others',
+             tip:'💡 Great for social events, meeting elders, or being well-received',
+             panel:'Lucky Colors for Charm' },
+        pA:1, pB:3
+    }
+};
+
+/* ─── Gems & times ─────────────────────────────────────────── */
+const GEMS = {
+    th:['ทับทิม','มุก','ปะการัง','มรกต','บุษราคัม','เพชร','ไพลิน'],
+    en:['Ruby','Pearl','Coral','Emerald','Topaz','Diamond','Sapphire']
+};
+const TIMES = ['06:00–08:00','08:00–10:00','10:00–12:00','12:00–14:00',
+               '14:00–16:00','16:00–18:00','18:00–20:00'];
+
+/* ─── State ────────────────────────────────────────────────── */
 const today = new Date().toISOString().split('T')[0];
 document.getElementById('querydate').value = today;
 
+let lang = localStorage.getItem('lang') || 'th';
 let step = 1;
 let gender = null;
+let lastResult = null; // for re-rendering on lang switch
 
-/* ─── Step navigation ───────────────────────────────────────── */
+/* ─── Apply language to UI ─────────────────────────────────── */
+function applyLang() {
+    document.body.dataset.lang = lang;
+    document.documentElement.lang = lang;
+    const T = I18N[lang];
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.dataset.i18n;
+        if (T[key] != null) el.textContent = T[key];
+    });
+    document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+        const key = el.dataset.i18nPh;
+        if (T[key] != null) el.placeholder = T[key];
+    });
+
+    document.querySelectorAll('.lang-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.setLang === lang);
+    });
+}
+
+function setLang(l) {
+    if (l === lang) return;
+    lang = l;
+    localStorage.setItem('lang', lang);
+    applyLang();
+    if (lastResult) renderResults(lastResult);
+}
+
+applyLang();
+
+/* ─── Wizard ───────────────────────────────────────────────── */
 function showStep(n) {
     document.querySelectorAll('.step').forEach(s => s.classList.remove('show'));
     document.querySelector(`.step[data-step="${n}"]`).classList.add('show');
@@ -581,121 +834,21 @@ function showStep(n) {
         d.classList.toggle('done',   sn < n);
     });
 }
-
-function next() {
-    if (!validateStep(step)) return;
-    if (step < 4) { step++; showStep(step); }
-}
-function prev() {
-    if (step > 1) { step--; showStep(step); }
-}
+function next() { if (validateStep(step) && step < 4) { step++; showStep(step); } }
+function prev() { if (step > 1) { step--; showStep(step); } }
 
 function validateStep(n) {
-    if (n === 1 && !document.getElementById('nickname').value.trim()) {
-        toast('💌 กรุณาใส่ชื่อเล่นด้วยนะ');
-        return false;
-    }
-    if (n === 2 && !gender) {
-        toast('💖 กรุณาเลือกเพศ');
-        return false;
-    }
-    if (n === 3 && !document.getElementById('birthdate').value) {
-        toast('🎂 กรุณาเลือกวันเกิด');
-        return false;
-    }
+    const T = I18N[lang];
+    if (n === 1 && !document.getElementById('nickname').value.trim()) { toast(T.toastNick); return false; }
+    if (n === 2 && !gender)                                            { toast(T.toastG);    return false; }
+    if (n === 3 && !document.getElementById('birthdate').value)        { toast(T.toastBd);   return false; }
     return true;
 }
-
 function pickG(g) {
     gender = g;
     document.getElementById('g-m').className = 'gcard' + (g==='male'  ? ' sel-m' : '');
     document.getElementById('g-f').className = 'gcard' + (g==='female'? ' sel-f' : '');
 }
-
-/* ─── Day data ─────────────────────────────────────────────── */
-const DAYS = {
-    0: { th:'อาทิตย์', em:'☀️', planet:'พระอาทิตย์',
-         grad:'linear-gradient(135deg,#FF6B6B,#FFB347)',
-         colors:[
-            {hex:'#FF3B3B',name:'แดงสด'},{hex:'#DC143C',name:'แดงเข้ม'},
-            {hex:'#FF7F50',name:'แดงปะการัง'},{hex:'#FFD700',name:'ทอง'},
-            {hex:'#FF8C00',name:'ส้มเข้ม'},{hex:'#FFB347',name:'ส้มอ่อน'}
-         ]},
-    1: { th:'จันทร์', em:'🌙', planet:'พระจันทร์',
-         grad:'linear-gradient(135deg,#FFD93D,#FCEE74)',
-         colors:[
-            {hex:'#FFD700',name:'เหลืองทอง'},{hex:'#FFEB3B',name:'เหลืองสด'},
-            {hex:'#FFFACD',name:'เหลืองอ่อน'},{hex:'#F5DEB3',name:'ครีม'},
-            {hex:'#FFFFFF',name:'ขาว'},{hex:'#FFF8DC',name:'ครีมหวาน'}
-         ]},
-    2: { th:'อังคาร', em:'🌸', planet:'พระอังคาร',
-         grad:'linear-gradient(135deg,#FF6FA5,#FFB7D5)',
-         colors:[
-            {hex:'#FF69B4',name:'ชมพู'},{hex:'#FF1493',name:'ชมพูเข้ม'},
-            {hex:'#FFB6C1',name:'ชมพูอ่อน'},{hex:'#FF007F',name:'กุหลาบ'},
-            {hex:'#C71585',name:'แดงกุหลาบ'},{hex:'#FFC0CB',name:'ชมพูหวาน'}
-         ]},
-    3: { th:'พุธ', em:'🍀', planet:'พระพุธ',
-         grad:'linear-gradient(135deg,#43E97B,#38F9D7)',
-         colors:[
-            {hex:'#22C55E',name:'เขียวสด'},{hex:'#10B981',name:'มรกต'},
-            {hex:'#84CC16',name:'เขียวมะนาว'},{hex:'#86EFAC',name:'เขียวอ่อน'},
-            {hex:'#15803D',name:'เขียวเข้ม'},{hex:'#A7F3D0',name:'เขียวหวาน'}
-         ]},
-    4: { th:'พฤหัสบดี', em:'🍊', planet:'พระพฤหัสบดี',
-         grad:'linear-gradient(135deg,#FFB347,#FFD700)',
-         colors:[
-            {hex:'#FFA500',name:'ส้มสด'},{hex:'#FF8C00',name:'ส้มเข้ม'},
-            {hex:'#FFD700',name:'ทอง'},{hex:'#FFBF00',name:'เหลืองส้ม'},
-            {hex:'#A0522D',name:'น้ำตาลแดง'},{hex:'#D2691E',name:'น้ำตาลส้ม'}
-         ]},
-    5: { th:'ศุกร์', em:'💎', planet:'พระศุกร์',
-         grad:'linear-gradient(135deg,#4ECDC4,#6FBFFF)',
-         colors:[
-            {hex:'#3B82F6',name:'น้ำเงิน'},{hex:'#87CEEB',name:'ฟ้าอ่อน'},
-            {hex:'#06B6D4',name:'เทอร์ควอยส์'},{hex:'#0EA5E9',name:'ฟ้าสด'},
-            {hex:'#1E40AF',name:'น้ำเงินเข้ม'},{hex:'#BFDBFE',name:'ฟ้าหวาน'}
-         ]},
-    6: { th:'เสาร์', em:'🔮', planet:'พระเสาร์',
-         grad:'linear-gradient(135deg,#A18CD1,#9B59B6)',
-         colors:[
-            {hex:'#9333EA',name:'ม่วง'},{hex:'#7C3AED',name:'ไวโอเล็ต'},
-            {hex:'#4C1D95',name:'ม่วงเข้ม'},{hex:'#C4B5FD',name:'ม่วงอ่อน'},
-            {hex:'#1F2937',name:'ดำ'},{hex:'#5B21B6',name:'น้ำเงินม่วง'}
-         ]}
-};
-
-/* ─── Categories ───────────────────────────────────────────── */
-const CATS = {
-    work: {
-        title:'การงาน', em:'💼',
-        sub:'สีเสริมพลังความสำเร็จในการทำงาน',
-        tip:'💡 เหมาะสำหรับวันประชุมสำคัญ การนำเสนองาน หรือวันที่ต้องการสร้างความน่าเชื่อถือ',
-        pA:0, pB:4
-    },
-    money: {
-        title:'การเงิน', em:'💰',
-        sub:'สีดึงดูดโชคลาภและความมั่งคั่ง',
-        tip:'💡 สวมใส่วันทำธุรกรรม เจรจาต่อรอง หรือวันที่อยากเรียกเงินเข้ากระเป๋า',
-        pA:4, pB:1
-    },
-    love: {
-        title:'ความรัก', em:'💕',
-        sub:'สีเสริมเสน่ห์และความโรแมนติก',
-        tip:'💡 เหมาะกับวันเดท วันพิเศษกับคนรัก หรือวันที่อยากดูดีที่สุด',
-        pA:5, pB:2
-    },
-    charm: {
-        title:'เมตตา', em:'✨',
-        sub:'สีเสริมความน่ารักและเสน่ห์ต่อผู้คน',
-        tip:'💡 ใส่วันพบปะสังคม เจอผู้ใหญ่ หรือวันที่ต้องการให้คนรอบข้างเอ็นดู',
-        pA:1, pB:3
-    }
-};
-
-const GEMS  = ['ทับทิม','มุก','ปะการัง','มรกต','บุษราคัม','เพชร','ไพลิน'];
-const TIMES = ['06:00–08:00','08:00–10:00','10:00–12:00','12:00–14:00',
-               '14:00–16:00','16:00–18:00','18:00–20:00'];
 
 /* ─── Helpers ──────────────────────────────────────────────── */
 function dow(s) { return new Date(s+'T00:00:00').getDay(); }
@@ -706,6 +859,11 @@ function thaiDate(s) {
                'กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
     return `${d.getDate()} ${M[d.getMonth()]} ${d.getFullYear()+543}`;
 }
+function enDate(s) {
+    const d = new Date(s+'T00:00:00');
+    return d.toLocaleDateString('en-US', { day:'numeric', month:'long', year:'numeric' });
+}
+function localizedDate(s) { return lang==='th' ? thaiDate(s) : enDate(s); }
 
 function pickColors(bd, qd, g, cat) {
     const gOff = g === 'female' ? 1 : 0;
@@ -715,106 +873,107 @@ function pickColors(bd, qd, g, cat) {
     const palB = DAYS[cat.pB].colors;
 
     return {
-        hero: { ...base[bq % base.length] },
+        hero: base[bq % base.length],
         subs: [
-            { ...palA[(bq + gOff + 2) % palA.length] },
-            { ...palB[(bd + gOff + 1) % palB.length] },
-            { ...base[(bq + 3) % base.length] },
-            { ...palA[(bd + qd + gOff) % palA.length] }
+            palA[(bq + gOff + 2) % palA.length],
+            palB[(bd + gOff + 1) % palB.length],
+            base[(bq + 3) % base.length],
+            palA[(bd + qd + gOff) % palA.length]
         ]
     };
 }
 
-/* ─── Reveal ──────────────────────────────────────────────── */
+function colorName(c) { return c[lang]; }
+
+/* ─── Reveal & Render ──────────────────────────────────────── */
 function reveal() {
     if (!validateStep(step)) return;
     const qval = document.getElementById('querydate').value;
-    if (!qval) { toast('📅 กรุณาเลือกวันที่'); return; }
+    if (!qval) { toast(I18N[lang].toastQd); return; }
 
-    const nick = document.getElementById('nickname').value.trim();
-    const bd   = dow(document.getElementById('birthdate').value);
-    const qd   = dow(qval);
-    const BD   = DAYS[bd];
-    const QD   = DAYS[qd];
-    const gEm  = gender === 'male' ? '👨' : '👩';
+    lastResult = {
+        nick:  document.getElementById('nickname').value.trim(),
+        bdate: document.getElementById('birthdate').value,
+        qdate: qval,
+        gender: gender
+    };
+    renderResults(lastResult);
+}
 
-    /* result html */
+function renderResults(R) {
+    const T   = I18N[lang];
+    const bd  = dow(R.bdate);
+    const qd  = dow(R.qdate);
+    const BD  = DAYS[bd];
+    const QD  = DAYS[qd];
+    const gEm = R.gender === 'male' ? '👨' : '👩';
+
     let html = `
     <div class="res-hero" style="background:${QD.grad}">
-        <div class="greet">สวัสดี ${gEm} ${nick}</div>
-        <h2>คุณเกิดวัน${BD.th} ${BD.em}</h2>
+        <div class="greet">${T.greetPrefix} ${gEm} ${R.nick}</div>
+        <h2>${T.bornOn(BD[lang].n)} ${BD.em}</h2>
         <div class="day-em">${QD.em}</div>
-        <div class="day-nm">วัน${QD.th}</div>
-        <div class="day-date">${thaiDate(qval)}</div>
+        <div class="day-nm">${T.dayPrefix(QD[lang].n)}</div>
+        <div class="day-date">${localizedDate(R.qdate)}</div>
     </div>
 
     <div class="tabs">
         ${Object.entries(CATS).map(([k,c],i) => `
             <div class="tab ${k} ${i===0?'active':''}" onclick="showTab('${k}')">
                 <span class="t-em">${c.em}</span>
-                <span class="t-nm">${c.title}</span>
+                <span class="t-nm">${c[lang].title}</span>
             </div>`).join('')}
     </div>`;
 
     Object.entries(CATS).forEach(([k,c],i) => {
-        const pal = pickColors(bd, qd, gender, c);
+        const pal = pickColors(bd, qd, R.gender, c);
         html += `
         <div class="panel ${i===0?'show':''}" id="panel-${k}">
             <div class="panel-head">
                 <span class="em">${c.em}</span>
-                <h3>สีมงคลด้าน${c.title}</h3>
-                <p>${c.sub}</p>
+                <h3>${c[lang].panel}</h3>
+                <p>${c[lang].sub}</p>
             </div>
 
             <div class="hero-color">
                 <div class="hero-swatch" style="background:${pal.hero.hex}"></div>
                 <div class="hero-color-info">
-                    <div class="hc-label">สีหลักของวันนี้</div>
-                    <h4>${pal.hero.name}</h4>
-                    <span class="hex" onclick="copyHex('${pal.hero.hex}','${pal.hero.name}')">${pal.hero.hex} 📋</span>
+                    <div class="hc-label">${T.heroLabel}</div>
+                    <h4>${colorName(pal.hero)}</h4>
+                    <span class="hex" onclick="copyHex('${pal.hero.hex}','${colorName(pal.hero)}')">${pal.hero.hex} 📋</span>
                 </div>
             </div>
 
-            <div class="sub-label">🎨 สีเสริมที่เข้าคู่ได้ดี</div>
+            <div class="sub-label">${T.subColors}</div>
             <div class="sub-colors">
                 ${pal.subs.map(s => `
-                    <div class="sub-item" onclick="copyHex('${s.hex}','${s.name}')">
+                    <div class="sub-item" onclick="copyHex('${s.hex}','${colorName(s)}')">
                         <div class="sub-circle" style="background:${s.hex}"></div>
                         <div>
-                            <div class="sub-name">${s.name}</div>
+                            <div class="sub-name">${colorName(s)}</div>
                             <div class="sub-hex">${s.hex}</div>
                         </div>
                     </div>`).join('')}
             </div>
 
-            <div class="tip">${c.tip}</div>
+            <div class="tip">${c[lang].tip}</div>
         </div>`;
     });
 
-    /* extras */
     const num  = ((bd*3 + qd*2 + 7) % 9) + 1;
-    const gem  = GEMS[qd];
+    const gem  = GEMS[lang][qd];
     const time = TIMES[(bd + qd) % TIMES.length];
     html += `
     <div class="extras">
-        <div class="extra-card">
-            <div class="ex-em">🔢</div>
-            <div class="ex-lb">เลขมงคล</div>
-            <div class="ex-vl">${num}</div>
-        </div>
-        <div class="extra-card">
-            <div class="ex-em">💎</div>
-            <div class="ex-lb">อัญมณีมงคล</div>
-            <div class="ex-vl">${gem}</div>
-        </div>
-        <div class="extra-card">
-            <div class="ex-em">⏰</div>
-            <div class="ex-lb">เวลามงคล</div>
-            <div class="ex-vl">${time}</div>
-        </div>
+        <div class="extra-card"><div class="ex-em">🔢</div>
+            <div class="ex-lb">${T.luckyNum}</div><div class="ex-vl">${num}</div></div>
+        <div class="extra-card"><div class="ex-em">💎</div>
+            <div class="ex-lb">${T.luckyGem}</div><div class="ex-vl">${gem}</div></div>
+        <div class="extra-card"><div class="ex-em">⏰</div>
+            <div class="ex-lb">${T.luckyTime}</div><div class="ex-vl">${time}</div></div>
     </div>
 
-    <button class="restart" onclick="restart()">🔄 เริ่มใหม่อีกครั้ง</button>`;
+    <button class="restart" onclick="restart()">${T.restart}</button>`;
 
     const r = document.getElementById('results');
     r.innerHTML = html;
@@ -831,6 +990,7 @@ function showTab(k) {
 }
 
 function restart() {
+    lastResult = null;
     document.getElementById('results').classList.remove('show');
     document.getElementById('wizard').style.display = 'block';
     document.getElementById('nickname').value = '';
@@ -846,7 +1006,7 @@ function restart() {
 
 function copyHex(hex, name) {
     navigator.clipboard.writeText(hex).catch(()=>{});
-    toast(`🎨 คัดลอกสี${name} (${hex}) แล้ว!`);
+    toast(I18N[lang].toastCopy(name, hex));
 }
 
 function toast(msg) {
@@ -856,7 +1016,6 @@ function toast(msg) {
     setTimeout(() => t.classList.remove('show'), 2400);
 }
 
-/* Enter key navigation */
 document.addEventListener('keydown', e => {
     if (e.key === 'Enter' && document.getElementById('wizard').style.display !== 'none') {
         if (step < 4) next(); else reveal();
