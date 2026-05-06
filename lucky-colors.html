@@ -789,12 +789,6 @@ function render() {
     const day = QD[lang];
 
     let html = `
-    <div class="res-hero" style="background:${QD.grad}">
-        <div class="day-em">${QD.em}</div>
-        <div class="day-nm">${lang==='th'?'วัน':''}${day.n}</div>
-        <div class="planet-line">${day.p}</div>
-    </div>
-
     <div class="tabs">
         ${Object.entries(CATS).map(([k,c]) => `
             <div class="tab ${k} ${k===activeCat?'active':''}" onclick="showTab('${k}')">
