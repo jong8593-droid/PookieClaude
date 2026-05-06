@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>แบบสอบถาม</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --purple: #a855f7;
+      --pink:   #ec4899;
+      --cyan:   #22d3ee;
+      --green:  #4ade80;
+      --yellow: #facc15;
+      --bg:     #0a0a0f;
+    }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--bg);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+    }
+
+    /* ── Blobs ── */
+    .blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.32;
+      animation: blobFloat 9s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .blob-1 { width: 460px; height: 460px; background: var(--purple); top: -140px; left: -120px; animation-delay: 0s; }
+    .blob-2 { width: 340px; height: 340px; background: var(--pink);   bottom: -90px; right: -90px; animation-delay: -3s; }
+    .blob-3 { width: 280px; height: 280px; background: var(--cyan);   top: 38%; left: 52%; animation-delay: -6s; }
+    @keyframes blobFloat {
+      0%,100% { transform: translateY(0) scale(1); }
+      50%      { transform: translateY(-28px) scale(1.05); }
+    }
+
+    /* ── Scene layout ── */
+    .scene {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      padding: 32px 16px 40px;
+      min-height: 100vh;
+    }
+
+    /* ── Pikachu ── */
+    .pika-wrap {
+      position: relative;
+      flex-shrink: 0;
+      z-index: 2;
+      margin-bottom: -10px;
+      animation: pikaBounce 2.4s ease-in-out infinite;
+    }
+    @keyframes pikaBounce {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-12px); }
+    }
+
+    .pika-wrap svg { display: block; filter: drop-shadow(0 8px 28px rgba(250,204,21,0.4)); }
+
+    /* speech bubble — appears to the right of Pikachu, tail points left toward face */
+    .bubble {
+      position: absolute;
+      top: 28px;
+      left: calc(100% + 10px);
+      white-space: nowrap;
+      background: #fff;
+      color: #1a1a2e;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 9px 16px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.35);
+      animation: bubblePop 2.4s ease-in-out infinite;
+    }
+    .bubble::after {
+      content: '';
+      position: absolute;
+      top: 14px;
+      left: -9px;
+      border: 5px solid transparent;
+      border-right-color: #fff;
+    }
+    @keyframes bubblePop {
+      0%,100% { transform: scale(1); }
+      50%      { transform: scale(1.04); }
+    }
+
+    /* ── Card ── */
+    .card {
+      position: relative;
+      width: 100%;
+      max-width: 440px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 28px;
+      padding: 40px 36px 36px;
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      box-shadow: 0 0 80px rgba(168,85,247,0.14), 0 24px 48px rgba(0,0,0,0.45);
+      z-index: 1;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 28px;
+      padding: 1.5px;
+      background: linear-gradient(135deg, var(--purple), var(--pink), var(--cyan));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    /* ── Header ── */
+    .pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: linear-gradient(135deg, rgba(168,85,247,0.25), rgba(236,72,153,0.25));
+      border: 1px solid rgba(168,85,247,0.4);
+      border-radius: 99px; padding: 4px 14px;
+      font-size: 0.72rem; font-weight: 600; color: #d8b4fe;
+      letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 14px;
+    }
+    .pill-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--green); box-shadow: 0 0 6px var(--green);
+      animation: dot-pulse 2s ease infinite;
+    }
+    @keyframes dot-pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
+
+    h1 { font-size: 1.85rem; font-weight: 800; line-height: 1.18; color: #fff; margin-bottom: 6px; }
+    h1 span {
+      background: linear-gradient(90deg, var(--purple), var(--pink));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .subtitle { font-size: 0.83rem; color: rgba(255,255,255,0.42); margin-bottom: 28px; }
+
+    /* ── Inputs ── */
+    .form-group { margin-bottom: 18px; }
+    label {
+      display: flex; align-items: center; gap: 7px;
+      font-size: 0.77rem; font-weight: 600;
+      color: rgba(255,255,255,0.6); letter-spacing: 0.04em;
+      text-transform: uppercase; margin-bottom: 7px;
+    }
+    label .req { color: var(--pink); font-size: 0.7rem; }
+
+    input {
+      width: 100%; padding: 12px 15px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 13px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.93rem; color: #fff; outline: none;
+      transition: border-color .25s, background .25s, box-shadow .25s;
+    }
+    input::placeholder { color: rgba(255,255,255,0.2); }
+    input:focus {
+      border-color: var(--purple);
+      background: rgba(168,85,247,0.1);
+      box-shadow: 0 0 0 3px rgba(168,85,247,0.2);
+    }
+    input.error { border-color: var(--pink); box-shadow: 0 0 0 3px rgba(236,72,153,0.2); }
+
+    .error-msg { display:none; font-size:.77rem; color:#f9a8d4; margin-top:5px; padding-left:3px; }
+
+    /* ── Button ── */
+    button[type="submit"] {
+      position: relative; width: 100%; padding: 13px; margin-top: 8px;
+      border: none; border-radius: 13px;
+      background: linear-gradient(135deg, var(--purple), var(--pink));
+      color: #fff; font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.97rem; font-weight: 700; letter-spacing: .02em;
+      cursor: pointer; overflow: hidden; transition: transform .15s, opacity .2s;
+    }
+    button[type="submit"]::after {
+      content:''; position:absolute; inset:0;
+      background: linear-gradient(135deg, rgba(255,255,255,.15), transparent);
+      opacity:0; transition:opacity .2s;
+    }
+    button[type="submit"]:hover:not(:disabled)::after { opacity:1; }
+    button[type="submit"]:hover:not(:disabled) { transform: translateY(-2px); }
+    button[type="submit"]:active:not(:disabled) { transform: translateY(0); }
+    button[type="submit"]:disabled { opacity:.45; cursor:not-allowed; }
+
+    /* ── Banners ── */
+    .success-banner, .error-banner {
+      display:none; border-radius:13px; padding:13px 16px;
+      font-size:.86rem; font-weight:500; margin-top:14px;
+      text-align:center; animation: slideUp .3s ease;
+    }
+    @keyframes slideUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+    .success-banner { background:rgba(74,222,128,.12); border:1px solid rgba(74,222,128,.35); color:#86efac; }
+    .error-banner   { background:rgba(236,72,153,.12); border:1px solid rgba(236,72,153,.35); color:#f9a8d4; }
+
+    /* ── Download button ── */
+    .btn-download {
+      display: block; width: 100%; margin-top: 12px; padding: 11px;
+      background: linear-gradient(135deg, #facc15, #f59e0b);
+      color: #1a1000; border: none; border-radius: 13px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.92rem; font-weight: 700; cursor: pointer;
+      transition: transform .15s, opacity .2s;
+      letter-spacing: .01em;
+    }
+    .btn-download:hover { transform: translateY(-2px); opacity: .92; }
+
+    .footer-link {
+      margin-top:24px; text-align:center;
+      font-size:.76rem; color:rgba(255,255,255,.22);
+    }
+    .footer-link a { color:rgba(168,85,247,.7); text-decoration:none; }
+    .footer-link a:hover { color:var(--purple); }
+
+  </style>
+</head>
+<body>
+
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
+  <div class="scene">
+
+    <!-- ════ Pikachu SVG ════ -->
+    <div class="pika-wrap">
+      <div class="bubble">กรอกข้อมูลด้วยนะ~ ⚡</div>
+
+      <svg viewBox="0 0 210 300" width="150" height="214" xmlns="http://www.w3.org/2000/svg">
+
+        <!-- ── Tail (lightning bolt) ── -->
+        <g transform="translate(148,145) rotate(-15)">
+          <polygon points="0,0 14,-28 20,-10 34,-42 26,-20 38,-12 22,8 30,28 14,16 8,36 4,18 -6,28 4,8"
+                   fill="#F5CC00" stroke="#c8a000" stroke-width="1.2" stroke-linejoin="round"/>
+        </g>
+
+        <!-- ── Body ── -->
+        <ellipse cx="88" cy="200" rx="52" ry="48" fill="#F5CC00"/>
+        <!-- back stripes -->
+        <path d="M 52 178 C 58 163 72 171" stroke="#9B6A00" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+        <path d="M 56 196 C 64 180 78 188" stroke="#9B6A00" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+
+        <!-- ── Head ── -->
+        <circle cx="88" cy="115" r="52" fill="#F5CC00"/>
+
+        <!-- ── Ears ── -->
+        <!-- left ear -->
+        <polygon points="56,78 42,22 80,64" fill="#F5CC00"/>
+        <polygon points="58,75 49,34 75,64" fill="#1a1a1a"/>
+        <!-- right ear -->
+        <polygon points="120,78 134,22 96,64" fill="#F5CC00"/>
+        <polygon points="118,75 127,34 101,64" fill="#1a1a1a"/>
+
+        <!-- ── Eyes ── -->
+        <ellipse cx="74"  cy="108" rx="9.5" ry="10.5" fill="#1e1009"/>
+        <ellipse cx="102" cy="108" rx="9.5" ry="10.5" fill="#1e1009"/>
+        <circle cx="77"  cy="104" r="3.5" fill="white"/>
+        <circle cx="105" cy="104" r="3.5" fill="white"/>
+
+        <!-- ── Cheeks ── -->
+        <ellipse cx="58"  cy="124" rx="14" ry="11" fill="#FF3E3E" opacity="0.82"/>
+        <ellipse cx="118" cy="124" rx="14" ry="11" fill="#FF3E3E" opacity="0.82"/>
+        <!-- cheek sparkles -->
+        <circle cx="54"  cy="120" r="2" fill="white" opacity="0.7"/>
+        <circle cx="62"  cy="118" r="1.5" fill="white" opacity="0.5"/>
+        <circle cx="114" cy="120" r="2" fill="white" opacity="0.7"/>
+        <circle cx="122" cy="118" r="1.5" fill="white" opacity="0.5"/>
+
+        <!-- ── Nose & mouth ── -->
+        <ellipse cx="88" cy="126" rx="4.5" ry="3.5" fill="#5a2d00"/>
+        <path d="M 78 134 Q 88 145 98 134" stroke="#5a2d00" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+        <!-- ── Right arm: pointing DOWN toward the form ── -->
+        <path d="M 136 190 Q 162 200 168 226" stroke="#F5CC00" stroke-width="14" stroke-linecap="round" fill="none"/>
+        <circle cx="168" cy="229" r="9" fill="#F5CC00"/>
+        <!-- pointing finger down -->
+        <path d="M 168 237 Q 170 255 170 272" stroke="#F5CC00" stroke-width="8" stroke-linecap="round" fill="none"/>
+        <circle cx="170" cy="278" r="7" fill="#F5CC00"/>
+        <!-- fingertip highlight -->
+        <circle cx="172" cy="275" r="2.2" fill="white" opacity="0.55"/>
+
+        <!-- ── Left arm (relaxed) ── -->
+        <path d="M 42 185 Q 26 198 20 214" stroke="#F5CC00" stroke-width="14" stroke-linecap="round" fill="none"/>
+        <circle cx="19" cy="216" r="8" fill="#F5CC00"/>
+
+        <!-- ── Feet ── -->
+        <ellipse cx="70"  cy="242" rx="25" ry="14" fill="#F5CC00"/>
+        <ellipse cx="108" cy="242" rx="25" ry="14" fill="#F5CC00"/>
+        <!-- toes left foot -->
+        <ellipse cx="55"  cy="244" rx="6" ry="4.5" fill="#e8b800"/>
+        <ellipse cx="70"  cy="248" rx="6" ry="4.5" fill="#e8b800"/>
+        <ellipse cx="85"  cy="244" rx="6" ry="4.5" fill="#e8b800"/>
+        <!-- toes right foot -->
+        <ellipse cx="93"  cy="244" rx="6" ry="4.5" fill="#e8b800"/>
+        <ellipse cx="108" cy="248" rx="6" ry="4.5" fill="#e8b800"/>
+        <ellipse cx="123" cy="244" rx="6" ry="4.5" fill="#e8b800"/>
+
+      </svg>
+    </div>
+    <!-- ══════════════════════════ -->
+
+    <!-- ════ Form Card ════ -->
+    <div class="card">
+      <div class="pill"><span class="pill-dot"></span> Open for registration</div>
+      <h1>กรอก<span>ข้อมูล</span><br>ของคุณ ✦</h1>
+      <p class="subtitle">กรอกข้อมูลให้ครบเพื่อยืนยันการลงทะเบียน</p>
+
+      <form id="contactForm" novalidate>
+        <div class="form-group">
+          <label for="name"><span>👤</span> ชื่อ-นามสกุล <span class="req">✦</span></label>
+          <input type="text" id="name" name="name" placeholder="เช่น สมชาย ใจดี">
+          <div class="error-msg" id="nameError">⚠ กรุณากรอกชื่อ-นามสกุล</div>
+        </div>
+
+        <div class="form-group">
+          <label for="email"><span>✉️</span> อีเมล <span class="req">✦</span></label>
+          <input type="email" id="email" name="email" placeholder="you@example.com">
+          <div class="error-msg" id="emailError">⚠ กรุณากรอกอีเมลให้ถูกต้อง</div>
+        </div>
+
+        <div class="form-group">
+          <label for="phone"><span>📱</span> เบอร์โทรศัพท์ <span class="req">✦</span></label>
+          <input type="tel" id="phone" name="phone" placeholder="0XX-XXX-XXXX" maxlength="12">
+          <div class="error-msg" id="phoneError">⚠ กรุณากรอกเบอร์โทรให้ถูกต้อง (10 หลัก)</div>
+        </div>
+
+        <button type="submit" id="submitBtn">ส่งข้อมูล →</button>
+
+        <div class="success-banner" id="successBanner">
+          🎉 ส่งข้อมูลเรียบร้อยแล้ว ขอบคุณที่ลงทะเบียน!
+          <button class="btn-download" id="downloadBtn">⬇ ดาวน์โหลดบัตรลงทะเบียน</button>
+        </div>
+        <div class="error-banner" id="errorBanner"></div>
+      </form>
+      <canvas id="cardCanvas" style="display:none"></canvas>
+
+      <div class="footer-link">ดูรายชื่อผู้ลงทะเบียน → <a href="/admin.html">Admin Dashboard</a></div>
+    </div>
+
+  </div><!-- /scene -->
+
+  <script>
+    const form      = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('submitBtn');
+    let   lastRecord = null;
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      let valid = true;
+
+      const name  = document.getElementById('name');
+      const email = document.getElementById('email');
+      const phone = document.getElementById('phone');
+
+      document.getElementById('successBanner').style.display = 'none';
+      document.getElementById('errorBanner').style.display   = 'none';
+
+      if (!name.value.trim())                                       { showError(name,  'nameError');  valid = false; } else { clearError(name,  'nameError'); }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim()))  { showError(email, 'emailError'); valid = false; } else { clearError(email, 'emailError'); }
+      if (!/^\d{10}$/.test(phone.value.replace(/[-\s]/g, '')))     { showError(phone, 'phoneError'); valid = false; } else { clearError(phone, 'phoneError'); }
+
+      if (!valid) return;
+
+      submitBtn.disabled    = true;
+      submitBtn.textContent = 'กำลังส่ง…';
+
+      try {
+        const res  = await fetch('/api/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: name.value.trim(), email: email.value.trim(), phone: phone.value.trim() })
+        });
+        const json = await res.json();
+
+        if (res.ok) {
+          lastRecord = json.data;
+          document.getElementById('successBanner').style.display = 'block';
+          form.reset();
+        } else {
+          showBannerError(json.error || 'เกิดข้อผิดพลาด กรุณาลองใหม่');
+        }
+      } catch {
+        showBannerError('ไม่สามารถเชื่อมต่อ server ได้');
+      } finally {
+        submitBtn.disabled    = false;
+        submitBtn.textContent = 'ส่งข้อมูล →';
+      }
+    });
+
+    document.getElementById('downloadBtn').addEventListener('click', function () {
+      if (!lastRecord) return;
+      drawCard(lastRecord);
+    });
+
+    /* ── Canvas card generator ── */
+    function drawCard(rec) {
+      const W = 800, H = 460;
+      const canvas = document.getElementById('cardCanvas');
+      canvas.width  = W;
+      canvas.height = H;
+      const c = canvas.getContext('2d');
+
+      /* background */
+      const bgGrad = c.createLinearGradient(0, 0, W, H);
+      bgGrad.addColorStop(0,   '#0f0118');
+      bgGrad.addColorStop(0.5, '#1a0533');
+      bgGrad.addColorStop(1,   '#0a0a1f');
+      c.fillStyle = bgGrad;
+      c.fillRect(0, 0, W, H);
+
+      /* purple glow */
+      const g1 = c.createRadialGradient(160, 160, 0, 160, 160, 260);
+      g1.addColorStop(0, 'rgba(168,85,247,0.45)');
+      g1.addColorStop(1, 'transparent');
+      c.fillStyle = g1; c.fillRect(0, 0, W, H);
+
+      /* pink glow */
+      const g2 = c.createRadialGradient(680, 340, 0, 680, 340, 220);
+      g2.addColorStop(0, 'rgba(236,72,153,0.38)');
+      g2.addColorStop(1, 'transparent');
+      c.fillStyle = g2; c.fillRect(0, 0, W, H);
+
+      /* card border */
+      c.strokeStyle = 'rgba(168,85,247,0.55)';
+      c.lineWidth = 1.5;
+      roundRect(c, 18, 18, W - 36, H - 36, 24);
+      c.stroke();
+
+      /* divider line */
+      c.strokeStyle = 'rgba(255,255,255,0.08)';
+      c.lineWidth = 1;
+      c.beginPath(); c.moveTo(320, 60); c.lineTo(320, H - 60); c.stroke();
+
+      /* ── Pikachu (left panel) ── */
+      drawPikachu(c, 160, 230, 110);
+
+      /* sparkles around Pikachu */
+      const stars = [[55,80],[270,70],[48,360],[278,370],[160,80]];
+      stars.forEach(([sx, sy], i) => {
+        const sz = [6,5,7,5,4][i];
+        drawStar(c, sx, sy, sz, 'rgba(250,204,21,0.75)');
+      });
+
+      /* ── Right panel ── */
+      const rx = 358;
+
+      /* badge pill */
+      c.fillStyle = 'rgba(168,85,247,0.25)';
+      roundRect(c, rx, 52, 180, 28, 14);
+      c.fill();
+      c.strokeStyle = 'rgba(168,85,247,0.6)';
+      c.lineWidth = 1;
+      c.stroke();
+      c.fillStyle = '#d8b4fe';
+      c.font = 'bold 11px system-ui, sans-serif';
+      c.letterSpacing = '0.08em';
+      c.fillText('✦  REGISTRATION CARD', rx + 14, 71);
+
+      /* title */
+      c.letterSpacing = '0em';
+      c.font = 'bold 32px system-ui, sans-serif';
+      c.fillStyle = '#ffffff';
+      c.fillText('ยืนยันการลงทะเบียน', rx, 122);
+
+      /* checkmark circle */
+      c.beginPath();
+      c.arc(rx + 14, 148, 12, 0, Math.PI * 2);
+      c.fillStyle = 'rgba(74,222,128,0.2)';
+      c.fill();
+      c.strokeStyle = '#4ade80'; c.lineWidth = 1.5; c.stroke();
+      c.fillStyle = '#4ade80'; c.font = 'bold 13px system-ui';
+      c.fillText('✓', rx + 8, 153);
+
+      c.fillStyle = 'rgba(255,255,255,0.45)';
+      c.font = '13px system-ui, sans-serif';
+      c.fillText('ลงทะเบียนสำเร็จแล้ว', rx + 34, 153);
+
+      /* info rows */
+      const rows = [
+        { icon: '👤', label: 'ชื่อ-นามสกุล', value: rec.name },
+        { icon: '✉',  label: 'อีเมล',        value: rec.email },
+        { icon: '📱', label: 'เบอร์โทร',     value: rec.phone },
+        { icon: '📅', label: 'วันที่',        value: new Date(rec.registeredAt).toLocaleString('th-TH', { dateStyle:'medium', timeStyle:'short' }) },
+      ];
+
+      rows.forEach((row, i) => {
+        const y = 195 + i * 54;
+
+        /* row bg */
+        c.fillStyle = 'rgba(255,255,255,0.04)';
+        roundRect(c, rx, y, 400, 42, 10);
+        c.fill();
+        c.strokeStyle = 'rgba(255,255,255,0.07)';
+        c.lineWidth = 1; c.stroke();
+
+        /* icon */
+        c.font = '17px system-ui';
+        c.fillStyle = '#fff';
+        c.fillText(row.icon, rx + 14, y + 27);
+
+        /* label */
+        c.font = '11px system-ui, sans-serif';
+        c.fillStyle = 'rgba(255,255,255,0.42)';
+        c.fillText(row.label.toUpperCase(), rx + 44, y + 18);
+
+        /* value */
+        c.font = 'bold 15px system-ui, sans-serif';
+        c.fillStyle = '#ffffff';
+        c.fillText(row.value, rx + 44, y + 34);
+      });
+
+      /* footer */
+      c.fillStyle = 'rgba(255,255,255,0.18)';
+      c.font = '11px system-ui, sans-serif';
+      c.fillText('⚡ Powered by PokéForm  •  ID: ' + rec.id, rx, H - 28);
+
+      /* trigger download */
+      const a = document.createElement('a');
+      a.download = 'registration-card.png';
+      a.href = canvas.toDataURL('image/png');
+      a.click();
+    }
+
+    /* ── Draw Pikachu face + body on canvas ── */
+    function drawPikachu(c, cx, cy, r) {
+      /* body */
+      c.fillStyle = '#F5CC00';
+      c.beginPath(); c.ellipse(cx, cy + r * 0.72, r * 0.62, r * 0.55, 0, 0, Math.PI * 2); c.fill();
+
+      /* back stripes */
+      c.strokeStyle = '#9B6A00'; c.lineWidth = 4; c.lineCap = 'round';
+      [[cx - r*0.38, cy + r*0.28, cx - r*0.18, cy + r*0.18],
+       [cx - r*0.33, cy + r*0.45, cx - r*0.12, cy + r*0.35]].forEach(([x1,y1,x2,y2]) => {
+        c.beginPath(); c.moveTo(x1,y1); c.quadraticCurveTo(x1+10,y1-8,x2,y2); c.stroke();
+      });
+
+      /* left ear */
+      c.fillStyle = '#F5CC00';
+      c.beginPath(); c.moveTo(cx - r*0.52, cy - r*0.52); c.lineTo(cx - r*0.72, cy - r*1.22); c.lineTo(cx - r*0.18, cy - r*0.66); c.closePath(); c.fill();
+      c.fillStyle = '#1a1a1a';
+      c.beginPath(); c.moveTo(cx - r*0.50, cy - r*0.56); c.lineTo(cx - r*0.66, cy - r*1.10); c.lineTo(cx - r*0.22, cy - r*0.66); c.closePath(); c.fill();
+
+      /* right ear */
+      c.fillStyle = '#F5CC00';
+      c.beginPath(); c.moveTo(cx + r*0.52, cy - r*0.52); c.lineTo(cx + r*0.72, cy - r*1.22); c.lineTo(cx + r*0.18, cy - r*0.66); c.closePath(); c.fill();
+      c.fillStyle = '#1a1a1a';
+      c.beginPath(); c.moveTo(cx + r*0.50, cy - r*0.56); c.lineTo(cx + r*0.66, cy - r*1.10); c.lineTo(cx + r*0.22, cy - r*0.66); c.closePath(); c.fill();
+
+      /* head */
+      c.fillStyle = '#F5CC00';
+      c.beginPath(); c.arc(cx, cy, r, 0, Math.PI * 2); c.fill();
+
+      /* eyes */
+      [cx - r*0.32, cx + r*0.32].forEach(ex => {
+        c.fillStyle = '#1e1009';
+        c.beginPath(); c.ellipse(ex, cy - r*0.08, r*0.11, r*0.13, 0, 0, Math.PI*2); c.fill();
+        c.fillStyle = 'white';
+        c.beginPath(); c.arc(ex + r*0.03, cy - r*0.12, r*0.045, 0, Math.PI*2); c.fill();
+      });
+
+      /* cheeks */
+      [cx - r*0.58, cx + r*0.58].forEach(qx => {
+        c.fillStyle = 'rgba(255,62,62,0.82)';
+        c.beginPath(); c.ellipse(qx, cy + r*0.14, r*0.19, r*0.14, 0, 0, Math.PI*2); c.fill();
+        c.fillStyle = 'rgba(255,255,255,0.65)';
+        c.beginPath(); c.arc(qx - r*0.04, cy + r*0.10, r*0.035, 0, Math.PI*2); c.fill();
+      });
+
+      /* nose */
+      c.fillStyle = '#5a2d00';
+      c.beginPath(); c.ellipse(cx, cy + r*0.18, r*0.055, r*0.045, 0, 0, Math.PI*2); c.fill();
+
+      /* smile */
+      c.strokeStyle = '#5a2d00'; c.lineWidth = 2.8; c.lineCap = 'round';
+      c.beginPath(); c.moveTo(cx - r*0.22, cy + r*0.27); c.quadraticCurveTo(cx, cy + r*0.42, cx + r*0.22, cy + r*0.27); c.stroke();
+
+      /* feet */
+      [cx - r*0.32, cx + r*0.32].forEach(fx => {
+        c.fillStyle = '#F5CC00';
+        c.beginPath(); c.ellipse(fx, cy + r*1.32, r*0.3, r*0.17, 0, 0, Math.PI*2); c.fill();
+        c.fillStyle = '#d4a800';
+        [-r*0.14, 0, r*0.14].forEach(dx => {
+          c.beginPath(); c.ellipse(fx + dx, cy + r*1.38, r*0.08, r*0.06, 0, 0, Math.PI*2); c.fill();
+        });
+      });
+
+      /* lightning tail */
+      c.fillStyle = '#F5CC00';
+      c.strokeStyle = '#c8a000'; c.lineWidth = 1.2; c.lineJoin = 'round';
+      const tx = cx + r*0.82, ty = cy + r*0.3;
+      c.beginPath();
+      c.moveTo(tx,ty); c.lineTo(tx+18,ty-28); c.lineTo(tx+24,ty-12);
+      c.lineTo(tx+36,ty-44); c.lineTo(tx+30,ty-22); c.lineTo(tx+42,ty-14);
+      c.lineTo(tx+26,ty+6); c.lineTo(tx+32,ty+26); c.lineTo(tx+18,ty+14);
+      c.lineTo(tx+12,ty+34); c.lineTo(tx+8,ty+16); c.lineTo(tx-2,ty+28); c.closePath();
+      c.fill(); c.stroke();
+    }
+
+    function drawStar(c, x, y, size, color) {
+      c.fillStyle = color;
+      c.save(); c.translate(x, y);
+      c.beginPath();
+      for (let i = 0; i < 4; i++) {
+        c.rotate(Math.PI / 2);
+        c.moveTo(0, 0); c.lineTo(size * 0.4, size * 0.4); c.lineTo(0, size); c.lineTo(-size * 0.4, size * 0.4);
+      }
+      c.closePath(); c.fill(); c.restore();
+    }
+
+    function roundRect(c, x, y, w, h, r) {
+      c.beginPath();
+      c.moveTo(x + r, y);
+      c.lineTo(x + w - r, y); c.arcTo(x+w, y,   x+w, y+r,   r);
+      c.lineTo(x + w, y + h - r); c.arcTo(x+w, y+h, x+w-r, y+h, r);
+      c.lineTo(x + r, y + h); c.arcTo(x, y+h,   x, y+h-r, r);
+      c.lineTo(x, y + r); c.arcTo(x, y,     x+r, y,     r);
+      c.closePath();
+    }
+
+    function showBannerError(msg) {
+      const el = document.getElementById('errorBanner');
+      el.textContent = '⚠ ' + msg;
+      el.style.display = 'block';
+    }
+    function showError(input, id)  { input.classList.add('error');    document.getElementById(id).style.display = 'block'; }
+    function clearError(input, id) { input.classList.remove('error'); document.getElementById(id).style.display = 'none';  }
+  </script>
+</body>
+</html>

@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌈 สีมงคลประจำวัน</title>
+<link href="https://fonts.googleapis.com/css2?family=Mali:wght@400;500;600;700&family=Sarabun:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+    --pink:    #FFB7D5;
+    --peach:   #FFD6BA;
+    --cream:   #FFF4D6;
+    --mint:    #BEE7E2;
+    --sky:     #C8E6FF;
+    --lilac:   #DCC6F5;
+    --ink:     #4A3A5C;
+    --soft-ink:#6B5B7C;
+}
+
+body {
+    font-family: 'Mali', 'Sarabun', sans-serif;
+    min-height: 100vh;
+    color: var(--ink);
+    background:
+      radial-gradient(circle at 10% 10%, var(--pink) 0%, transparent 35%),
+      radial-gradient(circle at 90% 20%, var(--peach) 0%, transparent 40%),
+      radial-gradient(circle at 80% 90%, var(--lilac) 0%, transparent 40%),
+      radial-gradient(circle at 20% 80%, var(--mint) 0%, transparent 40%),
+      linear-gradient(135deg, #FFF4F8, #F8F4FF);
+    background-attachment: fixed;
+    overflow-x: hidden;
+}
+
+/* ── Floating decorations ─────────────────────────────────────── */
+.deco {
+    position: fixed;
+    pointer-events: none;
+    font-size: 2.5rem;
+    opacity: .55;
+    animation: drift 20s linear infinite;
+    z-index: 0;
+}
+.deco.d1 { top: 8%;  left: 5%;  animation-delay: 0s;   }
+.deco.d2 { top: 15%; right: 8%; animation-delay: -5s;  }
+.deco.d3 { bottom:18%; left: 8%;animation-delay: -10s; }
+.deco.d4 { bottom:8%; right:6%; animation-delay: -15s; }
+.deco.d5 { top: 50%; left: 3%;  animation-delay: -7s;  }
+.deco.d6 { top: 60%; right: 4%; animation-delay: -12s; }
+
+@keyframes drift {
+    0%   { transform: translate(0,0) rotate(0); }
+    25%  { transform: translate(20px,-30px) rotate(15deg); }
+    50%  { transform: translate(-15px,-15px) rotate(-10deg); }
+    75%  { transform: translate(-20px,20px) rotate(8deg); }
+    100% { transform: translate(0,0) rotate(0); }
+}
+
+.app {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 30px 20px 80px;
+    position: relative;
+    z-index: 1;
+}
+
+/* ── Header ───────────────────────────────────────────────────── */
+.hero {
+    text-align: center;
+    padding: 30px 10px 24px;
+}
+.hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,.7);
+    backdrop-filter: blur(10px);
+    padding: 6px 18px;
+    border-radius: 50px;
+    font-size: .85rem;
+    font-weight: 600;
+    color: var(--soft-ink);
+    margin-bottom: 14px;
+    border: 2px solid rgba(255,255,255,.9);
+}
+.hero h1 {
+    font-family: 'Mali', sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.15;
+    margin-bottom: 10px;
+}
+.hero h1 span {
+    background: linear-gradient(135deg, #FF6FA5, #B66FFF);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+.hero p {
+    font-size: 1rem;
+    color: var(--soft-ink);
+    font-weight: 400;
+}
+
+/* ── Wizard card ──────────────────────────────────────────────── */
+.wizard {
+    background: rgba(255,255,255,.85);
+    backdrop-filter: blur(20px);
+    border-radius: 32px;
+    padding: 32px 28px;
+    box-shadow:
+        0 30px 60px -20px rgba(180,120,200,.25),
+        0 0 0 1px rgba(255,255,255,.6) inset;
+    position: relative;
+}
+
+/* ── Stepper ─────────────────────────────────────────────────── */
+.stepper {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 26px;
+}
+.dot {
+    width: 32px;
+    height: 6px;
+    border-radius: 3px;
+    background: #EDE5F5;
+    transition: all .35s;
+}
+.dot.active { background: linear-gradient(90deg, #FF6FA5, #B66FFF); width: 44px; }
+.dot.done   { background: #C8B6E5; }
+
+/* ── Steps ──────────────────────────────────────────────────── */
+.step { display: none; animation: fadeIn .4s ease; }
+.step.show { display: block; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.step-icon {
+    text-align: center;
+    font-size: 4rem;
+    margin-bottom: 8px;
+    animation: bounce 2s ease-in-out infinite;
+}
+@keyframes bounce {
+    0%,100% { transform: translateY(0); }
+    50%     { transform: translateY(-8px); }
+}
+.step-title {
+    text-align: center;
+    font-family: 'Mali', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 6px;
+}
+.step-sub {
+    text-align: center;
+    color: var(--soft-ink);
+    font-size: .95rem;
+    margin-bottom: 26px;
+}
+
+/* ── Inputs ─────────────────────────────────────────────────── */
+.input-big {
+    width: 100%;
+    padding: 18px 22px;
+    border: 3px solid #F0E5F8;
+    border-radius: 18px;
+    font-family: 'Mali', sans-serif;
+    font-size: 1.15rem;
+    color: var(--ink);
+    background: #FCFAFF;
+    transition: all .25s;
+    text-align: center;
+}
+.input-big:focus {
+    outline: none;
+    border-color: #FF6FA5;
+    background: #fff;
+    box-shadow: 0 0 0 6px rgba(255,111,165,.13);
+}
+
+/* ── Gender pick ────────────────────────────────────────────── */
+.gpick {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+.gcard {
+    padding: 28px 16px;
+    border: 3px solid #F0E5F8;
+    border-radius: 22px;
+    background: #FCFAFF;
+    cursor: pointer;
+    text-align: center;
+    transition: all .3s;
+    font-family: 'Mali', sans-serif;
+}
+.gcard:hover { transform: translateY(-4px); border-color: #DCC6F5; }
+.gcard .em { font-size: 3.2rem; display: block; margin-bottom: 6px; }
+.gcard .nm { font-size: 1.15rem; font-weight: 600; color: var(--soft-ink); }
+.gcard.sel-m { border-color: #6FBFFF; background: linear-gradient(135deg,#C8E6FF,#E0F0FF); }
+.gcard.sel-f { border-color: #FF6FA5; background: linear-gradient(135deg,#FFD0E0,#FFE5EE); }
+.gcard.sel-m .nm, .gcard.sel-f .nm { color: var(--ink); font-weight: 700; }
+
+/* ── Step actions ───────────────────────────────────────────── */
+.actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 26px;
+}
+.btn {
+    flex: 1;
+    padding: 16px;
+    border: none;
+    border-radius: 16px;
+    font-family: 'Mali', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .25s;
+    letter-spacing: .5px;
+}
+.btn-back  { background: #F0E5F8; color: var(--soft-ink); }
+.btn-back:hover { background: #E5D5F0; }
+.btn-next  { background: linear-gradient(135deg, #FF6FA5, #B66FFF); color: #fff; box-shadow: 0 8px 22px rgba(182,111,255,.35); }
+.btn-next:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(182,111,255,.45); }
+.btn-final { background: linear-gradient(135deg, #FFB347, #FF6FA5); color: #fff; box-shadow: 0 8px 22px rgba(255,111,165,.4); }
+.btn-final:hover { transform: translateY(-2px); }
+.btn:disabled { opacity: .4; cursor: not-allowed; transform: none !important; box-shadow: none; }
+
+/* ────────────────────────────────────────────────────────────── */
+/*                          RESULTS                               */
+/* ────────────────────────────────────────────────────────────── */
+
+.results { display: none; }
+.results.show { display: block; animation: fadeIn .5s; }
+
+.res-hero {
+    text-align: center;
+    padding: 30px 24px;
+    border-radius: 32px;
+    color: #fff;
+    margin-bottom: 22px;
+    box-shadow: 0 20px 50px rgba(180,120,200,.3);
+    position: relative;
+    overflow: hidden;
+}
+.res-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.3), transparent 50%);
+    pointer-events: none;
+}
+.res-hero .greet { font-size: 1rem; opacity: .9; font-weight: 500; }
+.res-hero h2 { font-size: 1.9rem; font-weight: 700; font-family: 'Mali', sans-serif; margin: 6px 0; }
+.res-hero .day-em { font-size: 4.5rem; margin: 8px 0; filter: drop-shadow(0 4px 8px rgba(0,0,0,.25)); }
+.res-hero .day-nm { font-size: 2.4rem; font-weight: 700; font-family: 'Mali', sans-serif; }
+.res-hero .day-date { font-size: .95rem; opacity: .92; margin-top: 6px; }
+
+/* ── Category tabs ──────────────────────────────────────────── */
+.tabs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 18px;
+}
+.tab {
+    padding: 14px 6px;
+    border-radius: 18px;
+    background: rgba(255,255,255,.75);
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    text-align: center;
+    transition: all .3s;
+    font-family: 'Mali', sans-serif;
+    border: 2px solid transparent;
+}
+.tab:hover { transform: translateY(-3px); }
+.tab .t-em  { font-size: 1.8rem; display: block; margin-bottom: 2px; }
+.tab .t-nm  { font-size: .85rem; font-weight: 600; color: var(--soft-ink); }
+.tab.active { background: #fff; box-shadow: 0 12px 30px rgba(180,120,200,.25); }
+.tab.active.work  { border-color: #FF8E53; }
+.tab.active.money { border-color: #FFB347; }
+.tab.active.love  { border-color: #FF6FA5; }
+.tab.active.charm { border-color: #6FBFFF; }
+.tab.active .t-nm { color: var(--ink); }
+
+/* ── Category panel ─────────────────────────────────────────── */
+.panel {
+    background: rgba(255,255,255,.92);
+    border-radius: 28px;
+    padding: 28px 24px;
+    box-shadow: 0 18px 50px rgba(180,120,200,.18);
+    margin-bottom: 22px;
+    display: none;
+    animation: fadeIn .4s;
+}
+.panel.show { display: block; }
+
+.panel-head { text-align: center; margin-bottom: 22px; }
+.panel-head .em { font-size: 3rem; }
+.panel-head h3 { font-size: 1.6rem; font-weight: 700; font-family: 'Mali', sans-serif; margin-top: 4px; }
+.panel-head p  { font-size: .95rem; color: var(--soft-ink); margin-top: 4px; }
+
+/* ── Hero color ─────────────────────────────────────────────── */
+.hero-color {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    padding: 22px;
+    background: linear-gradient(135deg, #FFF8FC, #F8F2FF);
+    border-radius: 22px;
+    margin-bottom: 22px;
+}
+.hero-swatch {
+    width: 110px; height: 110px;
+    border-radius: 50%;
+    border: 6px solid #fff;
+    box-shadow: 0 14px 35px rgba(0,0,0,.2);
+    flex-shrink: 0;
+    position: relative;
+}
+.hero-swatch::after {
+    content: '⭐';
+    position: absolute; top: -8px; right: -4px;
+    font-size: 1.8rem;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,.3));
+}
+.hero-color-info .hc-label {
+    font-size: .8rem;
+    color: #B099C0;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+.hero-color-info h4 {
+    font-size: 1.7rem;
+    font-weight: 700;
+    font-family: 'Mali', sans-serif;
+    color: var(--ink);
+    margin: 4px 0;
+}
+.hero-color-info .hex {
+    font-family: 'Sarabun', monospace;
+    font-size: 1rem;
+    color: var(--soft-ink);
+    background: #fff;
+    padding: 4px 12px;
+    border-radius: 50px;
+    display: inline-block;
+    cursor: pointer;
+    transition: all .2s;
+}
+.hero-color-info .hex:hover { background: var(--ink); color: #fff; }
+
+/* ── Sub colors ─────────────────────────────────────────────── */
+.sub-label {
+    font-size: .9rem;
+    color: var(--soft-ink);
+    font-weight: 600;
+    margin-bottom: 12px;
+    text-align: center;
+}
+.sub-colors {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 22px;
+}
+.sub-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    background: #FCFAFF;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all .2s;
+}
+.sub-item:hover { background: #F4ECFC; transform: translateX(3px); }
+.sub-item .sub-circle {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,.12);
+    flex-shrink: 0;
+}
+.sub-item .sub-name { font-weight: 600; color: var(--ink); font-size: .95rem; }
+.sub-item .sub-hex  { font-size: .75rem; color: #B099C0; }
+
+/* ── Tip ────────────────────────────────────────────────────── */
+.tip {
+    padding: 16px 18px;
+    background: linear-gradient(135deg, #FFF8E5, #FFF1F5);
+    border-radius: 16px;
+    font-size: .92rem;
+    color: var(--soft-ink);
+    line-height: 1.6;
+}
+
+/* ── Lucky extras ───────────────────────────────────────────── */
+.extras {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+}
+.extra-card {
+    background: rgba(255,255,255,.92);
+    border-radius: 22px;
+    padding: 22px 12px;
+    text-align: center;
+    box-shadow: 0 12px 35px rgba(180,120,200,.16);
+}
+.extra-card .ex-em { font-size: 2.4rem; }
+.extra-card .ex-lb { font-size: .82rem; color: var(--soft-ink); margin-top: 4px; font-weight: 500; }
+.extra-card .ex-vl { font-size: 1.4rem; font-weight: 700; font-family: 'Mali', sans-serif; color: var(--ink); margin-top: 6px; }
+
+/* ── Restart ────────────────────────────────────────────────── */
+.restart {
+    width: 100%;
+    padding: 16px;
+    border: 2.5px dashed rgba(180,120,200,.4);
+    border-radius: 18px;
+    background: rgba(255,255,255,.5);
+    color: var(--soft-ink);
+    font-family: 'Mali', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .25s;
+}
+.restart:hover { background: rgba(255,255,255,.85); }
+
+/* ── Toast ──────────────────────────────────────────────────── */
+.toast {
+    position: fixed;
+    bottom: 24px; left: 50%;
+    transform: translate(-50%, 30px);
+    background: var(--ink);
+    color: #fff;
+    padding: 12px 22px;
+    border-radius: 50px;
+    font-size: .9rem;
+    font-weight: 500;
+    opacity: 0;
+    transition: all .35s;
+    pointer-events: none;
+    z-index: 9999;
+    box-shadow: 0 14px 35px rgba(0,0,0,.2);
+}
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 560px) {
+    .hero h1 { font-size: 2.2rem; }
+    .wizard  { padding: 26px 20px; }
+    .extras  { grid-template-columns: 1fr; }
+    .sub-colors { grid-template-columns: 1fr; }
+    .hero-color { flex-direction: column; text-align: center; }
+    .hero-swatch { width: 90px; height: 90px; }
+    .tab .t-nm { font-size: .75rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- decorations -->
+<span class="deco d1">🌸</span>
+<span class="deco d2">✨</span>
+<span class="deco d3">🌷</span>
+<span class="deco d4">💫</span>
+<span class="deco d5">🍀</span>
+<span class="deco d6">🌟</span>
+
+<div class="app">
+
+    <!-- Hero -->
+    <div class="hero">
+        <div class="hero-badge">🔮 โหราศาสตร์ไทย</div>
+        <h1>สีมงคล <span>ประจำวัน</span></h1>
+        <p>ค้นพบสีเสื้อผ้าที่ใช่ ในวันที่ใช่ ✨</p>
+    </div>
+
+    <!-- Wizard -->
+    <div class="wizard" id="wizard">
+
+        <div class="stepper">
+            <div class="dot active" data-step="1"></div>
+            <div class="dot" data-step="2"></div>
+            <div class="dot" data-step="3"></div>
+            <div class="dot" data-step="4"></div>
+        </div>
+
+        <!-- Step 1: nickname -->
+        <div class="step show" data-step="1">
+            <div class="step-icon">👋</div>
+            <div class="step-title">สวัสดีค่ะ! เรียกคุณว่าอะไรดี?</div>
+            <div class="step-sub">บอกชื่อเล่นของคุณให้เรารู้จักหน่อย</div>
+            <input type="text" class="input-big" id="nickname" placeholder="ชื่อเล่น..." maxlength="20">
+            <div class="actions">
+                <button class="btn btn-next" onclick="next()">ถัดไป →</button>
+            </div>
+        </div>
+
+        <!-- Step 2: gender -->
+        <div class="step" data-step="2">
+            <div class="step-icon">🧚</div>
+            <div class="step-title">คุณเป็นเพศอะไร?</div>
+            <div class="step-sub">เพื่อแนะนำสีให้เหมาะที่สุด</div>
+            <div class="gpick">
+                <div class="gcard" id="g-m" onclick="pickG('male')">
+                    <span class="em">👨</span>
+                    <span class="nm">ชาย</span>
+                </div>
+                <div class="gcard" id="g-f" onclick="pickG('female')">
+                    <span class="em">👩</span>
+                    <span class="nm">หญิง</span>
+                </div>
+            </div>
+            <div class="actions">
+                <button class="btn btn-back" onclick="prev()">← ย้อนกลับ</button>
+                <button class="btn btn-next" onclick="next()">ถัดไป →</button>
+            </div>
+        </div>
+
+        <!-- Step 3: birth date -->
+        <div class="step" data-step="3">
+            <div class="step-icon">🎂</div>
+            <div class="step-title">วันเกิดของคุณ</div>
+            <div class="step-sub">วันเกิดบ่งบอกดาวประจำตัวของคุณ</div>
+            <input type="date" class="input-big" id="birthdate">
+            <div class="actions">
+                <button class="btn btn-back" onclick="prev()">← ย้อนกลับ</button>
+                <button class="btn btn-next" onclick="next()">ถัดไป →</button>
+            </div>
+        </div>
+
+        <!-- Step 4: query date -->
+        <div class="step" data-step="4">
+            <div class="step-icon">📅</div>
+            <div class="step-title">อยากดูสีมงคลของวันไหน?</div>
+            <div class="step-sub">เลือกวันที่ต้องการเสริมโชค</div>
+            <input type="date" class="input-big" id="querydate">
+            <div class="actions">
+                <button class="btn btn-back" onclick="prev()">← ย้อนกลับ</button>
+                <button class="btn btn-final" onclick="reveal()">✨ เปิดเผยสีมงคล</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Results -->
+    <div class="results" id="results"></div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ─── Defaults ─────────────────────────────────────────────── */
+const today = new Date().toISOString().split('T')[0];
+document.getElementById('querydate').value = today;
+
+let step = 1;
+let gender = null;
+
+/* ─── Step navigation ───────────────────────────────────────── */
+function showStep(n) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('show'));
+    document.querySelector(`.step[data-step="${n}"]`).classList.add('show');
+    document.querySelectorAll('.dot').forEach(d => {
+        const sn = +d.dataset.step;
+        d.classList.toggle('active', sn === n);
+        d.classList.toggle('done',   sn < n);
+    });
+}
+
+function next() {
+    if (!validateStep(step)) return;
+    if (step < 4) { step++; showStep(step); }
+}
+function prev() {
+    if (step > 1) { step--; showStep(step); }
+}
+
+function validateStep(n) {
+    if (n === 1 && !document.getElementById('nickname').value.trim()) {
+        toast('💌 กรุณาใส่ชื่อเล่นด้วยนะ');
+        return false;
+    }
+    if (n === 2 && !gender) {
+        toast('💖 กรุณาเลือกเพศ');
+        return false;
+    }
+    if (n === 3 && !document.getElementById('birthdate').value) {
+        toast('🎂 กรุณาเลือกวันเกิด');
+        return false;
+    }
+    return true;
+}
+
+function pickG(g) {
+    gender = g;
+    document.getElementById('g-m').className = 'gcard' + (g==='male'  ? ' sel-m' : '');
+    document.getElementById('g-f').className = 'gcard' + (g==='female'? ' sel-f' : '');
+}
+
+/* ─── Day data ─────────────────────────────────────────────── */
+const DAYS = {
+    0: { th:'อาทิตย์', em:'☀️', planet:'พระอาทิตย์',
+         grad:'linear-gradient(135deg,#FF6B6B,#FFB347)',
+         colors:[
+            {hex:'#FF3B3B',name:'แดงสด'},{hex:'#DC143C',name:'แดงเข้ม'},
+            {hex:'#FF7F50',name:'แดงปะการัง'},{hex:'#FFD700',name:'ทอง'},
+            {hex:'#FF8C00',name:'ส้มเข้ม'},{hex:'#FFB347',name:'ส้มอ่อน'}
+         ]},
+    1: { th:'จันทร์', em:'🌙', planet:'พระจันทร์',
+         grad:'linear-gradient(135deg,#FFD93D,#FCEE74)',
+         colors:[
+            {hex:'#FFD700',name:'เหลืองทอง'},{hex:'#FFEB3B',name:'เหลืองสด'},
+            {hex:'#FFFACD',name:'เหลืองอ่อน'},{hex:'#F5DEB3',name:'ครีม'},
+            {hex:'#FFFFFF',name:'ขาว'},{hex:'#FFF8DC',name:'ครีมหวาน'}
+         ]},
+    2: { th:'อังคาร', em:'🌸', planet:'พระอังคาร',
+         grad:'linear-gradient(135deg,#FF6FA5,#FFB7D5)',
+         colors:[
+            {hex:'#FF69B4',name:'ชมพู'},{hex:'#FF1493',name:'ชมพูเข้ม'},
+            {hex:'#FFB6C1',name:'ชมพูอ่อน'},{hex:'#FF007F',name:'กุหลาบ'},
+            {hex:'#C71585',name:'แดงกุหลาบ'},{hex:'#FFC0CB',name:'ชมพูหวาน'}
+         ]},
+    3: { th:'พุธ', em:'🍀', planet:'พระพุธ',
+         grad:'linear-gradient(135deg,#43E97B,#38F9D7)',
+         colors:[
+            {hex:'#22C55E',name:'เขียวสด'},{hex:'#10B981',name:'มรกต'},
+            {hex:'#84CC16',name:'เขียวมะนาว'},{hex:'#86EFAC',name:'เขียวอ่อน'},
+            {hex:'#15803D',name:'เขียวเข้ม'},{hex:'#A7F3D0',name:'เขียวหวาน'}
+         ]},
+    4: { th:'พฤหัสบดี', em:'🍊', planet:'พระพฤหัสบดี',
+         grad:'linear-gradient(135deg,#FFB347,#FFD700)',
+         colors:[
+            {hex:'#FFA500',name:'ส้มสด'},{hex:'#FF8C00',name:'ส้มเข้ม'},
+            {hex:'#FFD700',name:'ทอง'},{hex:'#FFBF00',name:'เหลืองส้ม'},
+            {hex:'#A0522D',name:'น้ำตาลแดง'},{hex:'#D2691E',name:'น้ำตาลส้ม'}
+         ]},
+    5: { th:'ศุกร์', em:'💎', planet:'พระศุกร์',
+         grad:'linear-gradient(135deg,#4ECDC4,#6FBFFF)',
+         colors:[
+            {hex:'#3B82F6',name:'น้ำเงิน'},{hex:'#87CEEB',name:'ฟ้าอ่อน'},
+            {hex:'#06B6D4',name:'เทอร์ควอยส์'},{hex:'#0EA5E9',name:'ฟ้าสด'},
+            {hex:'#1E40AF',name:'น้ำเงินเข้ม'},{hex:'#BFDBFE',name:'ฟ้าหวาน'}
+         ]},
+    6: { th:'เสาร์', em:'🔮', planet:'พระเสาร์',
+         grad:'linear-gradient(135deg,#A18CD1,#9B59B6)',
+         colors:[
+            {hex:'#9333EA',name:'ม่วง'},{hex:'#7C3AED',name:'ไวโอเล็ต'},
+            {hex:'#4C1D95',name:'ม่วงเข้ม'},{hex:'#C4B5FD',name:'ม่วงอ่อน'},
+            {hex:'#1F2937',name:'ดำ'},{hex:'#5B21B6',name:'น้ำเงินม่วง'}
+         ]}
+};
+
+/* ─── Categories ───────────────────────────────────────────── */
+const CATS = {
+    work: {
+        title:'การงาน', em:'💼',
+        sub:'สีเสริมพลังความสำเร็จในการทำงาน',
+        tip:'💡 เหมาะสำหรับวันประชุมสำคัญ การนำเสนองาน หรือวันที่ต้องการสร้างความน่าเชื่อถือ',
+        pA:0, pB:4
+    },
+    money: {
+        title:'การเงิน', em:'💰',
+        sub:'สีดึงดูดโชคลาภและความมั่งคั่ง',
+        tip:'💡 สวมใส่วันทำธุรกรรม เจรจาต่อรอง หรือวันที่อยากเรียกเงินเข้ากระเป๋า',
+        pA:4, pB:1
+    },
+    love: {
+        title:'ความรัก', em:'💕',
+        sub:'สีเสริมเสน่ห์และความโรแมนติก',
+        tip:'💡 เหมาะกับวันเดท วันพิเศษกับคนรัก หรือวันที่อยากดูดีที่สุด',
+        pA:5, pB:2
+    },
+    charm: {
+        title:'เมตตา', em:'✨',
+        sub:'สีเสริมความน่ารักและเสน่ห์ต่อผู้คน',
+        tip:'💡 ใส่วันพบปะสังคม เจอผู้ใหญ่ หรือวันที่ต้องการให้คนรอบข้างเอ็นดู',
+        pA:1, pB:3
+    }
+};
+
+const GEMS  = ['ทับทิม','มุก','ปะการัง','มรกต','บุษราคัม','เพชร','ไพลิน'];
+const TIMES = ['06:00–08:00','08:00–10:00','10:00–12:00','12:00–14:00',
+               '14:00–16:00','16:00–18:00','18:00–20:00'];
+
+/* ─── Helpers ──────────────────────────────────────────────── */
+function dow(s) { return new Date(s+'T00:00:00').getDay(); }
+
+function thaiDate(s) {
+    const d = new Date(s+'T00:00:00');
+    const M = ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน',
+               'กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
+    return `${d.getDate()} ${M[d.getMonth()]} ${d.getFullYear()+543}`;
+}
+
+function pickColors(bd, qd, g, cat) {
+    const gOff = g === 'female' ? 1 : 0;
+    const bq   = (bd + qd) % 6;
+    const base = DAYS[qd].colors;
+    const palA = DAYS[cat.pA].colors;
+    const palB = DAYS[cat.pB].colors;
+
+    return {
+        hero: { ...base[bq % base.length] },
+        subs: [
+            { ...palA[(bq + gOff + 2) % palA.length] },
+            { ...palB[(bd + gOff + 1) % palB.length] },
+            { ...base[(bq + 3) % base.length] },
+            { ...palA[(bd + qd + gOff) % palA.length] }
+        ]
+    };
+}
+
+/* ─── Reveal ──────────────────────────────────────────────── */
+function reveal() {
+    if (!validateStep(step)) return;
+    const qval = document.getElementById('querydate').value;
+    if (!qval) { toast('📅 กรุณาเลือกวันที่'); return; }
+
+    const nick = document.getElementById('nickname').value.trim();
+    const bd   = dow(document.getElementById('birthdate').value);
+    const qd   = dow(qval);
+    const BD   = DAYS[bd];
+    const QD   = DAYS[qd];
+    const gEm  = gender === 'male' ? '👨' : '👩';
+
+    /* result html */
+    let html = `
+    <div class="res-hero" style="background:${QD.grad}">
+        <div class="greet">สวัสดี ${gEm} ${nick}</div>
+        <h2>คุณเกิดวัน${BD.th} ${BD.em}</h2>
+        <div class="day-em">${QD.em}</div>
+        <div class="day-nm">วัน${QD.th}</div>
+        <div class="day-date">${thaiDate(qval)}</div>
+    </div>
+
+    <div class="tabs">
+        ${Object.entries(CATS).map(([k,c],i) => `
+            <div class="tab ${k} ${i===0?'active':''}" onclick="showTab('${k}')">
+                <span class="t-em">${c.em}</span>
+                <span class="t-nm">${c.title}</span>
+            </div>`).join('')}
+    </div>`;
+
+    Object.entries(CATS).forEach(([k,c],i) => {
+        const pal = pickColors(bd, qd, gender, c);
+        html += `
+        <div class="panel ${i===0?'show':''}" id="panel-${k}">
+            <div class="panel-head">
+                <span class="em">${c.em}</span>
+                <h3>สีมงคลด้าน${c.title}</h3>
+                <p>${c.sub}</p>
+            </div>
+
+            <div class="hero-color">
+                <div class="hero-swatch" style="background:${pal.hero.hex}"></div>
+                <div class="hero-color-info">
+                    <div class="hc-label">สีหลักของวันนี้</div>
+                    <h4>${pal.hero.name}</h4>
+                    <span class="hex" onclick="copyHex('${pal.hero.hex}','${pal.hero.name}')">${pal.hero.hex} 📋</span>
+                </div>
+            </div>
+
+            <div class="sub-label">🎨 สีเสริมที่เข้าคู่ได้ดี</div>
+            <div class="sub-colors">
+                ${pal.subs.map(s => `
+                    <div class="sub-item" onclick="copyHex('${s.hex}','${s.name}')">
+                        <div class="sub-circle" style="background:${s.hex}"></div>
+                        <div>
+                            <div class="sub-name">${s.name}</div>
+                            <div class="sub-hex">${s.hex}</div>
+                        </div>
+                    </div>`).join('')}
+            </div>
+
+            <div class="tip">${c.tip}</div>
+        </div>`;
+    });
+
+    /* extras */
+    const num  = ((bd*3 + qd*2 + 7) % 9) + 1;
+    const gem  = GEMS[qd];
+    const time = TIMES[(bd + qd) % TIMES.length];
+    html += `
+    <div class="extras">
+        <div class="extra-card">
+            <div class="ex-em">🔢</div>
+            <div class="ex-lb">เลขมงคล</div>
+            <div class="ex-vl">${num}</div>
+        </div>
+        <div class="extra-card">
+            <div class="ex-em">💎</div>
+            <div class="ex-lb">อัญมณีมงคล</div>
+            <div class="ex-vl">${gem}</div>
+        </div>
+        <div class="extra-card">
+            <div class="ex-em">⏰</div>
+            <div class="ex-lb">เวลามงคล</div>
+            <div class="ex-vl">${time}</div>
+        </div>
+    </div>
+
+    <button class="restart" onclick="restart()">🔄 เริ่มใหม่อีกครั้ง</button>`;
+
+    const r = document.getElementById('results');
+    r.innerHTML = html;
+    r.classList.add('show');
+    document.getElementById('wizard').style.display = 'none';
+    r.scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
+function showTab(k) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelector(`.tab.${k}`).classList.add('active');
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('show'));
+    document.getElementById('panel-' + k).classList.add('show');
+}
+
+function restart() {
+    document.getElementById('results').classList.remove('show');
+    document.getElementById('wizard').style.display = 'block';
+    document.getElementById('nickname').value = '';
+    document.getElementById('birthdate').value = '';
+    document.getElementById('querydate').value = today;
+    gender = null;
+    document.getElementById('g-m').className = 'gcard';
+    document.getElementById('g-f').className = 'gcard';
+    step = 1;
+    showStep(1);
+    window.scrollTo({ top:0, behavior:'smooth' });
+}
+
+function copyHex(hex, name) {
+    navigator.clipboard.writeText(hex).catch(()=>{});
+    toast(`🎨 คัดลอกสี${name} (${hex}) แล้ว!`);
+}
+
+function toast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2400);
+}
+
+/* Enter key navigation */
+document.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && document.getElementById('wizard').style.display !== 'none') {
+        if (step < 4) next(); else reveal();
+    }
+});
+</script>
+</body>
+</html>
