@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🌈 สีมงคลประจำวัน · Lucky Colors</title>
+<title>🌈 สีเสื้อมงคลประจำวัน · Lucky Shirt Colors</title>
 <link href="https://fonts.googleapis.com/css2?family=Mali:wght@400;500;600;700&family=Sarabun:wght@400;600;700;800&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
@@ -17,6 +17,7 @@
     --lilac:   #DCC6F5;
     --ink:     #4A3A5C;
     --soft-ink:#6B5B7C;
+    --warn:    #DC2626;
 }
 
 body {
@@ -56,7 +57,6 @@ body[data-lang="en"] { font-family: 'Quicksand','Mali',sans-serif; }
     100% { transform: translate(0,0) rotate(0); }
 }
 
-/* ── Language switch ──────────────────────────────────────── */
 .lang-switch {
     position: fixed; top: 18px; right: 18px; z-index: 100;
     display: flex;
@@ -79,7 +79,6 @@ body[data-lang="en"] { font-family: 'Quicksand','Mali',sans-serif; }
     box-shadow: 0 4px 12px rgba(182,111,255,.3);
 }
 
-/* ── Layout ────────────────────────────────────────────────── */
 .app { max-width: 760px; margin: 0 auto; padding: 30px 20px 80px; position: relative; z-index: 1; }
 
 .hero { text-align: center; padding: 30px 10px 24px; }
@@ -93,14 +92,13 @@ body[data-lang="en"] { font-family: 'Quicksand','Mali',sans-serif; }
     margin-bottom: 14px;
     border: 2px solid rgba(255,255,255,.9);
 }
-.hero h1 { font-size: 2.8rem; font-weight: 700; line-height: 1.15; margin-bottom: 10px; }
+.hero h1 { font-size: 2.6rem; font-weight: 700; line-height: 1.15; margin-bottom: 10px; }
 .hero h1 span {
     background: linear-gradient(135deg, #FF6FA5, #B66FFF);
     -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 .hero p { font-size: 1rem; color: var(--soft-ink); }
 
-/* ── Picker card ──────────────────────────────────────────── */
 .picker {
     background: rgba(255,255,255,.85);
     backdrop-filter: blur(20px);
@@ -116,32 +114,7 @@ body[data-lang="en"] { font-family: 'Quicksand','Mali',sans-serif; }
     letter-spacing: .5px;
 }
 
-/* gender row */
-.gender-row { display: flex; gap: 10px; margin-bottom: 18px; }
-.gbtn {
-    flex: 1;
-    padding: 12px;
-    border: 2.5px solid #F0E5F8;
-    border-radius: 14px;
-    background: #FCFAFF;
-    cursor: pointer;
-    text-align: center;
-    transition: all .25s;
-    font-family: inherit; font-weight: 600;
-    color: var(--soft-ink);
-    font-size: .95rem;
-}
-.gbtn .em { font-size: 1.4rem; margin-right: 6px; }
-.gbtn:hover { border-color: #DCC6F5; }
-.gbtn.sel-m { border-color: #6FBFFF; background: linear-gradient(135deg,#C8E6FF,#E0F0FF); color: var(--ink); }
-.gbtn.sel-f { border-color: #FF6FA5; background: linear-gradient(135deg,#FFD0E0,#FFE5EE); color: var(--ink); }
-
-/* day grid */
-.day-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 6px;
-}
+.day-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
 .day-btn {
     padding: 12px 4px;
     border: 2.5px solid #F0E5F8;
@@ -181,7 +154,6 @@ body[data-lang="en"] { font-family: 'Quicksand','Mali',sans-serif; }
 }
 .date-line strong { color: var(--ink); }
 
-/* ── Result hero ───────────────────────────────────────────── */
 .res-hero {
     text-align: center;
     padding: 26px 24px;
@@ -201,14 +173,14 @@ body[data-lang="en"] { font-family: 'Quicksand','Mali',sans-serif; }
 .res-hero .day-nm { font-size: 2.2rem; font-weight: 700; }
 .res-hero .planet-line { font-size: .95rem; opacity: .9; margin-top: 6px; }
 
-/* ── Tabs ──────────────────────────────────────────────────── */
+/* ── Tabs (5 cols) ─────────────────────────────────────────── */
 .tabs {
-    display: grid; grid-template-columns: repeat(4,1fr);
-    gap: 8px; margin-bottom: 16px;
+    display: grid; grid-template-columns: repeat(5,1fr);
+    gap: 6px; margin-bottom: 16px;
 }
 .tab {
-    padding: 14px 6px;
-    border-radius: 18px;
+    padding: 12px 4px;
+    border-radius: 16px;
     background: rgba(255,255,255,.75);
     backdrop-filter: blur(10px);
     cursor: pointer;
@@ -218,16 +190,16 @@ body[data-lang="en"] { font-family: 'Quicksand','Mali',sans-serif; }
     border: 2px solid transparent;
 }
 .tab:hover { transform: translateY(-3px); }
-.tab .t-em { font-size: 1.8rem; display: block; margin-bottom: 2px; }
-.tab .t-nm { font-size: .85rem; font-weight: 600; color: var(--soft-ink); }
+.tab .t-em { font-size: 1.6rem; display: block; margin-bottom: 2px; }
+.tab .t-nm { font-size: .78rem; font-weight: 600; color: var(--soft-ink); }
 .tab.active { background: #fff; box-shadow: 0 12px 30px rgba(180,120,200,.25); }
 .tab.active.work  { border-color: #FF8E53; }
 .tab.active.money { border-color: #FFB347; }
 .tab.active.love  { border-color: #FF6FA5; }
-.tab.active.charm { border-color: #6FBFFF; }
+.tab.active.elder { border-color: #6FBFFF; }
+.tab.active.avoid { border-color: var(--warn); }
 .tab.active .t-nm { color: var(--ink); }
 
-/* ── Panel ─────────────────────────────────────────────────── */
 .panel {
     background: rgba(255,255,255,.92);
     border-radius: 28px;
@@ -240,18 +212,27 @@ body[data-lang="en"] { font-family: 'Quicksand','Mali',sans-serif; }
 .panel.show { display: block; }
 @keyframes fadeIn { from { opacity:0; transform:translateY(15px); } to { opacity:1; transform:translateY(0); } }
 
+.panel.panel-avoid {
+    background: linear-gradient(135deg, rgba(255,235,235,.95), rgba(255,245,245,.95));
+    box-shadow: 0 18px 50px rgba(220,38,38,.18);
+    border: 2px solid rgba(220,38,38,.15);
+}
+
 .panel-head { text-align: center; margin-bottom: 18px; }
 .panel-head .em { font-size: 2.6rem; }
 .panel-head h3 { font-size: 1.45rem; font-weight: 700; margin-top: 4px; }
 .panel-head p  { font-size: .9rem; color: var(--soft-ink); margin-top: 4px; }
+.panel-avoid .panel-head h3 { color: var(--warn); }
 
-/* hero color */
 .hero-color {
     display: flex; align-items: center; gap: 22px;
     padding: 22px;
     background: linear-gradient(135deg, #FFF8FC, #F8F2FF);
     border-radius: 22px;
     margin-bottom: 18px;
+}
+.panel-avoid .hero-color {
+    background: linear-gradient(135deg, #FFF1F1, #FFEAEA);
 }
 .hero-swatch {
     width: 110px; height: 110px;
@@ -267,25 +248,41 @@ body[data-lang="en"] { font-family: 'Quicksand','Mali',sans-serif; }
     font-size: 1.8rem;
     filter: drop-shadow(0 2px 4px rgba(0,0,0,.3));
 }
+.panel-avoid .hero-swatch {
+    border-color: var(--warn);
+    box-shadow: 0 14px 35px rgba(220,38,38,.4);
+}
+.panel-avoid .hero-swatch::before {
+    content: '🚫';
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3rem;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,.4));
+}
+.panel-avoid .hero-swatch::after {
+    content: '⚠️';
+    top: -10px; right: -10px;
+}
+
 .hero-color-info .hc-label {
     font-size: .78rem; color: #B099C0;
     font-weight: 600; letter-spacing: 1px;
     text-transform: uppercase;
 }
+.panel-avoid .hero-color-info .hc-label { color: var(--warn); font-weight: 700; }
 .hero-color-info h4 {
-    font-size: 1.6rem; font-weight: 700;
+    font-size: 1.5rem; font-weight: 700;
     color: var(--ink); margin: 4px 0;
 }
 .hero-color-info .hex {
     font-family: 'Sarabun', monospace;
-    font-size: .95rem; color: var(--soft-ink);
+    font-size: .92rem; color: var(--soft-ink);
     background: #fff; padding: 4px 12px; border-radius: 50px;
     display: inline-block; cursor: pointer;
     transition: all .2s;
 }
 .hero-color-info .hex:hover { background: var(--ink); color:#fff; }
 
-/* blessing */
 .blessing {
     padding: 18px 20px;
     background: linear-gradient(135deg, #FFF8E5, #FFF1F5, #F4ECFC);
@@ -302,6 +299,16 @@ body[data-lang="en"] { font-family: 'Quicksand','Mali',sans-serif; }
     color: rgba(255,111,165,.35);
     line-height: 1;
 }
+.panel-avoid .blessing {
+    background: linear-gradient(135deg, #FEE2E2, #FECACA);
+    border-color: rgba(220,38,38,.2);
+}
+.panel-avoid .blessing::before {
+    content: '⚠️';
+    color: var(--warn);
+    font-size: 2rem;
+    top: -4px;
+}
 .blessing-text {
     font-size: 1rem;
     color: var(--ink);
@@ -310,8 +317,8 @@ body[data-lang="en"] { font-family: 'Quicksand','Mali',sans-serif; }
     text-align: center;
     padding: 0 8px;
 }
+.panel-avoid .blessing-text { color: #7F1D1D; font-weight: 600; }
 
-/* sub colors */
 .sub-label {
     font-size: .88rem; color: var(--soft-ink);
     font-weight: 600; margin-bottom: 10px;
@@ -337,6 +344,13 @@ body[data-lang="en"] { font-family: 'Quicksand','Mali',sans-serif; }
     box-shadow: 0 4px 12px rgba(0,0,0,.12);
     flex-shrink: 0;
 }
+.panel-avoid .sub-item {
+    background: rgba(255,255,255,.7);
+}
+.panel-avoid .sub-item .sub-circle {
+    border-color: var(--warn);
+    opacity: .85;
+}
 .sub-item .sub-name { font-weight: 600; color: var(--ink); font-size: .92rem; }
 .sub-item .sub-hex  { font-size: .72rem; color: #B099C0; }
 
@@ -348,8 +362,11 @@ body[data-lang="en"] { font-family: 'Quicksand','Mali',sans-serif; }
     color: var(--soft-ink);
     line-height: 1.55;
 }
+.panel-avoid .tip {
+    background: rgba(220,38,38,.08);
+    color: #7F1D1D;
+}
 
-/* extras */
 .extras {
     display: grid; grid-template-columns: repeat(3,1fr);
     gap: 10px;
@@ -383,7 +400,8 @@ body[data-lang="en"] { font-family: 'Quicksand','Mali',sans-serif; }
     .sub-colors { grid-template-columns: 1fr; }
     .hero-color { flex-direction: column; text-align: center; }
     .hero-swatch { width: 90px; height: 90px; }
-    .tab .t-nm { font-size: .72rem; }
+    .tab .t-em { font-size: 1.3rem; }
+    .tab .t-nm { font-size: .65rem; }
     .day-btn .d-nm { font-size: .68rem; }
     .day-btn .d-em { font-size: 1.2rem; }
     .lang-switch { top: 12px; right: 12px; }
@@ -413,7 +431,6 @@ body[data-lang="en"] { font-family: 'Quicksand','Mali',sans-serif; }
         <p data-i18n="subtitle"></p>
     </div>
 
-    <!-- Picker (single page) -->
     <div class="picker">
         <div class="picker-label" data-i18n="lblDay"></div>
         <div class="day-grid" id="dayGrid"></div>
@@ -430,18 +447,17 @@ body[data-lang="en"] { font-family: 'Quicksand','Mali',sans-serif; }
 /* ─── i18n ─────────────────────────────────────────────────── */
 const I18N = {
     th: {
-        badge:'🔮 โหราศาสตร์ไทย',
-        title1:'สีมงคล', title2:'ประจำวัน',
-        subtitle:'แตะเพื่อเลือกวัน — สีมงคลเปลี่ยนทันที ✨',
+        badge:'🔮 ตารางสีเสื้อมงคลประจำปี ๒๕๖๙',
+        title1:'สีเสื้อ', title2:'มงคลประจำวัน',
+        subtitle:'ใส่แล้วเฮง เสริมดวงทั้งปี ✨ แตะเลือกวัน',
 
-        lblGender:'เลือกเพศ',
         lblDay:'เลือกวันที่ต้องการดูสีมงคล',
-        male:'ชาย', female:'หญิง',
         today:'(วันนี้)',
 
-        heroLabel:'สีหลักของวัน',
-        subColors:'🎨 สีเสริมที่เข้าคู่ได้ดี',
-        blessingLabel:'คำอวยพรประจำวัน',
+        heroLabel:'สีหลัก',
+        heroLabelAvoid:'สีต้องห้าม',
+        subColors:'🎨 สีเสริมที่เข้าคู่กัน',
+        subColorsAvoid:'⚠️ สีเสริมที่ควรเลี่ยง',
         luckyNum:'เลขมงคล',
         luckyGem:'อัญมณีมงคล',
         luckyTime:'เวลามงคล',
@@ -449,18 +465,17 @@ const I18N = {
         toastCopy:(n,h)=>`🎨 คัดลอกสี${n} (${h}) แล้ว!`,
     },
     en: {
-        badge:'🔮 Thai Astrology',
-        title1:'Daily', title2:'Lucky Colors',
-        subtitle:'Tap a day — your lucky colors update instantly ✨',
+        badge:'🔮 Lucky Shirt Colors 2026',
+        title1:'Lucky', title2:'Shirt Colors',
+        subtitle:'Wear right, attract fortune all year ✨ Tap a day',
 
-        lblGender:'Choose your gender',
         lblDay:'Pick a day',
-        male:'Male', female:'Female',
         today:'(Today)',
 
-        heroLabel:"DAY'S MAIN COLOR",
+        heroLabel:'MAIN COLOR',
+        heroLabelAvoid:'AVOID THIS COLOR',
         subColors:'🎨 Matching accent colors',
-        blessingLabel:'Daily Blessing',
+        subColorsAvoid:'⚠️ Also avoid',
         luckyNum:'Lucky Number',
         luckyGem:'Lucky Gem',
         luckyTime:'Lucky Hour',
@@ -469,197 +484,234 @@ const I18N = {
     }
 };
 
-/* ─── Days ─────────────────────────────────────────────────── */
+/* ─── Day metadata ─────────────────────────────────────────── */
 const DAYS = {
     0: { th:{n:'อาทิตย์',short:'อา.',p:'พระอาทิตย์'}, en:{n:'Sunday',short:'Sun',p:'Sun'}, em:'☀️',
-         grad:'linear-gradient(135deg,#FF6B6B,#FFB347)',
-         colors:[
-            {hex:'#FF3B3B',th:'แดงสด',en:'Bright Red'},
-            {hex:'#DC143C',th:'แดงเข้ม',en:'Crimson'},
-            {hex:'#FF7F50',th:'แดงปะการัง',en:'Coral'},
-            {hex:'#FFD700',th:'ทอง',en:'Gold'},
-            {hex:'#FF8C00',th:'ส้มเข้ม',en:'Dark Orange'},
-            {hex:'#FFB347',th:'ส้มอ่อน',en:'Light Orange'}
-         ]},
+         grad:'linear-gradient(135deg,#FF6B6B,#FFB347)' },
     1: { th:{n:'จันทร์',short:'จ.',p:'พระจันทร์'}, en:{n:'Monday',short:'Mon',p:'Moon'}, em:'🌙',
-         grad:'linear-gradient(135deg,#FFD93D,#FCEE74)',
-         colors:[
-            {hex:'#FFD700',th:'เหลืองทอง',en:'Golden Yellow'},
-            {hex:'#FFEB3B',th:'เหลืองสด',en:'Bright Yellow'},
-            {hex:'#FFFACD',th:'เหลืองอ่อน',en:'Light Yellow'},
-            {hex:'#F5DEB3',th:'ครีม',en:'Cream'},
-            {hex:'#FFFFFF',th:'ขาว',en:'White'},
-            {hex:'#FFF8DC',th:'ครีมหวาน',en:'Soft Cream'}
-         ]},
+         grad:'linear-gradient(135deg,#FFD93D,#FCEE74)' },
     2: { th:{n:'อังคาร',short:'อ.',p:'พระอังคาร'}, en:{n:'Tuesday',short:'Tue',p:'Mars'}, em:'🌸',
-         grad:'linear-gradient(135deg,#FF6FA5,#FFB7D5)',
-         colors:[
-            {hex:'#FF69B4',th:'ชมพู',en:'Pink'},
-            {hex:'#FF1493',th:'ชมพูเข้ม',en:'Hot Pink'},
-            {hex:'#FFB6C1',th:'ชมพูอ่อน',en:'Light Pink'},
-            {hex:'#FF007F',th:'กุหลาบ',en:'Rose'},
-            {hex:'#C71585',th:'แดงกุหลาบ',en:'Rose Red'},
-            {hex:'#FFC0CB',th:'ชมพูหวาน',en:'Soft Pink'}
-         ]},
+         grad:'linear-gradient(135deg,#FF6FA5,#FFB7D5)' },
     3: { th:{n:'พุธ',short:'พ.',p:'พระพุธ'}, en:{n:'Wednesday',short:'Wed',p:'Mercury'}, em:'🍀',
-         grad:'linear-gradient(135deg,#43E97B,#38F9D7)',
-         colors:[
-            {hex:'#22C55E',th:'เขียวสด',en:'Bright Green'},
-            {hex:'#10B981',th:'มรกต',en:'Emerald'},
-            {hex:'#84CC16',th:'เขียวมะนาว',en:'Lime Green'},
-            {hex:'#86EFAC',th:'เขียวอ่อน',en:'Light Green'},
-            {hex:'#15803D',th:'เขียวเข้ม',en:'Dark Green'},
-            {hex:'#A7F3D0',th:'เขียวหวาน',en:'Mint'}
-         ]},
+         grad:'linear-gradient(135deg,#43E97B,#38F9D7)' },
     4: { th:{n:'พฤหัสบดี',short:'พฤ.',p:'พระพฤหัสบดี'}, en:{n:'Thursday',short:'Thu',p:'Jupiter'}, em:'🍊',
-         grad:'linear-gradient(135deg,#FFB347,#FFD700)',
-         colors:[
-            {hex:'#FFA500',th:'ส้มสด',en:'Orange'},
-            {hex:'#FF8C00',th:'ส้มเข้ม',en:'Dark Orange'},
-            {hex:'#FFD700',th:'ทอง',en:'Gold'},
-            {hex:'#FFBF00',th:'เหลืองส้ม',en:'Amber'},
-            {hex:'#A0522D',th:'น้ำตาลแดง',en:'Sienna'},
-            {hex:'#D2691E',th:'น้ำตาลส้ม',en:'Chocolate'}
-         ]},
+         grad:'linear-gradient(135deg,#FFB347,#FFD700)' },
     5: { th:{n:'ศุกร์',short:'ศ.',p:'พระศุกร์'}, en:{n:'Friday',short:'Fri',p:'Venus'}, em:'💎',
-         grad:'linear-gradient(135deg,#4ECDC4,#6FBFFF)',
-         colors:[
-            {hex:'#3B82F6',th:'น้ำเงิน',en:'Blue'},
-            {hex:'#87CEEB',th:'ฟ้าอ่อน',en:'Sky Blue'},
-            {hex:'#06B6D4',th:'เทอร์ควอยส์',en:'Turquoise'},
-            {hex:'#0EA5E9',th:'ฟ้าสด',en:'Bright Blue'},
-            {hex:'#1E40AF',th:'น้ำเงินเข้ม',en:'Navy'},
-            {hex:'#BFDBFE',th:'ฟ้าหวาน',en:'Soft Blue'}
-         ]},
+         grad:'linear-gradient(135deg,#4ECDC4,#6FBFFF)' },
     6: { th:{n:'เสาร์',short:'ส.',p:'พระเสาร์'}, en:{n:'Saturday',short:'Sat',p:'Saturn'}, em:'🔮',
-         grad:'linear-gradient(135deg,#A18CD1,#9B59B6)',
-         colors:[
-            {hex:'#9333EA',th:'ม่วง',en:'Purple'},
-            {hex:'#7C3AED',th:'ไวโอเล็ต',en:'Violet'},
-            {hex:'#4C1D95',th:'ม่วงเข้ม',en:'Deep Purple'},
-            {hex:'#C4B5FD',th:'ม่วงอ่อน',en:'Light Purple'},
-            {hex:'#1F2937',th:'ดำ',en:'Black'},
-            {hex:'#5B21B6',th:'น้ำเงินม่วง',en:'Indigo'}
-         ]}
+         grad:'linear-gradient(135deg,#A18CD1,#9B59B6)' }
+};
+
+/* ─── Color palette ────────────────────────────────────────── */
+const C = {
+    orange:  {hex:'#FF8C00',th:'ส้ม',           en:'Orange'},
+    brown:   {hex:'#8B4513',th:'น้ำตาล',         en:'Brown'},
+    purple:  {hex:'#9333EA',th:'ม่วง',           en:'Purple'},
+    purpleLt:{hex:'#C084FC',th:'ม่วงอ่อน',        en:'Light Purple'},
+    black:   {hex:'#1F2937',th:'ดำ',             en:'Black'},
+    green:   {hex:'#10B981',th:'เขียว',          en:'Green'},
+    emerald: {hex:'#059669',th:'เขียวมรกต',       en:'Emerald'},
+    skyblue: {hex:'#38BDF8',th:'ฟ้า',            en:'Light Blue'},
+    navy:    {hex:'#1E40AF',th:'น้ำเงิน',         en:'Navy'},
+    navyDk:  {hex:'#1E3A8A',th:'น้ำเงินเข้ม',     en:'Deep Navy'},
+    red:     {hex:'#DC2626',th:'แดง',            en:'Red'},
+    yellow:  {hex:'#FACC15',th:'เหลือง',          en:'Yellow'},
+    cream:   {hex:'#FEF3C7',th:'ครีม',           en:'Cream'},
+    grey:    {hex:'#9CA3AF',th:'เทา',            en:'Grey'},
+    white:   {hex:'#F8FAFC',th:'ขาว',            en:'White'},
+    pink:    {hex:'#EC4899',th:'ชมพู',           en:'Pink'}
+};
+
+/* ─── Lucky-color table for year 2569 ──────────────────────── */
+/* day → category → colors[] (first = main, rest = accents) */
+const TABLE = {
+    0: { /* อาทิตย์ Sun */
+        work:  [C.purple, C.black],
+        money: [C.green],
+        love:  [C.pink],
+        elder: [C.skyblue, C.navy],
+        avoid: [C.navyDk]
+    },
+    1: { /* จันทร์ Mon */
+        work:  [C.orange, C.brown],
+        money: [C.purple, C.black],
+        love:  [C.emerald],
+        elder: [C.skyblue, C.navy],
+        avoid: [C.red]
+    },
+    2: { /* อังคาร Tue */
+        work:  [C.purple],
+        money: [C.orange, C.brown],
+        love:  [C.pink, C.black],
+        elder: [C.red],
+        avoid: [C.yellow, C.white, C.grey]
+    },
+    3: { /* พุธ Wed */
+        work:  [C.skyblue, C.navy],
+        money: [C.purple, C.pink],
+        love:  [C.orange, C.brown],
+        elder: [C.yellow, C.cream],
+        avoid: [C.pink]
+    },
+    4: { /* พฤหัสบดี Thu */
+        work:  [C.yellow, C.grey],
+        money: [C.red],
+        love:  [C.skyblue, C.navy],
+        elder: [C.emerald],
+        avoid: [C.black]
+    },
+    5: { /* ศุกร์ Fri */
+        work:  [C.green],
+        money: [C.pink],
+        love:  [C.yellow, C.cream],
+        elder: [C.orange, C.brown],
+        avoid: [C.purple]
+    },
+    6: { /* เสาร์ Sat */
+        work:  [C.red],
+        money: [C.skyblue, C.navy],
+        love:  [C.purple],
+        elder: [C.pink],
+        avoid: [C.green]
+    }
 };
 
 /* ─── Categories ───────────────────────────────────────────── */
 const CATS = {
-    work:  { em:'💼', pA:0, pB:4,
+    work:  { em:'💼',
         th:{ title:'การงาน', sub:'สีเสริมพลังความสำเร็จในการทำงาน',
-             tip:'💡 เหมาะกับวันประชุมสำคัญ การนำเสนอ หรือต้องการความน่าเชื่อถือ' },
-        en:{ title:'Work', sub:'Colors that boost career success',
-             tip:'💡 Wear on important meetings, presentations, or days you need to look credible' }},
-    money: { em:'💰', pA:4, pB:1,
+             tip:'💡 เหมาะกับวันประชุมสำคัญ การนำเสนอ หรือสร้างความน่าเชื่อถือ' },
+        en:{ title:'Work', sub:'Boost career success',
+             tip:'💡 Wear on important meetings, presentations, or to look credible' }},
+    money: { em:'💰',
         th:{ title:'การเงิน', sub:'สีดึงดูดโชคลาภและความมั่งคั่ง',
-             tip:'💡 สวมใส่วันทำธุรกรรม เจรจาต่อรอง หรือเรียกเงินเข้ากระเป๋า' },
-        en:{ title:'Wealth', sub:'Colors to attract fortune & abundance',
+             tip:'💡 สวมใส่วันทำธุรกรรม เจรจาต่อรอง หรือเรียกเงิน' },
+        en:{ title:'Wealth', sub:'Attract fortune & abundance',
              tip:'💡 Wear when making transactions, negotiating, or attracting wealth' }},
-    love:  { em:'💕', pA:5, pB:2,
+    love:  { em:'💕',
         th:{ title:'ความรัก', sub:'สีเสริมเสน่ห์และความโรแมนติก',
-             tip:'💡 เหมาะกับวันเดท วันพิเศษ หรือวันที่อยากดูดีที่สุด' },
-        en:{ title:'Love', sub:'Colors that enhance charm & romance',
+             tip:'💡 เหมาะกับวันเดท วันพิเศษ หรืออยากดูดี' },
+        en:{ title:'Love', sub:'Enhance charm & romance',
              tip:'💡 Perfect for date nights, special moments, or looking your best' }},
-    charm: { em:'✨', pA:1, pB:3,
-        th:{ title:'เมตตา', sub:'สีเสริมความน่ารักและเสน่ห์ต่อผู้คน',
-             tip:'💡 ใส่วันพบปะสังคม เจอผู้ใหญ่ หรือต้องการให้คนเอ็นดู' },
-        en:{ title:'Charm', sub:'Colors that draw kindness from others',
-             tip:'💡 Great for social events, meeting elders, or being well-received' }}
+    elder: { em:'🙏',
+        th:{ title:'ผู้ใหญ่เมตตา', sub:'สีเสริมให้ผู้ใหญ่และเจ้านายเอ็นดู',
+             tip:'💡 ใส่วันพบผู้ใหญ่ ผู้บังคับบัญชา หรือผู้มีอำนาจ' },
+        en:{ title:'Elder Charm', sub:'Win favor of elders & bosses',
+             tip:'💡 Wear when meeting elders, supervisors, or authority figures' }},
+    avoid: { em:'🚫',
+        th:{ title:'กาลกิณี', sub:'สีต้องห้าม ห้ามใส่เด็ดขาด!',
+             tip:'⚠️ สีนี้จะดึงพลังลบและทำให้ดวงตก ควรหลีกเลี่ยงตลอดทั้งวัน' },
+        en:{ title:'Avoid', sub:'Forbidden colors — do not wear!',
+             tip:'⚠️ This color drains your luck and brings negative energy — avoid all day' }}
 };
 
-/* ─── Blessings: 7 days × 4 categories ─────────────────────── */
+/* ─── Blessings: 7 days × 5 categories ─────────────────────── */
 const BLESS = {
     th: {
         0: {
             work:'พลังพระอาทิตย์เด่นชัด สีนี้ทำให้คุณกล้าตัดสินใจ และเป็นที่จดจำในที่ประชุม',
             money:'แสงทองส่องทาง รายได้ก้อนใหญ่กำลังจะมา จงเปิดใจรับโชคที่ไม่คาดฝัน',
             love:'ความมั่นใจคือเสน่ห์ ใส่สีนี้แล้วคนพิเศษจะหันมามองไม่หยุด',
-            charm:'อบอุ่นเหมือนแสงตะวัน ผู้คนจะเข้าหาคุณเป็นธรรมชาติ คุณคือศูนย์กลางของวงสนทนา'
+            elder:'ผู้ใหญ่จะมองเห็นความสามารถของคุณ ผู้นำจะให้โอกาสที่ใหญ่ขึ้น',
+            avoid:'หลีกเลี่ยงสีน้ำเงินเข้ม ป้องกันการขัดแย้งกับผู้มีอำนาจในวันนี้'
         },
         1: {
             work:'พระจันทร์มอบสมาธิและความนุ่มนวล งานยาก ๆ จะคลี่คลายอย่างราบรื่น',
             money:'สีนี้ดึงดูดเงินไหลมาเทมาเหมือนน้ำขึ้น ทุกการลงทุนจะให้ผลตอบแทนงดงาม',
-            love:'ความอ่อนโยนคือพลัง คนที่รักคุณจะรู้สึกอบอุ่นในใจตลอดทั้งวัน',
-            charm:'บริสุทธิ์และเข้าถึงง่าย ทุกคนจะเอ็นดูและพร้อมยื่นมือมาช่วยเหลือ'
+            love:'มรกตเสริมความผูกพัน คนที่รักคุณจะรู้สึกอบอุ่นในใจตลอดทั้งวัน',
+            elder:'ความสุภาพอ่อนน้อมจะทำให้ผู้ใหญ่เอ็นดู โอกาสจากเจ้านายกำลังจะมา',
+            avoid:'งดสีแดงในวันจันทร์ จะช่วยลดความวุ่นวายและการตัดสินใจที่ผิดพลาด'
         },
         2: {
-            work:'ไฟพระอังคารปลุกความกล้า สีนี้ทำให้คุณลงมือทำในสิ่งที่ค้างคามานาน',
+            work:'ไฟพระอังคารปลุกความกล้า สีม่วงทำให้คุณลงมือทำในสิ่งที่ค้างคามานาน',
             money:'พลังที่กล้าได้กล้าเสียจะนำพาโอกาสทอง จงเชื่อมั่นในการตัดสินใจของตัวเอง',
             love:'ความสดใสน่ารักทำให้คนรอบข้างหลงใหล วันนี้คือวันของความโรแมนติกแรงกล้า',
-            charm:'เสน่ห์เปล่งประกายดั่งดอกไม้บาน ใครเห็นก็อยากเข้ามาคุยด้วย'
+            elder:'ความกล้าหาญและตรงไปตรงมาทำให้ผู้ใหญ่ไว้ใจ มอบหมายงานสำคัญให้',
+            avoid:'เลี่ยงโทนเหลือง ขาว และเทา เพื่อไม่ให้พลังการต่อสู้ลดลง'
         },
         3: {
-            work:'ปัญญาพระพุธทำให้คิดเร็วทำเร็ว สีนี้ดึงพลังการสื่อสารและการเจรจาให้คมขึ้น',
+            work:'ปัญญาพระพุธทำให้คิดเร็วทำเร็ว สีฟ้า-น้ำเงินดึงพลังการสื่อสารให้คมขึ้น',
             money:'การเงินไหลลื่นเหมือนสายน้ำ การค้าขายและธุรกิจจะเติบโตงอกงาม',
             love:'พลังการสื่อสารทำให้เข้าใจคนรักลึกซึ้งขึ้น ความสัมพันธ์จะแน่นแฟ้นยิ่งกว่าเดิม',
-            charm:'ฉลาดและน่ารัก ใครได้คุยด้วยจะติดใจในไหวพริบและรอยยิ้มของคุณ'
+            elder:'ปัญญาและไหวพริบทำให้เป็นที่จดจำของผู้ใหญ่ ได้รับการสนับสนุนเต็มที่',
+            avoid:'งดสีชมพูในวันพุธ ระวังเรื่องการเงินและความสัมพันธ์ที่อาจเข้าใจผิด'
         },
         4: {
             work:'ครูบาอาจารย์อวยพร ความสำเร็จมาเยือน งานที่ทำอยู่จะได้รับการยอมรับและชื่นชม',
-            money:'พระพฤหัสคือดาวแห่งโชคลาภ สีนี้เปิดทางให้เงินก้อนใหญ่มาถึงประตูบ้าน',
+            money:'สีแดงเปิดทางให้เงินก้อนใหญ่ พระพฤหัสคือดาวแห่งโชคลาภและทรัพย์',
             love:'เมตตาและจริงใจคือคุณสมบัติที่คนรักประทับใจ ความสัมพันธ์จะมั่นคงยั่งยืน',
-            charm:'อบอุ่นเหมือนผู้ใหญ่ใจดี ทุกคนรอบตัวจะนับถือและไว้วางใจคุณ'
+            elder:'ผู้หลักผู้ใหญ่จะปกป้องและส่งเสริมคุณ คำชี้แนะดี ๆ จะหลั่งไหลเข้ามา',
+            avoid:'เลี่ยงสีดำในวันพฤหัสบดี ป้องกันความซบเซาและโอกาสที่หลุดมือ'
         },
         5: {
-            work:'พระศุกร์มอบความคิดสร้างสรรค์ งานศิลปะและความสวยงามจะออกมาเปล่งประกายสะดุดตา',
-            money:'สีฟ้าเรียกความใจเย็นและการตัดสินใจที่รอบคอบ ทรัพย์จะไม่รั่วไหล',
-            love:'พระศุกร์คือดาวแห่งความรัก วันนี้เหมาะที่สุดที่จะสารภาพหรือเริ่มต้นสิ่งใหม่ ๆ',
-            charm:'งดงามเปล่งประกายดั่งอัญมณี ใครเห็นก็อยากใกล้ชิดและประทับใจ'
+            work:'พระศุกร์มอบความคิดสร้างสรรค์ สีเขียวทำให้งานออกมาเปล่งประกายสะดุดตา',
+            money:'ชมพูเรียกเสน่ห์และโอกาสทางการเงิน รายได้พิเศษจะวิ่งเข้ามาหา',
+            love:'พระศุกร์คือดาวแห่งความรัก เหลือง-ครีมทำให้วันนี้เหมาะที่จะสารภาพหรือเริ่มต้นใหม่',
+            elder:'ความสง่างามและสุภาพทำให้ผู้ใหญ่ประทับใจ คำปรึกษาดี ๆ จะหลั่งไหลเข้ามา',
+            avoid:'งดสีม่วงในวันศุกร์ จะช่วยให้ความรักและการเจรจาราบรื่นขึ้น'
         },
         6: {
-            work:'พระเสาร์สอนความอดทน งานที่ลงแรงนานจะออกผลในวันนี้ จงรอคอยอย่างมั่นใจ',
-            money:'สีนี้ปกป้องทรัพย์จากการสูญเสีย และเปิดทางให้ผลตอบแทนระยะยาวเพิ่มพูน',
-            love:'ความลึกซึ้งและจริงจังเป็นเสน่ห์ คนรักจะมองเห็นคุณค่าที่แท้จริงของคุณ',
-            charm:'ลึกลับน่าค้นหา ผู้คนจะอยากทำความรู้จักให้มากกว่าเพียงผิวเผิน'
+            work:'พระเสาร์สอนความอดทน สีแดงปลุกพลังให้สู้ต่อ งานยาวนานจะออกผลในวันนี้',
+            money:'ฟ้า-น้ำเงินปกป้องทรัพย์จากการสูญเสีย เปิดทางให้ผลตอบแทนระยะยาวเพิ่มพูน',
+            love:'ม่วงคือเสน่ห์ลึกล้ำ คนรักจะมองเห็นคุณค่าที่แท้จริงของคุณในวันนี้',
+            elder:'ความน่าเชื่อถือและจริงจังคือสิ่งที่ผู้ใหญ่มองหา ความรับผิดชอบจะได้รับการตอบแทน',
+            avoid:'เลี่ยงสีเขียวในวันเสาร์ ปกป้องสุขภาพและการเดินทางในวันนี้'
         }
     },
     en: {
         0: {
             work:"The Sun empowers your decisions today. This color makes you bold and unforgettable in any meeting.",
             money:"Golden light opens the path. Unexpected income is on its way — keep your heart wide open.",
-            love:"Confidence is your charm today. Wear this and someone special won't stop looking your way.",
-            charm:"Warm as sunshine — people will gravitate toward you. You are the center of every conversation."
+            love:"Confidence is your charm. Wear pink and someone special won't stop looking your way.",
+            elder:"Senior figures will see your true ability — leaders are about to open bigger doors for you.",
+            avoid:"Avoid deep navy today — it may cause friction with those in authority above you."
         },
         1: {
             work:"The Moon grants focus and grace. Difficult tasks will untangle themselves smoothly today.",
             money:"This color draws wealth like a rising tide. Every investment promises generous returns.",
-            love:"Gentleness is power. Those who love you will feel warmth in their hearts all day long.",
-            charm:"Pure and approachable — everyone will adore you and offer their help freely."
+            love:"Emerald deepens your bonds — those who love you will feel warmth all day long.",
+            elder:"Humility and grace win elders' affection. Opportunities from your boss are arriving soon.",
+            avoid:"Skip red on Monday to dodge chaos and decisions you may end up regretting."
         },
         2: {
-            work:"Mars ignites courage. This color makes you finally tackle what you've been postponing.",
+            work:"Mars ignites courage. Purple makes you finally tackle what you've been postponing.",
             money:"Bold moves bring golden chances. Trust your gut on every decision you make today.",
-            love:"Vibrant and adorable — those around you can't help but be enchanted. Romance blooms today.",
-            charm:"Charm radiates like a flower in bloom. Everyone wants to come closer and chat with you."
+            love:"Vibrant pink charms everyone around — romance blooms with extra intensity today.",
+            elder:"Courage and honesty earn senior trust. Important responsibilities will be handed to you.",
+            avoid:"Avoid yellow, white, and grey — these dull your fighting energy on Tuesday."
         },
         3: {
-            work:"Mercury sharpens your mind. This color amplifies your communication and negotiation skills.",
+            work:"Mercury sharpens your mind. Blue tones amplify your communication and negotiation power.",
             money:"Money flows like a smooth river. Trade and business will grow lush and prosperous.",
             love:"Better communication deepens understanding. Your bond grows stronger than ever before.",
-            charm:"Smart and lovable — anyone who talks to you will be hooked by your wit and smile."
+            elder:"Wit and intelligence make you memorable to elders — full support is coming your way.",
+            avoid:"No pink on Wednesday — guard against money slips and relationship misunderstandings."
         },
         4: {
             work:"Teachers and elders bless you. Success arrives — your work will be recognized and praised.",
-            money:"Jupiter is the planet of fortune. This color brings big money knocking at your door.",
+            money:"Red opens the door for big money. Jupiter is the planet of fortune and abundance today.",
             love:"Kindness and sincerity are what your partner cherishes. Your bond grows steady and lasting.",
-            charm:"Warm like a generous elder. Everyone around will respect and place their trust in you."
+            elder:"Elders will protect and uplift your path. Wise counsel will flow generously to you today.",
+            avoid:"Avoid black on Thursday — it may bring stagnation and let opportunities slip through."
         },
         5: {
-            work:"Venus fuels creativity. Art and beauty in your work will shine brightly and catch all eyes.",
-            money:"Blue brings calm and wise decisions. Your wealth will not slip through your fingers today.",
-            love:"Venus rules love. Today is perfect for confessions or starting something brand new.",
-            charm:"Radiant like a precious gem. Everyone will want to be close and feel your presence."
+            work:"Venus fuels creativity. Green makes art and beauty in your work shine and catch all eyes.",
+            money:"Pink draws charm and money chances. Extra income will run straight toward you today.",
+            love:"Venus rules love. Yellow & cream make today perfect for confessions or new beginnings.",
+            elder:"Elegance and politeness impress senior eyes. Wise advice will flow generously to you.",
+            avoid:"Skip purple on Friday — your love life and negotiations will flow much smoother without it."
         },
         6: {
-            work:"Saturn teaches patience. Long efforts pay off today — wait with confidence, rewards arrive.",
-            money:"This color protects wealth from loss and opens long-term returns that keep growing.",
-            love:"Depth and sincerity are your charm. Your partner will see your true worth at last.",
-            charm:"Mysterious and intriguing. People will want to know you beyond the surface — truly."
+            work:"Saturn teaches patience. Red ignites the strength to keep fighting — long efforts pay off today.",
+            money:"Blue tones protect your wealth from loss and open long-term returns that keep growing.",
+            love:"Purple is deep mystery. Your partner will see your true worth and beauty today at last.",
+            elder:"Reliability and seriousness are what elders seek. Your responsibility will be rewarded well.",
+            avoid:"Avoid green on Saturday — protect your health and any travel plans you have today."
         }
     }
 };
 
-/* ─── Gems ─────────────────────────────────────────────────── */
+/* ─── Gems & times ─────────────────────────────────────────── */
 const GEMS = {
     th:['ทับทิม','มุก','ปะการัง','มรกต','บุษราคัม','เพชร','ไพลิน'],
     en:['Ruby','Pearl','Coral','Emerald','Topaz','Diamond','Sapphire']
@@ -728,21 +780,6 @@ function updateDateLine() {
     }
 }
 
-/* ─── Color picker ─────────────────────────────────────────── */
-function pickColors(qd, cat) {
-    const base = DAYS[qd].colors;
-    const palA = DAYS[cat.pA].colors;
-    const palB = DAYS[cat.pB].colors;
-    return {
-        hero: base[qd % base.length],
-        subs: [
-            palA[(qd + 2) % palA.length],
-            palB[(qd + 1) % palB.length],
-            base[(qd + 3) % base.length],
-            palA[(qd + 4) % palA.length]
-        ]
-    };
-}
 function colorName(c) { return c[lang]; }
 
 /* ─── Render ───────────────────────────────────────────────── */
@@ -767,10 +804,14 @@ function render() {
     </div>`;
 
     Object.entries(CATS).forEach(([k,c]) => {
-        const pal = pickColors(pickedDay, c);
+        const colors = TABLE[pickedDay][k];
+        const hero = colors[0];
+        const subs = colors.slice(1);
         const blessing = BLESS[lang][pickedDay][k];
+        const isAvoid = k === 'avoid';
+
         html += `
-        <div class="panel ${k===activeCat?'show':''}" id="panel-${k}">
+        <div class="panel ${isAvoid?'panel-avoid':''} ${k===activeCat?'show':''}" id="panel-${k}">
             <div class="panel-head">
                 <span class="em">${c.em}</span>
                 <h3>${c[lang].title}</h3>
@@ -778,11 +819,11 @@ function render() {
             </div>
 
             <div class="hero-color">
-                <div class="hero-swatch" style="background:${pal.hero.hex}"></div>
+                <div class="hero-swatch" style="background:${hero.hex}"></div>
                 <div class="hero-color-info">
-                    <div class="hc-label">${T.heroLabel}</div>
-                    <h4>${colorName(pal.hero)}</h4>
-                    <span class="hex" onclick="copyHex('${pal.hero.hex}','${colorName(pal.hero)}')">${pal.hero.hex} 📋</span>
+                    <div class="hc-label">${isAvoid?T.heroLabelAvoid:T.heroLabel}</div>
+                    <h4>${colorName(hero)}</h4>
+                    <span class="hex" onclick="copyHex('${hero.hex}','${colorName(hero)}')">${hero.hex} 📋</span>
                 </div>
             </div>
 
@@ -790,9 +831,10 @@ function render() {
                 <div class="blessing-text">${blessing}</div>
             </div>
 
-            <div class="sub-label">${T.subColors}</div>
+            ${subs.length ? `
+            <div class="sub-label">${isAvoid?T.subColorsAvoid:T.subColors}</div>
             <div class="sub-colors">
-                ${pal.subs.map(s => `
+                ${subs.map(s => `
                     <div class="sub-item" onclick="copyHex('${s.hex}','${colorName(s)}')">
                         <div class="sub-circle" style="background:${s.hex}"></div>
                         <div>
@@ -800,7 +842,7 @@ function render() {
                             <div class="sub-hex">${s.hex}</div>
                         </div>
                     </div>`).join('')}
-            </div>
+            </div>` : ''}
 
             <div class="tip">${c[lang].tip}</div>
         </div>`;
@@ -842,7 +884,6 @@ function toast(msg) {
     setTimeout(() => t.classList.remove('show'), 2400);
 }
 
-/* ─── Init ─────────────────────────────────────────────────── */
 applyLang();
 </script>
 </body>
