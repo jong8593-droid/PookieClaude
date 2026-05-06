@@ -32,9 +32,7 @@ body {
     background-attachment: fixed;
     overflow-x: hidden;
 }
-body[data-lang="en"] {
-    font-family: 'Quicksand', 'Mali', sans-serif;
-}
+body[data-lang="en"] { font-family: 'Quicksand','Mali',sans-serif; }
 
 .deco {
     position: fixed;
@@ -50,7 +48,6 @@ body[data-lang="en"] {
 .deco.d4 { bottom:8%; right:6%; animation-delay: -15s; }
 .deco.d5 { top: 50%; left: 3%;  animation-delay: -7s;  }
 .deco.d6 { top: 60%; right: 4%; animation-delay: -12s; }
-
 @keyframes drift {
     0%   { transform: translate(0,0) rotate(0); }
     25%  { transform: translate(20px,-30px) rotate(15deg); }
@@ -59,239 +56,155 @@ body[data-lang="en"] {
     100% { transform: translate(0,0) rotate(0); }
 }
 
-/* ── Language switch (top-right floating) ─────────────────── */
+/* ── Language switch ──────────────────────────────────────── */
 .lang-switch {
-    position: fixed;
-    top: 18px;
-    right: 18px;
-    z-index: 100;
+    position: fixed; top: 18px; right: 18px; z-index: 100;
     display: flex;
     background: rgba(255,255,255,.85);
     backdrop-filter: blur(15px);
-    border-radius: 50px;
-    padding: 4px;
+    border-radius: 50px; padding: 4px;
     box-shadow: 0 8px 28px rgba(180,120,200,.25);
     border: 2px solid rgba(255,255,255,.7);
 }
 .lang-btn {
-    border: none;
-    padding: 8px 16px;
-    border-radius: 50px;
+    border: none; padding: 8px 16px; border-radius: 50px;
     background: transparent;
-    font-family: 'Mali', 'Quicksand', sans-serif;
-    font-size: .9rem;
-    font-weight: 700;
-    color: var(--soft-ink);
-    cursor: pointer;
-    transition: all .25s;
-    letter-spacing: .5px;
+    font-family: inherit; font-size: .9rem; font-weight: 700;
+    color: var(--soft-ink); cursor: pointer;
+    transition: all .25s; letter-spacing: .5px;
 }
 .lang-btn.active {
     background: linear-gradient(135deg, #FF6FA5, #B66FFF);
     color: #fff;
     box-shadow: 0 4px 12px rgba(182,111,255,.3);
 }
-.lang-btn:not(.active):hover { color: var(--ink); }
 
-.app {
-    max-width: 760px;
-    margin: 0 auto;
-    padding: 30px 20px 80px;
-    position: relative;
-    z-index: 1;
-}
+/* ── Layout ────────────────────────────────────────────────── */
+.app { max-width: 760px; margin: 0 auto; padding: 30px 20px 80px; position: relative; z-index: 1; }
 
-.hero {
-    text-align: center;
-    padding: 30px 10px 24px;
-}
+.hero { text-align: center; padding: 30px 10px 24px; }
 .hero-badge {
     display: inline-block;
     background: rgba(255,255,255,.7);
     backdrop-filter: blur(10px);
-    padding: 6px 18px;
-    border-radius: 50px;
-    font-size: .85rem;
-    font-weight: 600;
+    padding: 6px 18px; border-radius: 50px;
+    font-size: .85rem; font-weight: 600;
     color: var(--soft-ink);
     margin-bottom: 14px;
     border: 2px solid rgba(255,255,255,.9);
 }
-.hero h1 {
-    font-family: 'Mali', sans-serif;
-    font-size: 3rem;
-    font-weight: 700;
-    color: var(--ink);
-    line-height: 1.15;
-    margin-bottom: 10px;
-}
-body[data-lang="en"] .hero h1 { font-family: 'Quicksand', sans-serif; }
+.hero h1 { font-size: 2.8rem; font-weight: 700; line-height: 1.15; margin-bottom: 10px; }
 .hero h1 span {
     background: linear-gradient(135deg, #FF6FA5, #B66FFF);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    -webkit-background-clip: text; background-clip: text; color: transparent;
 }
-.hero p {
-    font-size: 1rem;
-    color: var(--soft-ink);
-    font-weight: 400;
-}
+.hero p { font-size: 1rem; color: var(--soft-ink); }
 
-.wizard {
+/* ── Picker card ──────────────────────────────────────────── */
+.picker {
     background: rgba(255,255,255,.85);
     backdrop-filter: blur(20px);
-    border-radius: 32px;
-    padding: 32px 28px;
-    box-shadow:
-        0 30px 60px -20px rgba(180,120,200,.25),
-        0 0 0 1px rgba(255,255,255,.6) inset;
-    position: relative;
+    border-radius: 28px;
+    padding: 24px;
+    box-shadow: 0 30px 60px -20px rgba(180,120,200,.25);
+    margin-bottom: 22px;
 }
-
-.stepper {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-bottom: 26px;
-}
-.dot {
-    width: 32px;
-    height: 6px;
-    border-radius: 3px;
-    background: #EDE5F5;
-    transition: all .35s;
-}
-.dot.active { background: linear-gradient(90deg, #FF6FA5, #B66FFF); width: 44px; }
-.dot.done   { background: #C8B6E5; }
-
-.step { display: none; animation: fadeIn .4s ease; }
-.step.show { display: block; }
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(15px); }
-    to   { opacity: 1; transform: translateY(0); }
-}
-
-.step-icon {
-    text-align: center;
-    font-size: 4rem;
-    margin-bottom: 8px;
-    animation: bounce 2s ease-in-out infinite;
-}
-@keyframes bounce {
-    0%,100% { transform: translateY(0); }
-    50%     { transform: translateY(-8px); }
-}
-.step-title {
-    text-align: center;
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: var(--ink);
-    margin-bottom: 6px;
-}
-.step-sub {
-    text-align: center;
+.picker-label {
+    font-size: .85rem; font-weight: 600;
     color: var(--soft-ink);
-    font-size: .95rem;
-    margin-bottom: 26px;
-}
-
-.input-big {
-    width: 100%;
-    padding: 18px 22px;
-    border: 3px solid #F0E5F8;
-    border-radius: 18px;
-    font-family: inherit;
-    font-size: 1.15rem;
-    color: var(--ink);
-    background: #FCFAFF;
-    transition: all .25s;
-    text-align: center;
-}
-.input-big:focus {
-    outline: none;
-    border-color: #FF6FA5;
-    background: #fff;
-    box-shadow: 0 0 0 6px rgba(255,111,165,.13);
-}
-
-.gpick {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-}
-.gcard {
-    padding: 28px 16px;
-    border: 3px solid #F0E5F8;
-    border-radius: 22px;
-    background: #FCFAFF;
-    cursor: pointer;
-    text-align: center;
-    transition: all .3s;
-    font-family: inherit;
-}
-.gcard:hover { transform: translateY(-4px); border-color: #DCC6F5; }
-.gcard .em { font-size: 3.2rem; display: block; margin-bottom: 6px; }
-.gcard .nm { font-size: 1.15rem; font-weight: 600; color: var(--soft-ink); }
-.gcard.sel-m { border-color: #6FBFFF; background: linear-gradient(135deg,#C8E6FF,#E0F0FF); }
-.gcard.sel-f { border-color: #FF6FA5; background: linear-gradient(135deg,#FFD0E0,#FFE5EE); }
-.gcard.sel-m .nm, .gcard.sel-f .nm { color: var(--ink); font-weight: 700; }
-
-.actions {
-    display: flex;
-    gap: 12px;
-    margin-top: 26px;
-}
-.btn {
-    flex: 1;
-    padding: 16px;
-    border: none;
-    border-radius: 16px;
-    font-family: inherit;
-    font-size: 1.05rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all .25s;
+    margin-bottom: 10px;
     letter-spacing: .5px;
 }
-.btn-back  { background: #F0E5F8; color: var(--soft-ink); }
-.btn-back:hover { background: #E5D5F0; }
-.btn-next  { background: linear-gradient(135deg, #FF6FA5, #B66FFF); color: #fff; box-shadow: 0 8px 22px rgba(182,111,255,.35); }
-.btn-next:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(182,111,255,.45); }
-.btn-final { background: linear-gradient(135deg, #FFB347, #FF6FA5); color: #fff; box-shadow: 0 8px 22px rgba(255,111,165,.4); }
-.btn-final:hover { transform: translateY(-2px); }
 
-.results { display: none; }
-.results.show { display: block; animation: fadeIn .5s; }
+/* gender row */
+.gender-row { display: flex; gap: 10px; margin-bottom: 18px; }
+.gbtn {
+    flex: 1;
+    padding: 12px;
+    border: 2.5px solid #F0E5F8;
+    border-radius: 14px;
+    background: #FCFAFF;
+    cursor: pointer;
+    text-align: center;
+    transition: all .25s;
+    font-family: inherit; font-weight: 600;
+    color: var(--soft-ink);
+    font-size: .95rem;
+}
+.gbtn .em { font-size: 1.4rem; margin-right: 6px; }
+.gbtn:hover { border-color: #DCC6F5; }
+.gbtn.sel-m { border-color: #6FBFFF; background: linear-gradient(135deg,#C8E6FF,#E0F0FF); color: var(--ink); }
+.gbtn.sel-f { border-color: #FF6FA5; background: linear-gradient(135deg,#FFD0E0,#FFE5EE); color: var(--ink); }
 
+/* day grid */
+.day-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+}
+.day-btn {
+    padding: 12px 4px;
+    border: 2.5px solid #F0E5F8;
+    border-radius: 14px;
+    background: #FCFAFF;
+    cursor: pointer;
+    text-align: center;
+    transition: all .25s;
+    font-family: inherit;
+    color: var(--soft-ink);
+    position: relative;
+}
+.day-btn:hover { border-color: #DCC6F5; transform: translateY(-2px); }
+.day-btn .d-em { display:block; font-size:1.5rem; margin-bottom:2px; }
+.day-btn .d-nm { display:block; font-size:.78rem; font-weight:700; }
+.day-btn.today::after {
+    content:'•';
+    position:absolute; top:4px; right:6px;
+    color:#FF6FA5; font-size:1.4rem; line-height:1;
+}
+.day-btn.active {
+    background: linear-gradient(135deg,#FF6FA5,#B66FFF);
+    border-color: transparent;
+    color: #fff;
+    box-shadow: 0 8px 20px rgba(182,111,255,.35);
+    transform: translateY(-2px);
+}
+.day-btn.active::after { color: #FFD93D; }
+.day-btn.active .d-nm { color:#fff; }
+
+.date-line {
+    text-align: center;
+    margin-top: 14px;
+    font-size: .9rem;
+    color: var(--soft-ink);
+    font-weight: 500;
+}
+.date-line strong { color: var(--ink); }
+
+/* ── Result hero ───────────────────────────────────────────── */
 .res-hero {
     text-align: center;
-    padding: 30px 24px;
-    border-radius: 32px;
+    padding: 26px 24px;
+    border-radius: 28px;
     color: #fff;
-    margin-bottom: 22px;
-    box-shadow: 0 20px 50px rgba(180,120,200,.3);
-    position: relative;
-    overflow: hidden;
+    margin-bottom: 18px;
+    box-shadow: 0 18px 45px rgba(180,120,200,.3);
+    position: relative; overflow: hidden;
+    transition: background .4s ease;
 }
 .res-hero::before {
-    content: '';
-    position: absolute; inset: 0;
+    content: ''; position: absolute; inset: 0;
     background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.3), transparent 50%);
     pointer-events: none;
 }
-.res-hero .greet { font-size: 1rem; opacity: .9; font-weight: 500; }
-.res-hero h2 { font-size: 1.9rem; font-weight: 700; margin: 6px 0; }
-.res-hero .day-em { font-size: 4.5rem; margin: 8px 0; filter: drop-shadow(0 4px 8px rgba(0,0,0,.25)); }
-.res-hero .day-nm { font-size: 2.4rem; font-weight: 700; }
-.res-hero .day-date { font-size: .95rem; opacity: .92; margin-top: 6px; }
+.res-hero .day-em { font-size: 4rem; filter: drop-shadow(0 4px 8px rgba(0,0,0,.25)); }
+.res-hero .day-nm { font-size: 2.2rem; font-weight: 700; }
+.res-hero .planet-line { font-size: .95rem; opacity: .9; margin-top: 6px; }
 
+/* ── Tabs ──────────────────────────────────────────────────── */
 .tabs {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
-    margin-bottom: 18px;
+    display: grid; grid-template-columns: repeat(4,1fr);
+    gap: 8px; margin-bottom: 16px;
 }
 .tab {
     padding: 14px 6px;
@@ -305,8 +218,8 @@ body[data-lang="en"] .hero h1 { font-family: 'Quicksand', sans-serif; }
     border: 2px solid transparent;
 }
 .tab:hover { transform: translateY(-3px); }
-.tab .t-em  { font-size: 1.8rem; display: block; margin-bottom: 2px; }
-.tab .t-nm  { font-size: .85rem; font-weight: 600; color: var(--soft-ink); }
+.tab .t-em { font-size: 1.8rem; display: block; margin-bottom: 2px; }
+.tab .t-nm { font-size: .85rem; font-weight: 600; color: var(--soft-ink); }
 .tab.active { background: #fff; box-shadow: 0 12px 30px rgba(180,120,200,.25); }
 .tab.active.work  { border-color: #FF8E53; }
 .tab.active.money { border-color: #FFB347; }
@@ -314,30 +227,31 @@ body[data-lang="en"] .hero h1 { font-family: 'Quicksand', sans-serif; }
 .tab.active.charm { border-color: #6FBFFF; }
 .tab.active .t-nm { color: var(--ink); }
 
+/* ── Panel ─────────────────────────────────────────────────── */
 .panel {
     background: rgba(255,255,255,.92);
     border-radius: 28px;
-    padding: 28px 24px;
+    padding: 26px 22px;
     box-shadow: 0 18px 50px rgba(180,120,200,.18);
-    margin-bottom: 22px;
+    margin-bottom: 18px;
     display: none;
-    animation: fadeIn .4s;
+    animation: fadeIn .35s;
 }
 .panel.show { display: block; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(15px); } to { opacity:1; transform:translateY(0); } }
 
-.panel-head { text-align: center; margin-bottom: 22px; }
-.panel-head .em { font-size: 3rem; }
-.panel-head h3 { font-size: 1.6rem; font-weight: 700; margin-top: 4px; }
-.panel-head p  { font-size: .95rem; color: var(--soft-ink); margin-top: 4px; }
+.panel-head { text-align: center; margin-bottom: 18px; }
+.panel-head .em { font-size: 2.6rem; }
+.panel-head h3 { font-size: 1.45rem; font-weight: 700; margin-top: 4px; }
+.panel-head p  { font-size: .9rem; color: var(--soft-ink); margin-top: 4px; }
 
+/* hero color */
 .hero-color {
-    display: flex;
-    align-items: center;
-    gap: 22px;
+    display: flex; align-items: center; gap: 22px;
     padding: 22px;
     background: linear-gradient(135deg, #FFF8FC, #F8F2FF);
     border-radius: 22px;
-    margin-bottom: 22px;
+    margin-bottom: 18px;
 }
 .hero-swatch {
     width: 110px; height: 110px;
@@ -354,132 +268,124 @@ body[data-lang="en"] .hero h1 { font-family: 'Quicksand', sans-serif; }
     filter: drop-shadow(0 2px 4px rgba(0,0,0,.3));
 }
 .hero-color-info .hc-label {
-    font-size: .8rem;
-    color: #B099C0;
-    font-weight: 600;
-    letter-spacing: 1px;
+    font-size: .78rem; color: #B099C0;
+    font-weight: 600; letter-spacing: 1px;
     text-transform: uppercase;
 }
 .hero-color-info h4 {
-    font-size: 1.7rem;
-    font-weight: 700;
-    color: var(--ink);
-    margin: 4px 0;
+    font-size: 1.6rem; font-weight: 700;
+    color: var(--ink); margin: 4px 0;
 }
 .hero-color-info .hex {
     font-family: 'Sarabun', monospace;
-    font-size: 1rem;
-    color: var(--soft-ink);
-    background: #fff;
-    padding: 4px 12px;
-    border-radius: 50px;
-    display: inline-block;
-    cursor: pointer;
+    font-size: .95rem; color: var(--soft-ink);
+    background: #fff; padding: 4px 12px; border-radius: 50px;
+    display: inline-block; cursor: pointer;
     transition: all .2s;
 }
-.hero-color-info .hex:hover { background: var(--ink); color: #fff; }
+.hero-color-info .hex:hover { background: var(--ink); color:#fff; }
 
+/* blessing */
+.blessing {
+    padding: 18px 20px;
+    background: linear-gradient(135deg, #FFF8E5, #FFF1F5, #F4ECFC);
+    border-radius: 20px;
+    margin-bottom: 18px;
+    position: relative;
+    border: 2px solid rgba(255,255,255,.7);
+}
+.blessing::before {
+    content: '"';
+    position: absolute; top: -12px; left: 16px;
+    font-family: 'Mali', serif;
+    font-size: 4rem;
+    color: rgba(255,111,165,.35);
+    line-height: 1;
+}
+.blessing-text {
+    font-size: 1rem;
+    color: var(--ink);
+    line-height: 1.7;
+    font-weight: 500;
+    text-align: center;
+    padding: 0 8px;
+}
+
+/* sub colors */
 .sub-label {
-    font-size: .9rem;
-    color: var(--soft-ink);
-    font-weight: 600;
-    margin-bottom: 12px;
+    font-size: .88rem; color: var(--soft-ink);
+    font-weight: 600; margin-bottom: 10px;
     text-align: center;
 }
 .sub-colors {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    margin-bottom: 22px;
+    display: grid; grid-template-columns: repeat(2,1fr);
+    gap: 10px; margin-bottom: 18px;
 }
 .sub-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 14px;
+    display: flex; align-items: center; gap: 12px;
+    padding: 11px 13px;
     background: #FCFAFF;
-    border-radius: 16px;
+    border-radius: 14px;
     cursor: pointer;
     transition: all .2s;
 }
 .sub-item:hover { background: #F4ECFC; transform: translateX(3px); }
 .sub-item .sub-circle {
-    width: 44px; height: 44px;
+    width: 42px; height: 42px;
     border-radius: 50%;
     border: 3px solid #fff;
     box-shadow: 0 4px 12px rgba(0,0,0,.12);
     flex-shrink: 0;
 }
-.sub-item .sub-name { font-weight: 600; color: var(--ink); font-size: .95rem; }
-.sub-item .sub-hex  { font-size: .75rem; color: #B099C0; }
+.sub-item .sub-name { font-weight: 600; color: var(--ink); font-size: .92rem; }
+.sub-item .sub-hex  { font-size: .72rem; color: #B099C0; }
 
 .tip {
-    padding: 16px 18px;
-    background: linear-gradient(135deg, #FFF8E5, #FFF1F5);
-    border-radius: 16px;
-    font-size: .92rem;
+    padding: 14px 16px;
+    background: rgba(180,120,200,.08);
+    border-radius: 14px;
+    font-size: .88rem;
     color: var(--soft-ink);
-    line-height: 1.6;
+    line-height: 1.55;
 }
 
+/* extras */
 .extras {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    margin-bottom: 24px;
+    display: grid; grid-template-columns: repeat(3,1fr);
+    gap: 10px;
 }
 .extra-card {
     background: rgba(255,255,255,.92);
-    border-radius: 22px;
-    padding: 22px 12px;
+    border-radius: 20px;
+    padding: 18px 10px;
     text-align: center;
-    box-shadow: 0 12px 35px rgba(180,120,200,.16);
+    box-shadow: 0 10px 28px rgba(180,120,200,.16);
 }
-.extra-card .ex-em { font-size: 2.4rem; }
-.extra-card .ex-lb { font-size: .82rem; color: var(--soft-ink); margin-top: 4px; font-weight: 500; }
-.extra-card .ex-vl { font-size: 1.4rem; font-weight: 700; color: var(--ink); margin-top: 6px; }
-
-.restart {
-    width: 100%;
-    padding: 16px;
-    border: 2.5px dashed rgba(180,120,200,.4);
-    border-radius: 18px;
-    background: rgba(255,255,255,.5);
-    color: var(--soft-ink);
-    font-family: inherit;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all .25s;
-}
-.restart:hover { background: rgba(255,255,255,.85); }
+.extra-card .ex-em { font-size: 2rem; }
+.extra-card .ex-lb { font-size: .76rem; color: var(--soft-ink); margin-top: 4px; font-weight: 500; }
+.extra-card .ex-vl { font-size: 1.2rem; font-weight: 700; color: var(--ink); margin-top: 4px; }
 
 .toast {
-    position: fixed;
-    bottom: 24px; left: 50%;
+    position: fixed; bottom: 24px; left: 50%;
     transform: translate(-50%, 30px);
-    background: var(--ink);
-    color: #fff;
-    padding: 12px 22px;
-    border-radius: 50px;
-    font-size: .9rem;
-    font-weight: 500;
-    opacity: 0;
-    transition: all .35s;
-    pointer-events: none;
-    z-index: 9999;
+    background: var(--ink); color: #fff;
+    padding: 12px 22px; border-radius: 50px;
+    font-size: .9rem; font-weight: 500;
+    opacity: 0; transition: all .35s;
+    pointer-events: none; z-index: 9999;
     box-shadow: 0 14px 35px rgba(0,0,0,.2);
 }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
 @media (max-width: 560px) {
-    .hero h1 { font-size: 2.2rem; }
-    .wizard  { padding: 26px 20px; }
+    .hero h1 { font-size: 2rem; }
     .extras  { grid-template-columns: 1fr; }
     .sub-colors { grid-template-columns: 1fr; }
     .hero-color { flex-direction: column; text-align: center; }
     .hero-swatch { width: 90px; height: 90px; }
-    .tab .t-nm { font-size: .75rem; }
+    .tab .t-nm { font-size: .72rem; }
+    .day-btn .d-nm { font-size: .68rem; }
+    .day-btn .d-em { font-size: 1.2rem; }
     .lang-switch { top: 12px; right: 12px; }
     .lang-btn { padding: 6px 12px; font-size: .8rem; }
 }
@@ -487,13 +393,11 @@ body[data-lang="en"] .hero h1 { font-family: 'Quicksand', sans-serif; }
 </head>
 <body data-lang="th">
 
-<!-- Language switch -->
 <div class="lang-switch">
     <button class="lang-btn active" data-set-lang="th" onclick="setLang('th')">🇹🇭 ไทย</button>
     <button class="lang-btn"        data-set-lang="en" onclick="setLang('en')">🇬🇧 EN</button>
 </div>
 
-<!-- decorations -->
 <span class="deco d1">🌸</span>
 <span class="deco d2">✨</span>
 <span class="deco d3">🌷</span>
@@ -509,159 +413,75 @@ body[data-lang="en"] .hero h1 { font-family: 'Quicksand', sans-serif; }
         <p data-i18n="subtitle"></p>
     </div>
 
-    <div class="wizard" id="wizard">
-
-        <div class="stepper">
-            <div class="dot active" data-step="1"></div>
-            <div class="dot" data-step="2"></div>
-            <div class="dot" data-step="3"></div>
-            <div class="dot" data-step="4"></div>
+    <!-- Picker (single page, no wizard) -->
+    <div class="picker">
+        <div class="picker-label" data-i18n="lblGender"></div>
+        <div class="gender-row">
+            <button class="gbtn" id="g-m" onclick="pickG('male')">
+                <span class="em">👨</span><span data-i18n="male"></span>
+            </button>
+            <button class="gbtn" id="g-f" onclick="pickG('female')">
+                <span class="em">👩</span><span data-i18n="female"></span>
+            </button>
         </div>
 
-        <!-- Step 1 -->
-        <div class="step show" data-step="1">
-            <div class="step-icon">👋</div>
-            <div class="step-title" data-i18n="s1_title"></div>
-            <div class="step-sub"   data-i18n="s1_sub"></div>
-            <input type="text" class="input-big" id="nickname" data-i18n-ph="s1_ph" maxlength="20">
-            <div class="actions">
-                <button class="btn btn-next" onclick="next()" data-i18n="next"></button>
-            </div>
-        </div>
-
-        <!-- Step 2 -->
-        <div class="step" data-step="2">
-            <div class="step-icon">🧚</div>
-            <div class="step-title" data-i18n="s2_title"></div>
-            <div class="step-sub"   data-i18n="s2_sub"></div>
-            <div class="gpick">
-                <div class="gcard" id="g-m" onclick="pickG('male')">
-                    <span class="em">👨</span>
-                    <span class="nm" data-i18n="male"></span>
-                </div>
-                <div class="gcard" id="g-f" onclick="pickG('female')">
-                    <span class="em">👩</span>
-                    <span class="nm" data-i18n="female"></span>
-                </div>
-            </div>
-            <div class="actions">
-                <button class="btn btn-back" onclick="prev()" data-i18n="back"></button>
-                <button class="btn btn-next" onclick="next()" data-i18n="next"></button>
-            </div>
-        </div>
-
-        <!-- Step 3 -->
-        <div class="step" data-step="3">
-            <div class="step-icon">🎂</div>
-            <div class="step-title" data-i18n="s3_title"></div>
-            <div class="step-sub"   data-i18n="s3_sub"></div>
-            <input type="date" class="input-big" id="birthdate">
-            <div class="actions">
-                <button class="btn btn-back" onclick="prev()" data-i18n="back"></button>
-                <button class="btn btn-next" onclick="next()" data-i18n="next"></button>
-            </div>
-        </div>
-
-        <!-- Step 4 -->
-        <div class="step" data-step="4">
-            <div class="step-icon">📅</div>
-            <div class="step-title" data-i18n="s4_title"></div>
-            <div class="step-sub"   data-i18n="s4_sub"></div>
-            <input type="date" class="input-big" id="querydate">
-            <div class="actions">
-                <button class="btn btn-back" onclick="prev()" data-i18n="back"></button>
-                <button class="btn btn-final" onclick="reveal()" data-i18n="reveal"></button>
-            </div>
-        </div>
-
+        <div class="picker-label" data-i18n="lblDay"></div>
+        <div class="day-grid" id="dayGrid"></div>
+        <div class="date-line" id="dateLine"></div>
     </div>
 
-    <div class="results" id="results"></div>
+    <div id="results"></div>
 
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-/* ─── Translations ─────────────────────────────────────────── */
+/* ─── i18n ─────────────────────────────────────────────────── */
 const I18N = {
     th: {
-        badge: '🔮 โหราศาสตร์ไทย',
-        title1: 'สีมงคล',
-        title2: 'ประจำวัน',
-        subtitle: 'ค้นพบสีเสื้อผ้าที่ใช่ ในวันที่ใช่ ✨',
+        badge:'🔮 โหราศาสตร์ไทย',
+        title1:'สีมงคล', title2:'ประจำวัน',
+        subtitle:'แตะเพื่อเลือกวัน — สีมงคลเปลี่ยนทันที ✨',
 
-        s1_title:'สวัสดีค่ะ! เรียกคุณว่าอะไรดี?',
-        s1_sub:'บอกชื่อเล่นของคุณให้เรารู้จักหน่อย',
-        s1_ph:'ชื่อเล่น...',
-        s2_title:'คุณเป็นเพศอะไร?',
-        s2_sub:'เพื่อแนะนำสีให้เหมาะที่สุด',
-        s3_title:'วันเกิดของคุณ',
-        s3_sub:'วันเกิดบ่งบอกดาวประจำตัวของคุณ',
-        s4_title:'อยากดูสีมงคลของวันไหน?',
-        s4_sub:'เลือกวันที่ต้องการเสริมโชค',
-
+        lblGender:'เลือกเพศ',
+        lblDay:'เลือกวันที่ต้องการดูสีมงคล',
         male:'ชาย', female:'หญิง',
-        next:'ถัดไป →', back:'← ย้อนกลับ',
-        reveal:'✨ เปิดเผยสีมงคล',
+        today:'(วันนี้)',
 
-        greetPrefix:'สวัสดี',
-        bornOn: d => `คุณเกิดวัน${d}`,
-        dayPrefix: d => `วัน${d}`,
-        heroLabel:'สีหลักของวันนี้',
+        heroLabel:'สีหลักของวัน',
         subColors:'🎨 สีเสริมที่เข้าคู่ได้ดี',
+        blessingLabel:'คำอวยพรประจำวัน',
         luckyNum:'เลขมงคล',
         luckyGem:'อัญมณีมงคล',
         luckyTime:'เวลามงคล',
-        restart:'🔄 เริ่มใหม่อีกครั้ง',
 
-        toastNick:'💌 กรุณาใส่ชื่อเล่นด้วยนะ',
-        toastG:'💖 กรุณาเลือกเพศ',
-        toastBd:'🎂 กรุณาเลือกวันเกิด',
-        toastQd:'📅 กรุณาเลือกวันที่',
         toastCopy:(n,h)=>`🎨 คัดลอกสี${n} (${h}) แล้ว!`,
     },
     en: {
-        badge: '🔮 Thai Astrology',
-        title1: 'Daily',
-        title2: 'Lucky Colors',
-        subtitle: 'Find the right color for the right day ✨',
+        badge:'🔮 Thai Astrology',
+        title1:'Daily', title2:'Lucky Colors',
+        subtitle:'Tap a day — your lucky colors update instantly ✨',
 
-        s1_title:"Hi there! What should we call you?",
-        s1_sub:'Tell us your nickname',
-        s1_ph:'Your nickname...',
-        s2_title:"What's your gender?",
-        s2_sub:'To recommend the best colors for you',
-        s3_title:'Your birthday',
-        s3_sub:'Your birthday reveals your guardian planet',
-        s4_title:"Which day's lucky colors?",
-        s4_sub:'Pick a date to find your lucky colors',
-
+        lblGender:'Choose your gender',
+        lblDay:'Pick a day',
         male:'Male', female:'Female',
-        next:'Next →', back:'← Back',
-        reveal:'✨ Reveal My Colors',
+        today:'(Today)',
 
-        greetPrefix:'Hello',
-        bornOn: d => `Born on ${d}`,
-        dayPrefix: d => d,
-        heroLabel:"TODAY'S MAIN COLOR",
+        heroLabel:"DAY'S MAIN COLOR",
         subColors:'🎨 Matching accent colors',
+        blessingLabel:'Daily Blessing',
         luckyNum:'Lucky Number',
         luckyGem:'Lucky Gem',
         luckyTime:'Lucky Hour',
-        restart:'🔄 Start Over',
 
-        toastNick:'💌 Please enter your nickname',
-        toastG:'💖 Please choose gender',
-        toastBd:'🎂 Please pick your birthday',
-        toastQd:'📅 Please pick a date',
         toastCopy:(n,h)=>`🎨 Copied ${n} (${h})!`,
     }
 };
 
-/* ─── Day data (bilingual) ─────────────────────────────────── */
+/* ─── Days ─────────────────────────────────────────────────── */
 const DAYS = {
-    0: { th:{n:'อาทิตย์',p:'พระอาทิตย์'}, en:{n:'Sunday',p:'Sun'}, em:'☀️',
+    0: { th:{n:'อาทิตย์',short:'อา.',p:'พระอาทิตย์'}, en:{n:'Sunday',short:'Sun',p:'Sun'}, em:'☀️',
          grad:'linear-gradient(135deg,#FF6B6B,#FFB347)',
          colors:[
             {hex:'#FF3B3B',th:'แดงสด',en:'Bright Red'},
@@ -671,7 +491,7 @@ const DAYS = {
             {hex:'#FF8C00',th:'ส้มเข้ม',en:'Dark Orange'},
             {hex:'#FFB347',th:'ส้มอ่อน',en:'Light Orange'}
          ]},
-    1: { th:{n:'จันทร์',p:'พระจันทร์'}, en:{n:'Monday',p:'Moon'}, em:'🌙',
+    1: { th:{n:'จันทร์',short:'จ.',p:'พระจันทร์'}, en:{n:'Monday',short:'Mon',p:'Moon'}, em:'🌙',
          grad:'linear-gradient(135deg,#FFD93D,#FCEE74)',
          colors:[
             {hex:'#FFD700',th:'เหลืองทอง',en:'Golden Yellow'},
@@ -681,7 +501,7 @@ const DAYS = {
             {hex:'#FFFFFF',th:'ขาว',en:'White'},
             {hex:'#FFF8DC',th:'ครีมหวาน',en:'Soft Cream'}
          ]},
-    2: { th:{n:'อังคาร',p:'พระอังคาร'}, en:{n:'Tuesday',p:'Mars'}, em:'🌸',
+    2: { th:{n:'อังคาร',short:'อ.',p:'พระอังคาร'}, en:{n:'Tuesday',short:'Tue',p:'Mars'}, em:'🌸',
          grad:'linear-gradient(135deg,#FF6FA5,#FFB7D5)',
          colors:[
             {hex:'#FF69B4',th:'ชมพู',en:'Pink'},
@@ -691,7 +511,7 @@ const DAYS = {
             {hex:'#C71585',th:'แดงกุหลาบ',en:'Rose Red'},
             {hex:'#FFC0CB',th:'ชมพูหวาน',en:'Soft Pink'}
          ]},
-    3: { th:{n:'พุธ',p:'พระพุธ'}, en:{n:'Wednesday',p:'Mercury'}, em:'🍀',
+    3: { th:{n:'พุธ',short:'พ.',p:'พระพุธ'}, en:{n:'Wednesday',short:'Wed',p:'Mercury'}, em:'🍀',
          grad:'linear-gradient(135deg,#43E97B,#38F9D7)',
          colors:[
             {hex:'#22C55E',th:'เขียวสด',en:'Bright Green'},
@@ -701,7 +521,7 @@ const DAYS = {
             {hex:'#15803D',th:'เขียวเข้ม',en:'Dark Green'},
             {hex:'#A7F3D0',th:'เขียวหวาน',en:'Mint'}
          ]},
-    4: { th:{n:'พฤหัสบดี',p:'พระพฤหัสบดี'}, en:{n:'Thursday',p:'Jupiter'}, em:'🍊',
+    4: { th:{n:'พฤหัสบดี',short:'พฤ.',p:'พระพฤหัสบดี'}, en:{n:'Thursday',short:'Thu',p:'Jupiter'}, em:'🍊',
          grad:'linear-gradient(135deg,#FFB347,#FFD700)',
          colors:[
             {hex:'#FFA500',th:'ส้มสด',en:'Orange'},
@@ -711,7 +531,7 @@ const DAYS = {
             {hex:'#A0522D',th:'น้ำตาลแดง',en:'Sienna'},
             {hex:'#D2691E',th:'น้ำตาลส้ม',en:'Chocolate'}
          ]},
-    5: { th:{n:'ศุกร์',p:'พระศุกร์'}, en:{n:'Friday',p:'Venus'}, em:'💎',
+    5: { th:{n:'ศุกร์',short:'ศ.',p:'พระศุกร์'}, en:{n:'Friday',short:'Fri',p:'Venus'}, em:'💎',
          grad:'linear-gradient(135deg,#4ECDC4,#6FBFFF)',
          colors:[
             {hex:'#3B82F6',th:'น้ำเงิน',en:'Blue'},
@@ -721,7 +541,7 @@ const DAYS = {
             {hex:'#1E40AF',th:'น้ำเงินเข้ม',en:'Navy'},
             {hex:'#BFDBFE',th:'ฟ้าหวาน',en:'Soft Blue'}
          ]},
-    6: { th:{n:'เสาร์',p:'พระเสาร์'}, en:{n:'Saturday',p:'Saturn'}, em:'🔮',
+    6: { th:{n:'เสาร์',short:'ส.',p:'พระเสาร์'}, en:{n:'Saturday',short:'Sat',p:'Saturn'}, em:'🔮',
          grad:'linear-gradient(135deg,#A18CD1,#9B59B6)',
          colors:[
             {hex:'#9333EA',th:'ม่วง',en:'Purple'},
@@ -733,51 +553,123 @@ const DAYS = {
          ]}
 };
 
-/* ─── Categories (bilingual) ───────────────────────────────── */
+/* ─── Categories ───────────────────────────────────────────── */
 const CATS = {
-    work: {
-        em:'💼',
+    work:  { em:'💼', pA:0, pB:4,
         th:{ title:'การงาน', sub:'สีเสริมพลังความสำเร็จในการทำงาน',
-             tip:'💡 เหมาะสำหรับวันประชุมสำคัญ การนำเสนองาน หรือวันที่ต้องการสร้างความน่าเชื่อถือ',
-             panel:'สีมงคลด้านการงาน' },
+             tip:'💡 เหมาะกับวันประชุมสำคัญ การนำเสนอ หรือต้องการความน่าเชื่อถือ' },
         en:{ title:'Work', sub:'Colors that boost career success',
-             tip:'💡 Wear on important meetings, presentations, or days you need to look credible',
-             panel:'Lucky Colors for Work' },
-        pA:0, pB:4
-    },
-    money: {
-        em:'💰',
+             tip:'💡 Wear on important meetings, presentations, or days you need to look credible' }},
+    money: { em:'💰', pA:4, pB:1,
         th:{ title:'การเงิน', sub:'สีดึงดูดโชคลาภและความมั่งคั่ง',
-             tip:'💡 สวมใส่วันทำธุรกรรม เจรจาต่อรอง หรือวันที่อยากเรียกเงินเข้ากระเป๋า',
-             panel:'สีมงคลด้านการเงิน' },
+             tip:'💡 สวมใส่วันทำธุรกรรม เจรจาต่อรอง หรือเรียกเงินเข้ากระเป๋า' },
         en:{ title:'Wealth', sub:'Colors to attract fortune & abundance',
-             tip:'💡 Wear when making transactions, negotiating, or attracting wealth',
-             panel:'Lucky Colors for Wealth' },
-        pA:4, pB:1
-    },
-    love: {
-        em:'💕',
+             tip:'💡 Wear when making transactions, negotiating, or attracting wealth' }},
+    love:  { em:'💕', pA:5, pB:2,
         th:{ title:'ความรัก', sub:'สีเสริมเสน่ห์และความโรแมนติก',
-             tip:'💡 เหมาะกับวันเดท วันพิเศษกับคนรัก หรือวันที่อยากดูดีที่สุด',
-             panel:'สีมงคลด้านความรัก' },
+             tip:'💡 เหมาะกับวันเดท วันพิเศษ หรือวันที่อยากดูดีที่สุด' },
         en:{ title:'Love', sub:'Colors that enhance charm & romance',
-             tip:'💡 Perfect for date nights, special moments, or when you want to look your best',
-             panel:'Lucky Colors for Love' },
-        pA:5, pB:2
-    },
-    charm: {
-        em:'✨',
+             tip:'💡 Perfect for date nights, special moments, or looking your best' }},
+    charm: { em:'✨', pA:1, pB:3,
         th:{ title:'เมตตา', sub:'สีเสริมความน่ารักและเสน่ห์ต่อผู้คน',
-             tip:'💡 ใส่วันพบปะสังคม เจอผู้ใหญ่ หรือวันที่ต้องการให้คนรอบข้างเอ็นดู',
-             panel:'สีมงคลด้านเมตตา' },
+             tip:'💡 ใส่วันพบปะสังคม เจอผู้ใหญ่ หรือต้องการให้คนเอ็นดู' },
         en:{ title:'Charm', sub:'Colors that draw kindness from others',
-             tip:'💡 Great for social events, meeting elders, or being well-received',
-             panel:'Lucky Colors for Charm' },
-        pA:1, pB:3
+             tip:'💡 Great for social events, meeting elders, or being well-received' }}
+};
+
+/* ─── Blessings: 7 days × 4 categories ─────────────────────── */
+const BLESS = {
+    th: {
+        0: {
+            work:'พลังพระอาทิตย์เด่นชัด สีนี้ทำให้คุณกล้าตัดสินใจ และเป็นที่จดจำในที่ประชุม',
+            money:'แสงทองส่องทาง รายได้ก้อนใหญ่กำลังจะมา จงเปิดใจรับโชคที่ไม่คาดฝัน',
+            love:'ความมั่นใจคือเสน่ห์ ใส่สีนี้แล้วคนพิเศษจะหันมามองไม่หยุด',
+            charm:'อบอุ่นเหมือนแสงตะวัน ผู้คนจะเข้าหาคุณเป็นธรรมชาติ คุณคือศูนย์กลางของวงสนทนา'
+        },
+        1: {
+            work:'พระจันทร์มอบสมาธิและความนุ่มนวล งานยาก ๆ จะคลี่คลายอย่างราบรื่น',
+            money:'สีนี้ดึงดูดเงินไหลมาเทมาเหมือนน้ำขึ้น ทุกการลงทุนจะให้ผลตอบแทนงดงาม',
+            love:'ความอ่อนโยนคือพลัง คนที่รักคุณจะรู้สึกอบอุ่นในใจตลอดทั้งวัน',
+            charm:'บริสุทธิ์และเข้าถึงง่าย ทุกคนจะเอ็นดูและพร้อมยื่นมือมาช่วยเหลือ'
+        },
+        2: {
+            work:'ไฟพระอังคารปลุกความกล้า สีนี้ทำให้คุณลงมือทำในสิ่งที่ค้างคามานาน',
+            money:'พลังที่กล้าได้กล้าเสียจะนำพาโอกาสทอง จงเชื่อมั่นในการตัดสินใจของตัวเอง',
+            love:'ความสดใสน่ารักทำให้คนรอบข้างหลงใหล วันนี้คือวันของความโรแมนติกแรงกล้า',
+            charm:'เสน่ห์เปล่งประกายดั่งดอกไม้บาน ใครเห็นก็อยากเข้ามาคุยด้วย'
+        },
+        3: {
+            work:'ปัญญาพระพุธทำให้คิดเร็วทำเร็ว สีนี้ดึงพลังการสื่อสารและการเจรจาให้คมขึ้น',
+            money:'การเงินไหลลื่นเหมือนสายน้ำ การค้าขายและธุรกิจจะเติบโตงอกงาม',
+            love:'พลังการสื่อสารทำให้เข้าใจคนรักลึกซึ้งขึ้น ความสัมพันธ์จะแน่นแฟ้นยิ่งกว่าเดิม',
+            charm:'ฉลาดและน่ารัก ใครได้คุยด้วยจะติดใจในไหวพริบและรอยยิ้มของคุณ'
+        },
+        4: {
+            work:'ครูบาอาจารย์อวยพร ความสำเร็จมาเยือน งานที่ทำอยู่จะได้รับการยอมรับและชื่นชม',
+            money:'พระพฤหัสคือดาวแห่งโชคลาภ สีนี้เปิดทางให้เงินก้อนใหญ่มาถึงประตูบ้าน',
+            love:'เมตตาและจริงใจคือคุณสมบัติที่คนรักประทับใจ ความสัมพันธ์จะมั่นคงยั่งยืน',
+            charm:'อบอุ่นเหมือนผู้ใหญ่ใจดี ทุกคนรอบตัวจะนับถือและไว้วางใจคุณ'
+        },
+        5: {
+            work:'พระศุกร์มอบความคิดสร้างสรรค์ งานศิลปะและความสวยงามจะออกมาเปล่งประกายสะดุดตา',
+            money:'สีฟ้าเรียกความใจเย็นและการตัดสินใจที่รอบคอบ ทรัพย์จะไม่รั่วไหล',
+            love:'พระศุกร์คือดาวแห่งความรัก วันนี้เหมาะที่สุดที่จะสารภาพหรือเริ่มต้นสิ่งใหม่ ๆ',
+            charm:'งดงามเปล่งประกายดั่งอัญมณี ใครเห็นก็อยากใกล้ชิดและประทับใจ'
+        },
+        6: {
+            work:'พระเสาร์สอนความอดทน งานที่ลงแรงนานจะออกผลในวันนี้ จงรอคอยอย่างมั่นใจ',
+            money:'สีนี้ปกป้องทรัพย์จากการสูญเสีย และเปิดทางให้ผลตอบแทนระยะยาวเพิ่มพูน',
+            love:'ความลึกซึ้งและจริงจังเป็นเสน่ห์ คนรักจะมองเห็นคุณค่าที่แท้จริงของคุณ',
+            charm:'ลึกลับน่าค้นหา ผู้คนจะอยากทำความรู้จักให้มากกว่าเพียงผิวเผิน'
+        }
+    },
+    en: {
+        0: {
+            work:"The Sun empowers your decisions today. This color makes you bold and unforgettable in any meeting.",
+            money:"Golden light opens the path. Unexpected income is on its way — keep your heart wide open.",
+            love:"Confidence is your charm today. Wear this and someone special won't stop looking your way.",
+            charm:"Warm as sunshine — people will gravitate toward you. You are the center of every conversation."
+        },
+        1: {
+            work:"The Moon grants focus and grace. Difficult tasks will untangle themselves smoothly today.",
+            money:"This color draws wealth like a rising tide. Every investment promises generous returns.",
+            love:"Gentleness is power. Those who love you will feel warmth in their hearts all day long.",
+            charm:"Pure and approachable — everyone will adore you and offer their help freely."
+        },
+        2: {
+            work:"Mars ignites courage. This color makes you finally tackle what you've been postponing.",
+            money:"Bold moves bring golden chances. Trust your gut on every decision you make today.",
+            love:"Vibrant and adorable — those around you can't help but be enchanted. Romance blooms today.",
+            charm:"Charm radiates like a flower in bloom. Everyone wants to come closer and chat with you."
+        },
+        3: {
+            work:"Mercury sharpens your mind. This color amplifies your communication and negotiation skills.",
+            money:"Money flows like a smooth river. Trade and business will grow lush and prosperous.",
+            love:"Better communication deepens understanding. Your bond grows stronger than ever before.",
+            charm:"Smart and lovable — anyone who talks to you will be hooked by your wit and smile."
+        },
+        4: {
+            work:"Teachers and elders bless you. Success arrives — your work will be recognized and praised.",
+            money:"Jupiter is the planet of fortune. This color brings big money knocking at your door.",
+            love:"Kindness and sincerity are what your partner cherishes. Your bond grows steady and lasting.",
+            charm:"Warm like a generous elder. Everyone around will respect and place their trust in you."
+        },
+        5: {
+            work:"Venus fuels creativity. Art and beauty in your work will shine brightly and catch all eyes.",
+            money:"Blue brings calm and wise decisions. Your wealth will not slip through your fingers today.",
+            love:"Venus rules love. Today is perfect for confessions or starting something brand new.",
+            charm:"Radiant like a precious gem. Everyone will want to be close and feel your presence."
+        },
+        6: {
+            work:"Saturn teaches patience. Long efforts pay off today — wait with confidence, rewards arrive.",
+            money:"This color protects wealth from loss and opens long-term returns that keep growing.",
+            love:"Depth and sincerity are your charm. Your partner will see your true worth at last.",
+            charm:"Mysterious and intriguing. People will want to know you beyond the surface — truly."
+        }
     }
 };
 
-/* ─── Gems & times ─────────────────────────────────────────── */
+/* ─── Gems ─────────────────────────────────────────────────── */
 const GEMS = {
     th:['ทับทิม','มุก','ปะการัง','มรกต','บุษราคัม','เพชร','ไพลิน'],
     en:['Ruby','Pearl','Coral','Emerald','Topaz','Diamond','Sapphire']
@@ -786,152 +678,124 @@ const TIMES = ['06:00–08:00','08:00–10:00','10:00–12:00','12:00–14:00',
                '14:00–16:00','16:00–18:00','18:00–20:00'];
 
 /* ─── State ────────────────────────────────────────────────── */
-const today = new Date().toISOString().split('T')[0];
-document.getElementById('querydate').value = today;
-
+const TODAY_DOW = new Date().getDay();
 let lang = localStorage.getItem('lang') || 'th';
-let step = 1;
-let gender = null;
-let lastResult = null; // for re-rendering on lang switch
+let gender = localStorage.getItem('gender') || null;
+let pickedDay = TODAY_DOW;
+let activeCat = 'work';
 
-/* ─── Apply language to UI ─────────────────────────────────── */
+/* ─── i18n apply ──────────────────────────────────────────── */
 function applyLang() {
     document.body.dataset.lang = lang;
     document.documentElement.lang = lang;
     const T = I18N[lang];
-
     document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.dataset.i18n;
-        if (T[key] != null) el.textContent = T[key];
+        const k = el.dataset.i18n;
+        if (T[k] != null) el.textContent = T[k];
     });
-    document.querySelectorAll('[data-i18n-ph]').forEach(el => {
-        const key = el.dataset.i18nPh;
-        if (T[key] != null) el.placeholder = T[key];
-    });
-
     document.querySelectorAll('.lang-btn').forEach(b => {
         b.classList.toggle('active', b.dataset.setLang === lang);
     });
+    buildDayGrid();
+    render();
 }
-
 function setLang(l) {
     if (l === lang) return;
     lang = l;
     localStorage.setItem('lang', lang);
     applyLang();
-    if (lastResult) renderResults(lastResult);
 }
 
-applyLang();
-
-/* ─── Wizard ───────────────────────────────────────────────── */
-function showStep(n) {
-    document.querySelectorAll('.step').forEach(s => s.classList.remove('show'));
-    document.querySelector(`.step[data-step="${n}"]`).classList.add('show');
-    document.querySelectorAll('.dot').forEach(d => {
-        const sn = +d.dataset.step;
-        d.classList.toggle('active', sn === n);
-        d.classList.toggle('done',   sn < n);
-    });
-}
-function next() { if (validateStep(step) && step < 4) { step++; showStep(step); } }
-function prev() { if (step > 1) { step--; showStep(step); } }
-
-function validateStep(n) {
-    const T = I18N[lang];
-    if (n === 1 && !document.getElementById('nickname').value.trim()) { toast(T.toastNick); return false; }
-    if (n === 2 && !gender)                                            { toast(T.toastG);    return false; }
-    if (n === 3 && !document.getElementById('birthdate').value)        { toast(T.toastBd);   return false; }
-    return true;
-}
+/* ─── Gender ───────────────────────────────────────────────── */
 function pickG(g) {
     gender = g;
-    document.getElementById('g-m').className = 'gcard' + (g==='male'  ? ' sel-m' : '');
-    document.getElementById('g-f').className = 'gcard' + (g==='female'? ' sel-f' : '');
+    localStorage.setItem('gender', g);
+    document.getElementById('g-m').className = 'gbtn' + (g==='male'  ? ' sel-m' : '');
+    document.getElementById('g-f').className = 'gbtn' + (g==='female'? ' sel-f' : '');
+    render();
+}
+if (gender) pickG(gender);
+
+/* ─── Day picker ──────────────────────────────────────────── */
+function buildDayGrid() {
+    const grid = document.getElementById('dayGrid');
+    grid.innerHTML = '';
+    for (let d = 0; d < 7; d++) {
+        const day = DAYS[d][lang];
+        const btn = document.createElement('button');
+        btn.className = 'day-btn' +
+            (d === TODAY_DOW ? ' today' : '') +
+            (d === pickedDay ? ' active' : '');
+        btn.innerHTML = `<span class="d-em">${DAYS[d].em}</span><span class="d-nm">${day.short}</span>`;
+        btn.onclick = () => { pickedDay = d; buildDayGrid(); render(); };
+        grid.appendChild(btn);
+    }
+    updateDateLine();
 }
 
-/* ─── Helpers ──────────────────────────────────────────────── */
-function dow(s) { return new Date(s+'T00:00:00').getDay(); }
+function updateDateLine() {
+    const T = I18N[lang];
+    const day = DAYS[pickedDay][lang];
+    const el = document.getElementById('dateLine');
 
-function thaiDate(s) {
-    const d = new Date(s+'T00:00:00');
-    const M = ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน',
-               'กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
-    return `${d.getDate()} ${M[d.getMonth()]} ${d.getFullYear()+543}`;
+    if (pickedDay === TODAY_DOW) {
+        const d = new Date();
+        const dateStr = lang === 'th'
+            ? `${d.getDate()} ${['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'][d.getMonth()]} ${d.getFullYear()+543}`
+            : d.toLocaleDateString('en-US',{day:'numeric',month:'short',year:'numeric'});
+        el.innerHTML = `<strong>${lang==='th'?'วัน':''}${day.n}</strong> · ${dateStr} ${T.today}`;
+    } else {
+        el.innerHTML = `<strong>${lang==='th'?'วัน':''}${day.n}</strong>`;
+    }
 }
-function enDate(s) {
-    const d = new Date(s+'T00:00:00');
-    return d.toLocaleDateString('en-US', { day:'numeric', month:'long', year:'numeric' });
-}
-function localizedDate(s) { return lang==='th' ? thaiDate(s) : enDate(s); }
 
-function pickColors(bd, qd, g, cat) {
-    const gOff = g === 'female' ? 1 : 0;
-    const bq   = (bd + qd) % 6;
+/* ─── Color picker ─────────────────────────────────────────── */
+function pickColors(qd, g, cat) {
+    const gOff = g === 'female' ? 1 : (g === 'male' ? 0 : 2);
     const base = DAYS[qd].colors;
     const palA = DAYS[cat.pA].colors;
     const palB = DAYS[cat.pB].colors;
-
     return {
-        hero: base[bq % base.length],
+        hero: base[(qd + gOff) % base.length],
         subs: [
-            palA[(bq + gOff + 2) % palA.length],
-            palB[(bd + gOff + 1) % palB.length],
-            base[(bq + 3) % base.length],
-            palA[(bd + qd + gOff) % palA.length]
+            palA[(qd + gOff + 2) % palA.length],
+            palB[(qd + gOff + 1) % palB.length],
+            base[(qd + 3) % base.length],
+            palA[(qd + gOff + 4) % palA.length]
         ]
     };
 }
-
 function colorName(c) { return c[lang]; }
 
-/* ─── Reveal & Render ──────────────────────────────────────── */
-function reveal() {
-    if (!validateStep(step)) return;
-    const qval = document.getElementById('querydate').value;
-    if (!qval) { toast(I18N[lang].toastQd); return; }
-
-    lastResult = {
-        nick:  document.getElementById('nickname').value.trim(),
-        bdate: document.getElementById('birthdate').value,
-        qdate: qval,
-        gender: gender
-    };
-    renderResults(lastResult);
-}
-
-function renderResults(R) {
-    const T   = I18N[lang];
-    const bd  = dow(R.bdate);
-    const qd  = dow(R.qdate);
-    const BD  = DAYS[bd];
-    const QD  = DAYS[qd];
-    const gEm = R.gender === 'male' ? '👨' : '👩';
+/* ─── Render ───────────────────────────────────────────────── */
+function render() {
+    const T  = I18N[lang];
+    const QD = DAYS[pickedDay];
+    const day = QD[lang];
 
     let html = `
     <div class="res-hero" style="background:${QD.grad}">
-        <div class="greet">${T.greetPrefix} ${gEm} ${R.nick}</div>
-        <h2>${T.bornOn(BD[lang].n)} ${BD.em}</h2>
         <div class="day-em">${QD.em}</div>
-        <div class="day-nm">${T.dayPrefix(QD[lang].n)}</div>
-        <div class="day-date">${localizedDate(R.qdate)}</div>
+        <div class="day-nm">${lang==='th'?'วัน':''}${day.n}</div>
+        <div class="planet-line">${day.p}</div>
     </div>
 
     <div class="tabs">
-        ${Object.entries(CATS).map(([k,c],i) => `
-            <div class="tab ${k} ${i===0?'active':''}" onclick="showTab('${k}')">
+        ${Object.entries(CATS).map(([k,c]) => `
+            <div class="tab ${k} ${k===activeCat?'active':''}" onclick="showTab('${k}')">
                 <span class="t-em">${c.em}</span>
                 <span class="t-nm">${c[lang].title}</span>
             </div>`).join('')}
     </div>`;
 
-    Object.entries(CATS).forEach(([k,c],i) => {
-        const pal = pickColors(bd, qd, R.gender, c);
+    Object.entries(CATS).forEach(([k,c]) => {
+        const pal = pickColors(pickedDay, gender, c);
+        const blessing = BLESS[lang][pickedDay][k];
         html += `
-        <div class="panel ${i===0?'show':''}" id="panel-${k}">
+        <div class="panel ${k===activeCat?'show':''}" id="panel-${k}">
             <div class="panel-head">
                 <span class="em">${c.em}</span>
-                <h3>${c[lang].panel}</h3>
+                <h3>${c[lang].title}</h3>
                 <p>${c[lang].sub}</p>
             </div>
 
@@ -942,6 +806,10 @@ function renderResults(R) {
                     <h4>${colorName(pal.hero)}</h4>
                     <span class="hex" onclick="copyHex('${pal.hero.hex}','${colorName(pal.hero)}')">${pal.hero.hex} 📋</span>
                 </div>
+            </div>
+
+            <div class="blessing">
+                <div class="blessing-text">${blessing}</div>
             </div>
 
             <div class="sub-label">${T.subColors}</div>
@@ -960,9 +828,9 @@ function renderResults(R) {
         </div>`;
     });
 
-    const num  = ((bd*3 + qd*2 + 7) % 9) + 1;
-    const gem  = GEMS[lang][qd];
-    const time = TIMES[(bd + qd) % TIMES.length];
+    const num  = ((pickedDay*5 + 7) % 9) + 1;
+    const gem  = GEMS[lang][pickedDay];
+    const time = TIMES[pickedDay];
     html += `
     <div class="extras">
         <div class="extra-card"><div class="ex-em">🔢</div>
@@ -971,44 +839,24 @@ function renderResults(R) {
             <div class="ex-lb">${T.luckyGem}</div><div class="ex-vl">${gem}</div></div>
         <div class="extra-card"><div class="ex-em">⏰</div>
             <div class="ex-lb">${T.luckyTime}</div><div class="ex-vl">${time}</div></div>
-    </div>
+    </div>`;
 
-    <button class="restart" onclick="restart()">${T.restart}</button>`;
-
-    const r = document.getElementById('results');
-    r.innerHTML = html;
-    r.classList.add('show');
-    document.getElementById('wizard').style.display = 'none';
-    r.scrollIntoView({ behavior:'smooth', block:'start' });
+    document.getElementById('results').innerHTML = html;
+    updateDateLine();
 }
 
 function showTab(k) {
+    activeCat = k;
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     document.querySelector(`.tab.${k}`).classList.add('active');
     document.querySelectorAll('.panel').forEach(p => p.classList.remove('show'));
     document.getElementById('panel-' + k).classList.add('show');
 }
 
-function restart() {
-    lastResult = null;
-    document.getElementById('results').classList.remove('show');
-    document.getElementById('wizard').style.display = 'block';
-    document.getElementById('nickname').value = '';
-    document.getElementById('birthdate').value = '';
-    document.getElementById('querydate').value = today;
-    gender = null;
-    document.getElementById('g-m').className = 'gcard';
-    document.getElementById('g-f').className = 'gcard';
-    step = 1;
-    showStep(1);
-    window.scrollTo({ top:0, behavior:'smooth' });
-}
-
 function copyHex(hex, name) {
     navigator.clipboard.writeText(hex).catch(()=>{});
     toast(I18N[lang].toastCopy(name, hex));
 }
-
 function toast(msg) {
     const t = document.getElementById('toast');
     t.textContent = msg;
@@ -1016,11 +864,8 @@ function toast(msg) {
     setTimeout(() => t.classList.remove('show'), 2400);
 }
 
-document.addEventListener('keydown', e => {
-    if (e.key === 'Enter' && document.getElementById('wizard').style.display !== 'none') {
-        if (step < 4) next(); else reveal();
-    }
-});
+/* ─── Init ─────────────────────────────────────────────────── */
+applyLang();
 </script>
 </body>
 </html>
